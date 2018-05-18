@@ -9,6 +9,7 @@
 5. AWS Rekognition (Image Recognition)
 6. Spring Boot (Backend)
 
+
 ### App Flow
 
 1. Login Using Cognito
