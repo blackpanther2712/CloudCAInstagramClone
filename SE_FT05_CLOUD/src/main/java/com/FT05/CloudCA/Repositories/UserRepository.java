@@ -1,6 +1,7 @@
 package com.FT05.CloudCA.Repositories;
 
 import com.FT05.CloudCA.Entity.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 
