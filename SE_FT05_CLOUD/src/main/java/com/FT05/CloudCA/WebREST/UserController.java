@@ -10,12 +10,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
 
-    @GetMapping("/user")
-    public String showPage(Model model){
-        model.addAttribute("user",new User());
-        return "index";
-    }
 }

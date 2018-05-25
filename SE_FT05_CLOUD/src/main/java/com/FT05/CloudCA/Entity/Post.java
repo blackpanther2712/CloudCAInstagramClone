@@ -18,6 +18,9 @@ public class Post {
     @Column(name = "posted_image")
     private String imageUrl;
 
+    @Column(name = "caption")
+    private String caption;
+
     @Column(name = "created_Date")
     private ZonedDateTime createdDatetime;
 
@@ -49,6 +52,14 @@ public class Post {
 
     public ZonedDateTime getCreatedDatetime() {
         return createdDatetime;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 
     public void setCreatedDatetime(ZonedDateTime createdDatetime) {
