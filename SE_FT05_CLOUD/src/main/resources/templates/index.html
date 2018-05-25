@@ -28,7 +28,6 @@
         }
 
     </style>
-    <script src="../static/JS/index.js"></script>
 </head>
 <body>
 <!-- Header -->
@@ -61,10 +60,10 @@
                     <h4 class="modal-title">Add post </h4>
                 </div>
                 <div class="modal-body" >
-                    <form id="userForm" action="#" th:action="@{/home}" method="post">
+                    <form id="userForm" action="#" th:action="@{/home}" th:object="${post}" method="post">
                         <div class="form-group">
                             <label class="form-control-label" >Caption</label>
-                            <input type="text" class="form-control"  id="caption"/>
+                            <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" >Upload File</label>
@@ -73,7 +72,7 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <a href="#" id="btncreate" class="btn btn-success">Post</a>
+                               <input type="submit" value="Post">
                             </div>
                         </div>
 
@@ -132,6 +131,8 @@
     </div>
 </div>
 </body>
+<script>
 
+</script>
 </html>
 

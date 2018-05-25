@@ -6,9 +6,7 @@ import com.FT05.CloudCA.Repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -29,9 +27,9 @@ public class PostController {
     }
 
     @PostMapping("/home")
-    public String uploadFile(@RequestPart(value = "file") MultipartFile file) {
-        String s = this.amazonClient.uploadFile(file);
-
+    public String uploadFile(@ModelAttribute Post post) {
+        //String s = this.amazonClient.uploadFile(file);
+        postRepository.save(post);
         return "index";
     }
 
