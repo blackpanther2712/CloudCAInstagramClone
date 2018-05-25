@@ -9,6 +9,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 @SpringBootApplication
 public class FirstSpringApplication implements CommandLineRunner {
 
@@ -32,8 +35,16 @@ public class FirstSpringApplication implements CommandLineRunner {
 		userRepository.save(user);
 
 		Post post = new Post();
+		Post post1 = new Post();
+
 		post.setUser(user);
+		post.setCaption("awesome");
+		post.setCreatedDatetime(ZonedDateTime.now());
+		post1.setUser(user);
+        post1.setCreatedDatetime(ZonedDateTime.now());
+		post1.setCaption("gowtham");
 		postRepository.save(post);
+        postRepository.save(post1);
 
 	}
 }
