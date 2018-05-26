@@ -1,16 +1,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 
     <title>Hello Spring Boot!</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
         .navbar-inverse
@@ -46,11 +46,13 @@
     </div>
 </div>
 <!-- Insert content into the layouts/layout.html -->
-
+<br>
+<br>
+<br>
+<br>
 <th:block layout:fragment="content">
-    <br>
-    <br>
-    <div align="center">
+
+    <div align="center" class="container">
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Post</button>
 
 
@@ -58,10 +60,10 @@
     <br/>
     <br>
     <br>
-    <div align="center"   class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
+    <div class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
         <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp96WEfgwtyEPdSaZJ_olD8Cd7_6zletAnaiECONkZzU2I1RAf" alt="Card image cap" width="200" height="200">
         <div class="card-body">
-            <h5 class="card-title" th:text="${posts.user.getName()}"></h5>
+            <span> <h5 class="card-title" th:text="${posts.user.getName()}"></h5> &nbsp;<button id = "like"> like </button></span>
             <p class="card-text" th:text="${posts.getCaption()}"></p>
             <p class="card-text" th:text="${posts.getCreatedDatetime()}"><small class="text-muted"></small></p>
         </div>
@@ -87,6 +89,7 @@
                     <div class="form-group">
                         <label class="form-control-label" >Caption</label>
                         <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
+
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" >Upload File</label>
@@ -113,7 +116,13 @@
 </th:block>
 </body>
 <script>
-
+    $(function(){
+        $("#like").click(function () {
+            $(this).text(function(i, text){
+                return text === "like" ? "unlike" : "like";
+            })
+        });
+    })
 </script>
 </html>
 
