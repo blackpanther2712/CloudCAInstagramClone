@@ -60,8 +60,9 @@
     <br>
     <br>
     <div class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
-        <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp96WEfgwtyEPdSaZJ_olD8Cd7_6zletAnaiECONkZzU2I1RAf" alt="Card image cap" width="200" height="200">
+        <img class="card-img-top" th:src="${posts.getImageUrl()}" alt="Card image cap" width="200" height="200">
         <div class="card-body">
+            <input id="postid" type="hidden" th:text="${posts.getId()}">
             <span>
                 <h5 class="card-title" th:text="${posts.user.getName()}"></h5> &nbsp;
                 <button id = "like" class="like-button"> like </button>
@@ -118,23 +119,18 @@
 
 </th:block>
 </body>
-<script>
-    $(function(){
-        $("#like").click(function () {
-            $(this).text(function(i, text){
-                return text === "like" ? "unlike" : "like";
-            })
-        });
-    })
-</script>
+
 
 <script>
     $(function() {
         $('.like-button').click(function(){
             var obj = $(this);
+            var id = $('#postid').val();
             if( obj.data('liked') ){
                 obj.data('liked', false);
                 obj.html('Like');
+                alert(id);
+                //likeviaAjax();
             }
             else{
                 obj.data('liked', true);
@@ -142,6 +138,8 @@
             }
         });
     });
+
+
 </script>
 
 </html>
