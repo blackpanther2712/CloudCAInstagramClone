@@ -35,8 +35,8 @@ public class PostController {
     }
 
     @PostMapping("/home")
-    public String uploadFile(@ModelAttribute Post post) {
-        //String s = this.amazonClient.uploadFile(file);
+    public String uploadFile(@ModelAttribute Post post, @RequestParam("file") MultipartFile file) {
+        String imageUrl = this.amazonClient.uploadFile(file);
         User user = new User();
         user.setName("Gowtham");
         user.setCurrentCity("Singapore");
@@ -48,6 +48,7 @@ public class PostController {
 
         post.setUser(user);
         post.setCreatedDatetime(ZonedDateTime.now());
+        post.setImageUrl(imageUrl);
         postRepository.save(post);
         return "index";
     }
