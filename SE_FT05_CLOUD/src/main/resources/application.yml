@@ -1,5 +1,5 @@
 amazonProperties:
-  endpointUrl: https://s3.ap-southeast-1b.amazonaws.com
+  endpointUrl: https://s3-ap-southeast-1.amazonaws.com
   accessKey: AKIAJ5I53POIPDAOWY3Q
   secretKey: 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
   bucketName: ft05

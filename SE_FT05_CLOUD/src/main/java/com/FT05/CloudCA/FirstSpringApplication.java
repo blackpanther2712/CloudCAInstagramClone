@@ -28,10 +28,10 @@ public class FirstSpringApplication implements CommandLineRunner {
 		User user = new User();
 		user.setName("Rakesh");
 		user.setCurrentCity("Singapore");
-		user.setHighSchool("NUS");
+		user.setHighSchool("ISS");
 		user.setBio("bio");
 		user.setTokenId("Cognito Token");
-		user.setUniversity("ISS");
+		user.setUniversity("SE");
 		userRepository.save(user);
 
 		Post post = new Post();

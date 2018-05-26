@@ -60,7 +60,7 @@
     <br>
     <br>
     <div class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
-        <img class="card-img-top" th:src="${posts.getImageUrl()}" alt="Card image cap" width="200" height="200">
+        <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap" width="200" height="200">
         <div class="card-body">
             <input id="postid" type="hidden" th:text="${posts.getId()}">
             <span>
