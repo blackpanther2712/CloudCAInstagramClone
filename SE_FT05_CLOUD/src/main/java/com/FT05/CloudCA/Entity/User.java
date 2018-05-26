@@ -5,6 +5,7 @@ package com.FT05.CloudCA.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,6 +44,13 @@ public class User {
 
     @OneToMany
     private Set<Post> posts = new HashSet<>();
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "followers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id"))
+    private List<User> following;
 
 
     public Long getId() {
