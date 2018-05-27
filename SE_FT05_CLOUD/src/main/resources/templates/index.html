@@ -65,7 +65,8 @@
             <input id="postid" type="hidden" th:text="${posts.getId()}">
             <span>
                 <h5 class="card-title" th:text="${posts.user.getName()}"></h5> &nbsp;
-                <button id = "like" class="like-button"> like </button>
+                <button id = "like" class="like-button"  th:onclick="'javascript:like(' + ${posts.getId()} + ')'"> like </button>
+
 
             </span>
             <p class="card-text" th:text="${posts.getCaption()}"></p>
@@ -115,29 +116,23 @@
 
     </div>
 </div>
+    <div id="resultsBlock">
 
+    </div>
 
 </th:block>
 </body>
 
 
 <script>
-    $(function() {
-        $('.like-button').click(function(){
-            var obj = $(this);
-            var id = $('#postid').val();
-            if( obj.data('liked') ){
-                obj.data('liked', false);
-                obj.html('Like');
-                alert(id);
-                //likeviaAjax();
-            }
-            else{
-                obj.data('liked', true);
-                obj.html('Unlike');
-            }
-        });
-    });
+var like = function (postId) {
+    var url = '/likes/';
+    url=url+postId;
+    alert(postId)
+    $("#resultsBlock").load(url);
+
+}
+
 
 
 </script>
