@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @SpringBootApplication
 public class FirstSpringApplication implements CommandLineRunner {
@@ -39,9 +40,9 @@ public class FirstSpringApplication implements CommandLineRunner {
 
 		post.setUser(user);
 		post.setCaption("awesome");
-		post.setCreatedDatetime(ZonedDateTime.now());
+		post.setCreatedDatetime(new Date());
 		post1.setUser(user);
-        post1.setCreatedDatetime(ZonedDateTime.now());
+        post1.setCreatedDatetime(new Date());
 		post1.setCaption("gowtham");
 		postRepository.save(post);
         postRepository.save(post1);

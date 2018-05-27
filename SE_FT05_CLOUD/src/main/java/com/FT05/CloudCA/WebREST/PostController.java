@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Controller
 public class PostController {
@@ -47,7 +48,7 @@ public class PostController {
         userRepository.save(user);
 
         post.setUser(user);
-        post.setCreatedDatetime(ZonedDateTime.now());
+        post.setCreatedDatetime(new Date());
         post.setImageUrl(imageUrl);
         postRepository.save(post);
         return "index";
