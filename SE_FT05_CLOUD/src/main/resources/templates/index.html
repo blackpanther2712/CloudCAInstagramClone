@@ -6,11 +6,12 @@
     <title>Hello Spring Boot!</title>
 
 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     <style>
         .navbar-inverse
@@ -19,6 +20,14 @@
             border-color: #2a6496;
             color: black ;
         }
+        a.navbar-brand{
+            color: #dee2e6;
+        }
+        a.navbar-brand:hover{
+            color: white;
+        }
+
+
         .card-img-top
         {
             height: 200px;
@@ -60,16 +69,22 @@
     <br>
     <br>
     <div class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
+        <br>
+        <h6 class="card-title" th:text="${posts.user.getName()}"></h6>
+        <br>
+
         <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap" width="200" height="200">
         <div class="card-body">
-
+            <p class="card-text" th:text="${posts.getCaption()}"></p>
             <span>
-                <h5 class="card-title" th:text="${posts.user.getName()}"></h5> &nbsp;
-                <button th:id="${posts.getId()}" class="like-button" th:onclick="'javascript:like(' + ${posts.getId()} + ')'"> like </button>
 
+                <button th:id="${posts.getId()}" class="like-button btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'"> like </button>
 
             </span>
-            <p class="card-text" th:text="${posts.getCaption()}"></p>
+
+
+
+
             <p class="card-text" th:text="${posts.getCreatedDatetime()}"><small class="text-muted"></small></p>
         </div>
     </div>
@@ -127,6 +142,7 @@
 <script>
         var like = function (id)
         {
+
             var select = ("#"+id+".like-button");
             var obj = $(select);
             if( obj.data('liked') ){
