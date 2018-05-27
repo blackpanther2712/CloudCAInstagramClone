@@ -19,7 +19,7 @@ LikeRepository likeRepository;
 
     @RequestMapping(value = "/likes/{postId}", method = RequestMethod.GET)
     public String showGuestList(@PathVariable("postId") String postId) {
-        Long postId1 = Long.parseLong(postId);
+       // Long postId1 = Long.parseLong(postId);
         System.out.println(postId);
         return "index";
     }

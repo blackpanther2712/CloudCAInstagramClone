@@ -62,10 +62,10 @@
     <div class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
         <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap" width="200" height="200">
         <div class="card-body">
-            <input id="postid" type="hidden" th:text="${posts.getId()}">
+
             <span>
                 <h5 class="card-title" th:text="${posts.user.getName()}"></h5> &nbsp;
-                <button id = "like" class="like-button"  th:onclick="'javascript:like(' + ${posts.getId()} + ')'"> like </button>
+                <button th:id="${posts.getId()}" class="like-button" th:onclick="'javascript:like(' + ${posts.getId()} + ')'"> like </button>
 
 
             </span>
@@ -125,15 +125,28 @@
 
 
 <script>
-var like = function (postId) {
-    var url = '/likes/';
-    url=url+postId;
-    alert(postId)
-    $("#resultsBlock").load(url);
+        var like = function (id)
+        {
+            var select = ("#"+id+".like-button");
+            var obj = $(select);
+            if( obj.data('liked') ){
+                obj.data('liked', false);
+                obj.html('Like');
+                alert(id);
+                var url = '/likes/';
+                url=url+id;
 
-}
-
-
+                $("#resultsBlock").load(url);
+            }
+            else{
+                obj.data('liked', true);
+                obj.html('Unlike');
+                var url = '/likes/';
+                url=url+id+'d';
+                alert(id)
+                $("#resultsBlock").load(url);
+            }
+        }
 
 </script>
 
