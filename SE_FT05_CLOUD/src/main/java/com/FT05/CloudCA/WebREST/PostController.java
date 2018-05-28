@@ -54,11 +54,4 @@ public class PostController {
         return "index";
     }
 
-
-    @RequestMapping(value = "/likes/{postId}", method = RequestMethod.GET)
-    public String showGuestList(@PathVariable("postId") String postId) {
-
-        System.out.println(postId);
-        return "index";
-    }
 }

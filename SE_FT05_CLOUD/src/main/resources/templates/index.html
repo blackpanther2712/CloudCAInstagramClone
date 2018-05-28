@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
     <style>
         .navbar-inverse
@@ -78,14 +79,16 @@
             <p class="card-text" th:text="${posts.getCaption()}"></p>
             <span>
 
-                <button th:id="${posts.getId()}" class="like-button btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'"> like </button>
+                <button th:id="${posts.getId()}" class="like-button btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
+                </button>
 
             </span>
 
 
 
 
-            <p class="card-text" th:text="${posts.getCreatedDatetime()}"><small class="text-muted"></small></p>
+            <p class="card-text" th:text="${#dates.format(posts.getCreatedDatetime(),'dd-MM-yyyy HH:mm')}"><small class="text-muted"></small></p>
         </div>
     </div>
 
