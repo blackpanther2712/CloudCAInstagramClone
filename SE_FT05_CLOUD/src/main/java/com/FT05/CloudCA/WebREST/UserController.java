@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.FT05.CloudCA.WebREST;
 
 import com.FT05.CloudCA.Entity.User;
@@ -86,7 +85,6 @@ public class UserController {
         return model;
     }
 }
-=======
 package com.FT05.CloudCA.WebREST;
 
 import com.FT05.CloudCA.Entity.User;
@@ -101,4 +99,3 @@ public class UserController {
 
 
 }
->>>>>>> 44792666ad016036648c8017fb5437d00897c4b7
