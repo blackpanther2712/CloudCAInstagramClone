@@ -26,7 +26,7 @@ public class FirstSpringApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user = new User();
+		/*User user = new User();
 		user.setName("Rakesh");
 		user.setCurrentCity("Singapore");
 		user.setHighSchool("ISS");
@@ -45,7 +45,7 @@ public class FirstSpringApplication implements CommandLineRunner {
         post1.setCreatedDatetime(new Date());
 		post1.setCaption("gowtham");
 		postRepository.save(post);
-        postRepository.save(post1);
+        postRepository.save(post1);*/
 
 	}
 }
