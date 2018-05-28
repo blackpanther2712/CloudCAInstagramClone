@@ -28,23 +28,23 @@ public class PostController {
         this.amazonClient = amazonClient;
     }
 
-    @GetMapping("/home")
-    public String showPage(Model model){
-        model.addAttribute("post",new Post());
-        model.addAttribute("getpost",postRepository.findAll());
-        return "index";
-    }
+//    @GetMapping("/home")
+//    public String showPage(Model model){
+//        model.addAttribute("post",new Post());
+//        model.addAttribute("getpost",postRepository.findAll());
+//        return "index";
+//    }
 
     @PostMapping("/home")
     public String uploadFile(@ModelAttribute Post post, @RequestParam("file") MultipartFile file) {
         String imageUrl = this.amazonClient.uploadFile(file);
         User user = new User();
-        user.setName("Gowtham");
+
         user.setCurrentCity("Singapore");
         user.setHighSchool("NUS");
         user.setBio("bio");
-        user.setTokenId("Cognito Token");
-        user.setUniversity("ISS");
+//        user.setTokenId("Cognito Token");
+       user.setUniversity("ISS");
         userRepository.save(user);
 
         post.setUser(user);

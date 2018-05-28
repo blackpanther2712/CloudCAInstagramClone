@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
@@ -50,7 +51,6 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Instagram</a>
             </div>
-
         </div>
     </div>
 </div>
@@ -71,7 +71,7 @@
     <br>
     <div class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
         <br>
-        <h2 class="card-title" th:text="${posts.user.getName()}"></h2>
+        <h2 class="card-title" th:text="${posts.user.getFirstname()}"></h2>
         <br>
 
         <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap" width="200" height="200">

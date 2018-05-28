@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 @SpringBootApplication
-public class FirstSpringApplication implements CommandLineRunner {
+public class FirstSpringApplication  {//implements CommandLineRunner
 
     @Autowired
     UserRepository userRepository;
@@ -24,9 +24,35 @@ public class FirstSpringApplication implements CommandLineRunner {
 		SpringApplication.run(FirstSpringApplication.class, args);
 	}
 
+<<<<<<< HEAD
+//	@Override
+//	public void run(String... args) throws Exception {
+//		User user = new User();
+//		user.setName("Rakesh");
+//		user.setCurrentCity("Singapore");
+//		user.setHighSchool("ISS");
+//		user.setBio("bio");
+//		user.setTokenId("Cognito Token");
+//		user.setUniversity("SE");
+//		userRepository.save(user);
+//
+//		Post post = new Post();
+//		Post post1 = new Post();
+//
+//		post.setUser(user);
+//		post.setCaption("awesome");
+//		post.setCreatedDatetime(new Date());
+//		post1.setUser(user);
+//        post1.setCreatedDatetime(new Date());
+//		post1.setCaption("gowtham");
+//		postRepository.save(post);
+//        postRepository.save(post1);
+//
+//	}
+=======
 	@Override
 	public void run(String... args) throws Exception {
-		User user = new User();
+		/*User user = new User();
 		user.setName("Rakesh");
 		user.setCurrentCity("Singapore");
 		user.setHighSchool("ISS");
@@ -45,7 +71,8 @@ public class FirstSpringApplication implements CommandLineRunner {
         post1.setCreatedDatetime(new Date());
 		post1.setCaption("gowtham");
 		postRepository.save(post);
-        postRepository.save(post1);
+        postRepository.save(post1);*/
 
 	}
+>>>>>>> 44792666ad016036648c8017fb5437d00897c4b7
 }
