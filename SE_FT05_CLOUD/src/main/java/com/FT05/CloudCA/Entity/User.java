@@ -4,6 +4,9 @@ package com.FT05.CloudCA.Entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -39,6 +42,15 @@ public class User {
     @Column(name = "image_Url")
     private String image;
 
+    @OneToMany
+    private Set<Post> posts = new HashSet<>();
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "followers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id"))
+    private List<User> following;
 
 
     public Long getId() {
@@ -104,5 +116,27 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", tokenId='" + tokenId + '\'' +
+                ", name='" + name + '\'' +
+                ", currentCity='" + currentCity + '\'' +
+                ", highSchool='" + highSchool + '\'' +
+                ", university='" + university + '\'' +
+                ", bio='" + bio + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
+
+    public List<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<User> following) {
+        this.following = following;
     }
 }

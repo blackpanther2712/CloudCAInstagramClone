@@ -1,5 +1,14 @@
 amazonProperties:
-  endpointUrl: https://s3.ap-southeast-1b.amazonaws.com
-  accessKey: AKIAJ7OVWBJ2BN5OZE5A
-  secretKey: 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
+  endpointUrl: https://s3-ap-southeast-1.amazonaws.com
+  accessKey: AKIAJ5I53POIPDAOWY3Q
+  secretKey: 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
   bucketName: ft05
+
+
+userPoolProperties:
+  POOL_ID: us-east-1_Bp9zDy6qR
+  CLIENTAPP_ID: 60ddjpgc4jfo2fair3gi49ll1
+  FED_POOL_ID: us-east-1:146ea462-061b-42df-b8a5-a207d58555fb
+  CUSTOMDOMAIN: ss
+  REGION: us-east-1
+

@@ -1,0 +1,183 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <title>Hello Spring Boot!</title>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <style>
+        .navbar-inverse
+        {
+            background-color: #2a6496;
+            border-color: #2a6496;
+            color: black ;
+        }
+        a.navbar-brand{
+            color: #dee2e6;
+        }
+        a.navbar-brand:hover{
+            color: white;
+        }
+
+
+        .card-img-top
+        {
+            height: 200px;
+            width:200px;
+
+        }
+
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div>
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional.                                           -->
+    <!-- ============================================================================ -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Instagram</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Insert content into the layouts/layout.html -->
+<br>
+<br>
+<br>
+<br>
+<th:block layout:fragment="content">
+
+    <div align="center" class="container">
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Post</button>
+
+
+
+    <br/>
+    <br>
+    <br>
+    <div class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
+        <br>
+        <h2 class="card-title" th:text="${posts.user.getName()}"></h2>
+        <br>
+
+        <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap" width="200" height="200">
+        <div class="card-body">
+            <p class="card-text" th:text="${posts.getCaption()}"></p>
+            <span>
+
+                <button th:id="${posts.getId()}" class="btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'">
+                <span th:id="${posts.getId()}" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
+                </button>
+
+            </span>
+
+
+
+
+            <p class="card-text" th:text="${#dates.format(posts.getCreatedDatetime(),'dd-MM-yyyy HH:mm')}"><small class="text-muted"></small></p>
+        </div>
+    </div>
+
+            <!-- Modal -->
+
+    </div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 align="center" class="modal-title">Post picture </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" >
+                <form id="userForm" action="#" th:action="@{/home}" th:object="${post}" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        <label class="form-control-label" >Caption</label>
+                        <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" >Upload File</label>
+                        <input type="file"  accept="image/*" class="form-control" name="file" />
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Post">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <div id="resultsBlock">
+
+    </div>
+
+</th:block>
+</body>
+
+
+<script>
+        var like = function (id)
+        {
+
+            var select = ("#"+id+".btn");
+            $(select).removeClass('btn-danger');
+            $(select).addClass('btn-success');
+
+            var value = $("#"+id).find("span");
+            $(value).removeClass('glyphicon glyphicon-thumbs-down');
+            $(value).addClass('glyphicon glyphicon-thumbs-up');
+            var obj = $(value);
+            if( obj.data('liked') ){
+                obj.data('liked', false);
+                obj.html('Like');
+                alert(id);
+                var url = '/likes/';
+                url=url+id;
+
+                $("#resultsBlock").load(url);
+            }
+            else{
+                $(select).removeClass('btn-success');
+                $(select).addClass('btn-danger');
+                $(value).removeClass('glyphicon glyphicon-thumbs-up');
+                $(value).addClass('glyphicon glyphicon-thumbs-down');
+                obj.data('liked', true);
+                obj.html('Unlike');
+                var url = '/likes/';
+                url=url+id+'d';
+                alert(id)
+                $("#resultsBlock").load(url);
+            }
+        }
+
+</script>
+
+</html>
+

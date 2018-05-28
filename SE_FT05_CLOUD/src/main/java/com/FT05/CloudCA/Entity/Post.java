@@ -2,6 +2,7 @@ package com.FT05.CloudCA.Entity;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "posts")
@@ -18,8 +19,14 @@ public class Post {
     @Column(name = "posted_image")
     private String imageUrl;
 
+    @Column(name = "caption")
+    private String caption;
+
     @Column(name = "created_Date")
-    private ZonedDateTime createdDatetime;
+    private Date createdDatetime;
+
+    @Column(name = "like_Count")
+    private int count;
 
 
     public Long getId() {
@@ -47,11 +54,27 @@ public class Post {
         this.imageUrl = imageUrl;
     }
 
-    public ZonedDateTime getCreatedDatetime() {
+    public Date getCreatedDatetime() {
         return createdDatetime;
     }
 
-    public void setCreatedDatetime(ZonedDateTime createdDatetime) {
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public void setCreatedDatetime(Date createdDatetime) {
         this.createdDatetime = createdDatetime;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

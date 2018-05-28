@@ -3,6 +3,7 @@ package com.FT05.CloudCA.WebREST;
 
 import com.FT05.CloudCA.AWS.AmazonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +28,10 @@ public class HomeController {
         return this.amazonClient.deleteFileFromS3Bucket(fileUrl);
     }
 
+    @GetMapping("/login")
+    public String login(Model model){
+        return "login";
+    }
 
 
 
