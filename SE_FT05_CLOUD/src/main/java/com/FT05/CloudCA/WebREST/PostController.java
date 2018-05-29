@@ -6,6 +6,7 @@ import com.FT05.CloudCA.Entity.User;
 import com.FT05.CloudCA.Repositories.PostRepository;
 import com.FT05.CloudCA.Repositories.UserRepository;
 import com.FT05.CloudCA.Service.FriendsFeedService;
+import com.FT05.CloudCA.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,15 +15,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.ZonedDateTime;
+
 import java.util.Date;
 
 @Controller
 public class PostController {
     @Autowired
     private PostRepository postRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
     @Autowired
     private AmazonClient amazonClient;
 
@@ -34,21 +37,21 @@ public class PostController {
         this.amazonClient = amazonClient;
     }
 
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 
     @GetMapping("/home")
     public String showPage(Model model){
-        if(friendsFeedService.getFreiendsFeed() != null){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+
+        if(friendsFeedService.getFreiendsFeed(user) != null){
             model.addAttribute("post",new Post());
-            model.addAttribute("getpost",friendsFeedService.getFreiendsFeed());
+            model.addAttribute("getpost",friendsFeedService.getFreiendsFeed(user));
         }
         else {
             model.addAttribute("post",new Post());
             model.addAttribute("getpost",postRepository.findAll());
         }
-
-        /*model.addAttribute("post",new Post());
-        model.addAttribute("getpost",postRepository.findAll());*/
 
         return "index";
     }
@@ -56,20 +59,13 @@ public class PostController {
     @PostMapping("/home")
     public String uploadFile(@ModelAttribute Post post, @RequestParam("file") MultipartFile file) {
         String imageUrl = this.amazonClient.uploadFile(file);
-        /*User user = new User();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        user.setCurrentCity("Singapore");
-        user.setHighSchool("NUS");
-        user.setBio("bio");
-//        user.setTokenId("Cognito Token");
-       user.setUniversity("ISS");
-        userRepository.save(user);*/
-
-        System.out.println(auth.getDetails());
-        /*post.setUser(user);
+        User user = userService.findUserByEmail(auth.getName());
+        post.setUser(user);
         post.setCreatedDatetime(new Date());
         post.setImageUrl(imageUrl);
-        postRepository.save(post);*/
+        postRepository.save(post);
         return "index";
     }
 
