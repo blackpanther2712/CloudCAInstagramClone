@@ -37,6 +37,9 @@ public class User {
     @Column(name = "lastname")
     private String lastname;
 
+    @Column(name = "tokenid")
+    private String tokenId;
+
     @Column(name = "password")
     private String password;
 
@@ -107,13 +110,9 @@ public class User {
 
     public void setPassword(String password) { this.password = password; }
 
-//    public String getTokenId() {
-//        return tokenId;
-//    }
-//
-//    public void setTokenId(String tokenId) {
-//        this.tokenId = tokenId;
-//    }
+    public String getTokenId() { return tokenId; }
+
+    public void setTokenId(String tokenId) { this.tokenId = tokenId; }
 
     public String getCurrentCity() {
         return currentCity;
@@ -159,7 +158,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-//                ", tokenId='" + tokenId + '\'' +
+               ", tokenId='" + tokenId + '\'' +
                 ", currentCity='" + currentCity + '\'' +
                 ", highSchool='" + highSchool + '\'' +
                 ", university='" + university + '\'' +

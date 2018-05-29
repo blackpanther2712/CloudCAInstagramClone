@@ -20,6 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT * FROM users WHERE ID = ?1", nativeQuery = true)
     User findByUserId(Long userId);
-    
+
+    User findByTokenId(String tokenid);
 
 }
