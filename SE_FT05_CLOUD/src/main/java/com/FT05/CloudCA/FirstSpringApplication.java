@@ -21,6 +21,7 @@ public class FirstSpringApplication implements CommandLineRunner {
     @Autowired
     PostRepository postRepository;
 	public static void main(String[] args) {
+
 		SpringApplication.run(FirstSpringApplication.class, args);
 	}
 

@@ -1,12 +1,22 @@
 package com.FT05.CloudCA.Entity;
 
-
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "users")
@@ -15,20 +25,23 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-
-
-    @Column(name = "tokenId")
-    private String tokenId;
-
-
-    @NotNull
-    @Column(name = "username")
-    private String name;
-
-
     @Column(name = "current_city")
-
     private String currentCity;
+
+    @Column(name ="email")
+    private  String email;
+
+    @Column (name ="firstname")
+    private  String firstname;
+
+    @Column(name = "lastname")
+    private String lastname;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "active")
+    private int active;
 
     @Column(name = "High_School")
     private String highSchool;
@@ -52,6 +65,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "following_id"))
     private List<User> following;
 
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
+
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -61,22 +86,34 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setEmail(String email) { this.email = email; }
 
+    public String getEmail() {  return email; }
 
-    public String getTokenId() {
-        return tokenId;
-    }
+    public String getFirstname() { return firstname; }
 
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
-    }
+    public void setFirstname(String firstname) { this.firstname = firstname; }
+
+    public int getActive() { return active; }
+
+    public void setActive(int active) { this.active = active; }
+
+    public String getLastname() { return lastname; }
+
+    public void setLastname(String lastname) { this.lastname = lastname; }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
+
+//    public String getTokenId() {
+//        return tokenId;
+//    }
+//
+//    public void setTokenId(String tokenId) {
+//        this.tokenId = tokenId;
+//    }
 
     public String getCurrentCity() {
         return currentCity;
@@ -122,8 +159,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", tokenId='" + tokenId + '\'' +
-                ", name='" + name + '\'' +
+//                ", tokenId='" + tokenId + '\'' +
                 ", currentCity='" + currentCity + '\'' +
                 ", highSchool='" + highSchool + '\'' +
                 ", university='" + university + '\'' +
