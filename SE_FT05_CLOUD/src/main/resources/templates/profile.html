@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-sm-6 col-md-8">
                             <h4 th:text="${userDetails.getFirstname()}"></h4>
-                            <small><cite th:text="${userDetails.getCurrentCity()}"><i class="glyphicon glyphicon-map-marker">
+                            <small><cite th:title="${userDetails.getCurrentCity()}" th:value="${userDetails.getCurrentCity()}"><i class="glyphicon glyphicon-map-marker">
                             </i></cite></small>
                             <p>
                                 <i th:text="${userDetails.getEmail()}" class="glyphicon glyphicon-envelope"></i>
