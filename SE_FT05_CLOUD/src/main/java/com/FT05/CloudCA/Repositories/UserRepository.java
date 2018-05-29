@@ -15,7 +15,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT * FROM users WHERE ID = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM users WHERE email = ?1", nativeQuery = true)
     User findByEmail(String email);
 
     @Query(value = "SELECT * FROM users WHERE ID = ?1", nativeQuery = true)

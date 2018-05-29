@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.ZonedDateTime;
+
 import java.util.Date;
 
 @Controller
@@ -34,7 +34,7 @@ public class PostController {
         this.amazonClient = amazonClient;
     }
 
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 
     @GetMapping("/home")
     public String showPage(Model model){
@@ -64,8 +64,13 @@ public class PostController {
 //        user.setTokenId("Cognito Token");
        user.setUniversity("ISS");
         userRepository.save(user);*/
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        System.out.println(auth.getDetails());
+        User user = userRepository.findByEmail(auth.getName());
+        post.setUser(user);
+        post.setCreatedDatetime(new Date());
+        post.setImageUrl(imageUrl);
+        postRepository.save(post);
         /*post.setUser(user);
         post.setCreatedDatetime(new Date());
         post.setImageUrl(imageUrl);
