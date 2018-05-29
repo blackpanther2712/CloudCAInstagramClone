@@ -20,22 +20,41 @@
         {
             background-color: #2a6496;
             border-color: #2a6496;
-            color: black ;
+            color: black;
+            height:60px;
+            width: 100%;
+            box-shadow: 0px 1px 10px #5E5E5E;
+            position: fixed;
+            overflow: hidden;
+            z-index: 5;
+
         }
         a.navbar-brand{
             color: #dee2e6;
+            font-family:"../webapp.resources.fonts/RobotoCondensed-Bold.ttf" ;
+            font-size: 7mm;
+
         }
         a.navbar-brand:hover{
             color: white;
+            font-family: "../webapp.resources.fonts/RobotoCondensed-Bold.ttf";
         }
 
 
         .card-img-top
         {
-            height: 200px;
-            width:200px;
+
+            max-width:300px;
+            max-height: 200px;
+
 
         }
+        #logo {
+            float: left;
+            max-height: 2cm;
+            max-width: 2cm;
+        }
+
 
     </style>
 </head>
@@ -48,8 +67,10 @@
     <!-- ============================================================================ -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Instagram</a>
+                <img src="../images/icon.png"  id="logo"/>
+                <a class="navbar-brand" href="#">Facegram</a>
             </div>
         </div>
     </div>
