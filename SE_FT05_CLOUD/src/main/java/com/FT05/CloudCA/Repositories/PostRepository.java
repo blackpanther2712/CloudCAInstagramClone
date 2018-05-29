@@ -17,7 +17,7 @@ public interface PostRepository extends JpaRepository<Post, Long>{
     List<Post> findByUserId(Long userId);
 
 
-    @Query(value = "SELECT * FROM posts ORDER BY created_date ASC ", nativeQuery = true)
+    @Query(value = "SELECT * FROM posts ORDER BY created_date DESC ", nativeQuery = true)
     List<Post> findAllOrderByDateAsc();
 
 

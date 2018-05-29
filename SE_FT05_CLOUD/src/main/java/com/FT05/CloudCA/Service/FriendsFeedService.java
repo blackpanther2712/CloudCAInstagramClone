@@ -5,6 +5,8 @@ import com.FT05.CloudCA.Entity.User;
 import com.FT05.CloudCA.Repositories.PostRepository;
 import com.FT05.CloudCA.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,11 +21,17 @@ public class FriendsFeedService {
 
     @Autowired
     PostRepository postRepository;
-    //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    List<User> userList;
-    List<Post> friendsPost = new ArrayList<>();
-    public List<Post> getFreiendsFeed(){
-        getFriendsList();
+
+    @Autowired
+    UserService userService;
+
+
+
+
+
+    public List<Post> getFreiendsFeed(User user){
+        List<Post> friendsPost = new ArrayList<>();
+        List<User> userList = getFriendsList(user);
         List<Post> postList = postRepository.findAllOrderByDateAsc();
         for (Post post: postList) {
             if(userList.contains(post.getUser())) {
@@ -33,24 +41,22 @@ public class FriendsFeedService {
         }
 
         return friendsPost;
-
     }
 
-    public void getFriendsList(){
+    public List<User> getFriendsList(User user){
+        List<User> userList = new ArrayList<>();
 
-        User user = userRepository.findByUserId(2L); // replace with current user
+
+        //User user = userRepository.findByUserId(4L); // replace with current user
         userList = user.getFollowing();
+        System.out.println("user size "+ user.getFollowing().size());
+        /*System.out.println("userlist"+userList);*/
         userList.add(user);
-
-        System.out.println("userlist"+userList);
+        System.out.println("userlist1"+userList);
+        return userList;
 
     }
-    
 
-    /*public List<Post> getCurrentUserFeed(){
-         = postRepository.findByUserId(1L); // replace with current user
-
-    }*/
 }
 
 

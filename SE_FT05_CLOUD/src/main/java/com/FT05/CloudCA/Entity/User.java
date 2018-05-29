@@ -59,7 +59,7 @@ public class User {
     private Set<Post> posts = new HashSet<>();
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "followers",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "following_id"))
@@ -67,7 +67,6 @@ public class User {
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
-
     private Set<Role> roles;
 
     public Set<Role> getRoles() {
@@ -106,14 +105,6 @@ public class User {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
-
-//    public String getTokenId() {
-//        return tokenId;
-//    }
-//
-//    public void setTokenId(String tokenId) {
-//        this.tokenId = tokenId;
-//    }
 
     public String getCurrentCity() {
         return currentCity;
