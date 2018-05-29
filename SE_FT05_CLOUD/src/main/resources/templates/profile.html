@@ -1,0 +1,162 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <title>Profile</title>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <style>
+        .navbar-inverse
+        {
+            background-color: #2a6496;
+            border-color: #2a6496;
+            color: black ;
+        }
+        a.navbar-brand{
+            color: #dee2e6;
+        }
+        a.navbar-brand:hover{
+            color: white;
+        }
+
+
+        .card-img-top
+        {
+            height: 200px;
+            width:200px;
+
+        }
+
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div>
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional.                                           -->
+    <!-- ============================================================================ -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a  class="navbar-brand"th:href="@{/logout}">Sign out</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Insert content into the layouts/layout.html -->
+<br>
+<br>
+<br>
+<br>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <img src="https://s3.ap-southeast-1.amazonaws.com/images.deccanchronicle.com/dc-Cover-ne2sovtg5n3gs7bbed4j1b42u7-20171122115447.Medi.jpeg" alt="" class="img-circle img-responsive" />
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <h4 th:text="${userDetails.getFirstname()}"></h4>
+                            <small><cite th:title="${userDetails.getCurrentCity()}" th:value="${userDetails.getCurrentCity()}"><i class="glyphicon glyphicon-map-marker">
+                            </i></cite></small>
+                            <p>
+                                <i th:text="${userDetails.getEmail()}" class="glyphicon glyphicon-envelope"></i>
+                                <br />
+                                <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com" th:text="${userDetails.getBio()}"></a>
+                                <br />
+                                <i class="glyphicon glyphicon-gift" th:text="${userDetails.getHighSchool()}"></i>
+                                <br />
+                                <i class="glyphicon glyphicon-gift" th:text="${userDetails.getUniversity()}"></i></p>
+
+                            <!-- Split button -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div align="center" class="container">
+    <div class="card mb-3" style="width: 400px;" th:each="posts : ${userPosts}">
+        <br>
+        <h2 class="card-title" th:text="${posts.user.getFirstname()}"></h2>
+        <br>
+
+        <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap" width="200" height="200">
+        <div class="card-body">
+            <p class="card-text" th:text="${posts.getCaption()}"></p>
+            <span>
+
+                <button th:id="${posts.getId()}" class="btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'">
+                <span th:id="${posts.getId()}" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
+                </button>
+
+            </span>
+
+            <p class="card-text" th:text="${#dates.format(posts.getCreatedDatetime(),'dd-MM-yyyy HH:mm')}"><small class="text-muted"></small></p>
+        </div>
+    </div>
+    </div>
+    <div id="resultsBlock">
+
+    </div>
+</th:block>
+</body>
+
+
+<script>
+    var like = function (id)
+    {
+
+        var select = ("#"+id+".btn");
+        $(select).removeClass('btn-danger');
+        $(select).addClass('btn-success');
+
+        var value = $("#"+id).find("span");
+        $(value).removeClass('glyphicon glyphicon-thumbs-down');
+        $(value).addClass('glyphicon glyphicon-thumbs-up');
+        var obj = $(value);
+        if( obj.data('liked') ){
+            obj.data('liked', false);
+            obj.html('Like');
+            alert(id);
+            var url = '/likes/';
+            url=url+id;
+
+            $("#resultsBlock").load(url);
+        }
+        else{
+            $(select).removeClass('btn-success');
+            $(select).addClass('btn-danger');
+            $(value).removeClass('glyphicon glyphicon-thumbs-up');
+            $(value).addClass('glyphicon glyphicon-thumbs-down');
+            obj.data('liked', true);
+            obj.html('Unlike');
+            var url = '/likes/';
+            url=url+id+'d';
+            alert(id)
+            $("#resultsBlock").load(url);
+        }
+    }
+
+</script>
+
+</html>
+
