@@ -12,21 +12,14 @@ import org.springframework.data.repository.CrudRepository;
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
-@Repository("userrepository")
+
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    @Query(value = "SELECT * FROM users WHERE ID = ?1", nativeQuery = true)
     User findByEmail(String email);
 
-
-public interface UserRepository extends JpaRepository<User, Long> {
-
-
-
     @Query(value = "SELECT * FROM users WHERE ID = ?1", nativeQuery = true)
     User findByUserId(Long userId);
-
-
-    @Query(value = "SELECT * FROM users WHERE ID = ?1", nativeQuery = true)
-    User findByUserId(Long userId);
-
+    
 
 }

@@ -65,7 +65,7 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value= {"/home"}, method=RequestMethod.GET)
+    /*@RequestMapping(value= {"/home"}, method=RequestMethod.GET)
     public ModelAndView home() {
         ModelAndView model = new ModelAndView();
         model.addObject("post",new Post());
@@ -76,7 +76,7 @@ public class UserController {
         model.addObject("userName", user.getFirstname() + " " + user.getLastname());
         model.setViewName("home");
         return model;
-    }
+    }*/
 
     @RequestMapping(value= {"/access_denied"}, method=RequestMethod.GET)
     public ModelAndView accessDenied() {
@@ -85,17 +85,4 @@ public class UserController {
         return model;
     }
 }
-package com.FT05.CloudCA.WebREST;
 
-import com.FT05.CloudCA.Entity.User;
-import com.FT05.CloudCA.Repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-@Controller
-public class UserController {
-
-
-}

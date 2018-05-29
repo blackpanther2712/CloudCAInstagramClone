@@ -17,7 +17,7 @@ public class LikeController {
     PostRepository postRepository;
 
     @Autowired
-LikeRepository likeRepository;
+    LikeRepository likeRepository;
     @Autowired
     LikeService likeService;
 

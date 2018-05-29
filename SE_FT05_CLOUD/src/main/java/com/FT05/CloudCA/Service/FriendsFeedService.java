@@ -7,6 +7,7 @@ import com.FT05.CloudCA.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,34 +21,36 @@ public class FriendsFeedService {
     PostRepository postRepository;
     //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     List<User> userList;
-
-    public void getFreiendsFeed(){
+    List<Post> friendsPost = new ArrayList<>();
+    public List<Post> getFreiendsFeed(){
         getFriendsList();
-        /*for (User user: userList) {
-
-
-
-        }*/
         List<Post> postList = postRepository.findAllOrderByDateAsc();
         for (Post post: postList) {
             if(userList.contains(post.getUser())) {
+                friendsPost.add(post);
 
             }
         }
 
+        return friendsPost;
 
     }
 
     public void getFriendsList(){
-        
-        User user = userRepository.findByUserId(3L); // replace with current user
+
+        User user = userRepository.findByUserId(2L); // replace with current user
         userList = user.getFollowing();
+        userList.add(user);
 
         System.out.println("userlist"+userList);
-        
+
     }
     
 
+    /*public List<Post> getCurrentUserFeed(){
+         = postRepository.findByUserId(1L); // replace with current user
+
+    }*/
 }
 
 
