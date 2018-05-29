@@ -25,7 +25,7 @@ public class LikeService {
     //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
     @Transactional
-    public void likeChecker(String postId){
+    public void likeChecker(String postId, User user){
 
         Post post;
         int count;
@@ -39,8 +39,6 @@ public class LikeService {
             Like like = new Like();
             like.setPost(post);
             //like.setUser(auth.getPrincipal()/getDetails());
-            User user = new User();
-            user.setId(1L);
             like.setUser(user);
             likeRepository.save(like);
 

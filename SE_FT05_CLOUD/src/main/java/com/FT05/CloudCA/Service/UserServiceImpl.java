@@ -1,5 +1,6 @@
 package com.FT05.CloudCA.Service;
 
+import com.FT05.CloudCA.Entity.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.FT05.CloudCA.Repositories.RoleRespository;
 import com.FT05.CloudCA.Repositories.UserRepository;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -36,5 +38,13 @@ public class UserServiceImpl implements UserService {
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
+
+    @Override
+    public User getSelectedUser(Long uid) {
+
+        userRepository.findByUserId(uid);
+        return null;
+    }
+
 
 }
