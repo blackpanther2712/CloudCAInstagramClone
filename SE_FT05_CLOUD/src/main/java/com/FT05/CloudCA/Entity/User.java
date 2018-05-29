@@ -55,6 +55,9 @@ public class User {
     @Column(name = "image_Url")
     private String image;
 
+    @Column(name = "tokenId")
+    private String tokenId;
+
     @OneToMany
     private Set<Post> posts = new HashSet<>();
 
@@ -165,5 +168,13 @@ public class User {
 
     public void setFollowing(List<User> following) {
         this.following = following;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 }

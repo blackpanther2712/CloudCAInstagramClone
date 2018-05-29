@@ -29,6 +29,11 @@
             z-index: 5;
 
         }
+        ::-webkit-input-placeholder {
+            text-align: center;
+
+        }
+
         a.navbar-brand{
             color: #dee2e6;
             font-family:"../webapp.resources.fonts/RobotoCondensed-Bold.ttf" ;
@@ -54,6 +59,11 @@
             max-height: 2cm;
             max-width: 2cm;
         }
+        input.form-control#status{
+            width:300px ;
+        }
+
+
 
 
     </style>
@@ -81,9 +91,11 @@
 <br>
 <br>
 <th:block layout:fragment="content">
+    <br>
+    <br>
 
     <div align="center" class="container">
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Post</button>
+    <input id="status" align="center" type="text" class="form-control" th:placeholder="'Whats up for today,'+${userName}"data-toggle="modal" data-target="#myModal">
 
 
 
@@ -124,32 +136,32 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 align="center" class="modal-title">Post picture </h4>
+                <h4 align="center" class="modal-title">Post</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
             </div>
             <div class="modal-body" >
                 <form id="userForm" action="#" th:action="@{/home}" th:object="${post}" enctype="multipart/form-data" method="post">
-                    <div class="form-group">
-                        <label class="form-control-label" >Caption</label>
-                        <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
 
-                    </div>
                     <div class="form-group">
                         <label class="form-control-label" >Upload File</label>
-                        <input type="file"  accept="image/*" class="form-control" name="file" />
+                        <input type="file"  accept="image/*"  name="file" />
+                    </div>
+                    <div class="form-group">
+                        <input placeholder="whats on your mind" type="text" class="form-control" th:field="*{caption}" id="caption"/>
+
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Post">
+                            <button type="submit" class="btn btn-success"> Post </button>
                         </div>
                     </div>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
 

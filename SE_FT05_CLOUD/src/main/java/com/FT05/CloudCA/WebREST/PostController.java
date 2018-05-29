@@ -43,7 +43,7 @@ public class PostController {
     public String showPage(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-
+        model.addAttribute("userName",user.getFirstname());
         if(friendsFeedService.getFreiendsFeed(user) != null){
             model.addAttribute("post",new Post());
             model.addAttribute("getpost",friendsFeedService.getFreiendsFeed(user));
