@@ -4,6 +4,7 @@ import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Entity.User;
 import com.FT05.CloudCA.Repositories.PostRepository;
 import com.FT05.CloudCA.Repositories.UserRepository;
+import com.FT05.CloudCA.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,15 +20,21 @@ public class ProfileController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    UserService userService;
+
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public ModelAndView showProfile(@PathVariable("id") String id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+
         ModelAndView model = new ModelAndView();
         Long uid = Long.parseLong(id);
-        User selectedUser = userRepository.findByUserId(uid);
-        model.addObject("userPosts",postRepository.findByUserId(uid));
+        userService.updateCurrentUserDetails(uid, user.getId());
+        User selectedUser = userService.getSelectedUser(uid);
+        model.addObject("userPosts",userService.getSelectedUserPosts(uid));
         model.addObject("userDetails", selectedUser);
         model.setViewName("profile");
-
         return model;
     }
 

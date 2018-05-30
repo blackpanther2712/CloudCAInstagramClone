@@ -1,7 +1,9 @@
 package com.FT05.CloudCA.Service;
 
+import com.FT05.CloudCA.Entity.Like;
 import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Entity.User;
+import com.FT05.CloudCA.Repositories.LikeRepository;
 import com.FT05.CloudCA.Repositories.PostRepository;
 import com.FT05.CloudCA.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +25,28 @@ public class FriendsFeedService {
     PostRepository postRepository;
 
     @Autowired
+    LikeRepository likeRepository;
+
+    @Autowired
     UserService userService;
-
-
 
 
 
     public List<Post> getFreiendsFeed(User user){
         List<Post> friendsPost = new ArrayList<>();
         List<User> userList = getFriendsList(user);
-        List<Post> postList = postRepository.findAllOrderByDateAsc();
+        List<Post> postList = postRepository.findAllOrderByDateDesc();
         for (Post post: postList) {
             if(userList.contains(post.getUser())) {
+                Like like = likeRepository.findByPostId(post.getId(), user.getId());
+                if(like != null) {
+                    System.out.println("like" );
+                    post.setLikeIndicator("L");
+                }
+                else {
+                    System.out.println("unlike" );
+                    post.setLikeIndicator("U");
+                }
                 friendsPost.add(post);
 
             }
@@ -46,11 +58,8 @@ public class FriendsFeedService {
     public List<User> getFriendsList(User user){
         List<User> userList = new ArrayList<>();
 
-
-        //User user = userRepository.findByUserId(4L); // replace with current user
         userList = user.getFollowing();
         System.out.println("user size "+ user.getFollowing().size());
-        /*System.out.println("userlist"+userList);*/
         userList.add(user);
         System.out.println("userlist1"+userList);
         return userList;

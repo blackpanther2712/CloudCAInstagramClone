@@ -9,8 +9,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface LikeRepository extends JpaRepository<Like,Long> {
 
-    @Query(value = "SELECT * FROM likes WHERE POST_ID = ?1", nativeQuery = true)
-    Like findByPostId(Long postId);
+    @Query(value = "SELECT * FROM likes WHERE POST_ID = ?1 and user_id = ?2", nativeQuery = true)
+    Like findByPostId(Long postId, Long id);
 
     @Modifying
     @Query(value = "DELETE FROM likes WHERE POST_ID = ?1 and user_id =?2", nativeQuery = true)

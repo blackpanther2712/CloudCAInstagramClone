@@ -1,5 +1,7 @@
 package com.FT05.CloudCA.Service;
 
+import com.FT05.CloudCA.Entity.Post;
+import com.FT05.CloudCA.Repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import com.FT05.CloudCA.Repositories.RoleRespository;
 import com.FT05.CloudCA.Repositories.UserRepository;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -21,10 +24,14 @@ public class UserServiceImpl implements UserService {
     private RoleRespository roleRepository;
 
     @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public User findUserByEmail(String email) {
+        System.out.println("aaaaaa" + userRepository.findByEmail(email));
         return userRepository.findByEmail(email);
     }
 
@@ -37,4 +44,28 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public User getSelectedUser(Long uid) {
+        return userRepository.findByUserId(uid);
+    }
+
+    @Override
+    public List<Post> getSelectedUserPosts(Long uid) {
+        return postRepository.findByUserId(uid);
+    }
+
+    @Override
+    public void updateCurrentUserDetails(Long uid, Long id) {
+        //checkCurrentLoginUser(id);
+
+    }
+
+
+   /* public boolean checkCurrentLoginUser(Long id) {
+        if(id == ){
+
+        }
+
+        return true;
+    }*/
 }
