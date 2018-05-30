@@ -25,7 +25,6 @@
             width: 100%;
             box-shadow: 0px 1px 10px #5E5E5E;
             position: fixed;
-            overflow: hidden;
             z-index: 5;
 
         }
@@ -59,7 +58,9 @@
             max-width: 2cm;
         }
         input
-
+        .navbar-header-two{
+            overflow: visible;
+        }
 
 
 
@@ -75,9 +76,22 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
 
-            <div class="navbar-header">
+            <div class="navbar-header-one">
                 <img src="../images/icon.png"  id="logo"/>
                 <a class="navbar-brand" href="#">Facegram</a>
+            </div>
+            <div class="navbar-header-two">
+            <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Settings
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/profile">update Profile</a></li>
+                  <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <div class="dropdown-divider"></div>
+                  <li> <a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
             </div>
         </div>
     </div>
@@ -151,18 +165,85 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Post">
+                            <button class="btn btn-success" type="submit" >Post</button>
                         </div>
                     </div>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
 
     </div>
+
+
+
+
+
+
+    <div id="updateProfileModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 align="center" class="modal-title">Post</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body" >
+                    <form id="updateProfileForm" action="#" th:action="@{/home}" th:object="${post}" enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                            <label class="form-control-label" >First Name</label>
+                            <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" >Last Name</label>
+                            <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" >Bio</label>
+                            <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" >Current City</label>
+                            <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" >High School</label>
+                            <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" >University</label>
+                            <input type="text" class="form-control" th:field="*{caption}" id="caption"/>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="file"  accept="image/*"  name="image" />
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button class="btn btn-success" type="submit" >Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+
+</div>
 </div>
     <div id="resultsBlock">
 
