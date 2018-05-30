@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class ProfileController {
     @Autowired
     private PostRepository postRepository;
@@ -43,22 +43,7 @@ public class ProfileController {
         return model;
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String showMyProfile(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        model.addAttribute("user", user);
-        return "index";
-    }
 
 
-    @RequestMapping(value = "/profile", method = RequestMethod.POST)
-    public String updateMyProfile(@ModelAttribute User updUser, @RequestParam("image") MultipartFile file) {
-        String imageUrl = this.amazonClient.uploadFile(file);
-        updUser.setImage(imageUrl);
-        userService.updateMyProfile(updUser);
-        //model.addAttribute("user", user);
-        return "redirect:/home";
-    }
 
 }
