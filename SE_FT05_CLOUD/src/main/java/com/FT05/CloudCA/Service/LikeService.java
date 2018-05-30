@@ -51,8 +51,7 @@ public class LikeService {
             count = post.getCount() - 1;
             post.setCount(count);
             postRepository.save(post);
-            Long userId = 1L;
-            likeRepository.deleteByLike(postIds, userId);
+            likeRepository.deleteByLike(postIds, user.getId());
 
 
         }

@@ -38,8 +38,8 @@ public class FriendsFeedService {
         List<Post> postList = postRepository.findAllOrderByDateDesc();
         for (Post post: postList) {
             if(userList.contains(post.getUser())) {
-                Like like = likeRepository.findByPostId(post.getId());
-                if(like != null && like.getUser().getId() == user.getId()) {
+                Like like = likeRepository.findByPostId(post.getId(), user.getId());
+                if(like != null) {
                     System.out.println("like" );
                     post.setLikeIndicator("L");
                 }
