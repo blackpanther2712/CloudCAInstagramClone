@@ -43,7 +43,7 @@ public class PasswordController {
     @RequestMapping(value = "/forgot", method = RequestMethod.GET)
 
         public ModelAndView displayForgotPasswordPage() {
-        return new ModelAndView("forgotPassword");
+        return new ModelAndView("forgot");
     }
 // Process form submission from forgotPassword page
 
@@ -81,7 +81,7 @@ public class PasswordController {
         }
 
 
-        modelAndView.setViewName("forgotPassword");
+        modelAndView.setViewName("forgot");
         return modelAndView;
 
     }
@@ -98,7 +98,7 @@ public class PasswordController {
         else { // Token not found in DB
             modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");
         }
-        modelAndView.setViewName("resetPassword");
+        modelAndView.setViewName("reset");
         return modelAndView;
     }
 
@@ -122,7 +122,7 @@ public class PasswordController {
         }
         else {
             modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");
-            modelAndView.setViewName("resetPassword");
+            modelAndView.setViewName("reset");
         }
 
         return modelAndView;
