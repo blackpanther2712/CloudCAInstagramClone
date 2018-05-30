@@ -41,11 +41,11 @@ public class FriendsFeedService {
                 Like like = likeRepository.findByPostId(post.getId());
                 if(like != null && like.getUser().getId() == user.getId()) {
                     System.out.println("like" );
-                    post.setLikeIndicator(true);
+                    post.setLikeIndicator("L");
                 }
                 else {
                     System.out.println("unlike" );
-                    post.setLikeIndicator(false);
+                    post.setLikeIndicator("U");
                 }
                 friendsPost.add(post);
 

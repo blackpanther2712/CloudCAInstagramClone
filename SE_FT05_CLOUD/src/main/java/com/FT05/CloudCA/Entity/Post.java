@@ -29,7 +29,7 @@ public class Post {
     private int count;
 
     @Column(name = "like_Indicator")
-    private boolean likeIndicator;
+    private String likeIndicator;
 
 
     public Long getId() {
@@ -81,11 +81,11 @@ public class Post {
         this.count = count;
     }
 
-    public boolean getLikeIndicator() {
+    public String getLikeIndicator() {
         return likeIndicator;
     }
 
-    public void setLikeIndicator(boolean likeIndicator) {
+    public void setLikeIndicator(String likeIndicator) {
         this.likeIndicator = likeIndicator;
     }
 }

@@ -66,7 +66,7 @@ public class PostController {
         post.setCreatedDatetime(new Date());
         post.setImageUrl(imageUrl);
         postRepository.save(post);
-        return "index";
+        return "redirect:/index";
     }
 
 }
