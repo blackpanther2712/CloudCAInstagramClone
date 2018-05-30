@@ -8,6 +8,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+<style>
+    body{
+        background-image: url("https://s3-ap-southeast-1.amazonaws.com/ft05/1511.jpg");
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .container{
+        margin-top: 255px;
+        width: 40%;
+    }
+    img {
+        vertical-align: middle;
+        border-style: none;
+        margin-top: -320px;
+        margin-bottom: 50px;
+    }
+
+
+</style>
 </head>
 
 <body>
@@ -16,6 +36,7 @@
         The email or password is incorrect!
     </div>
     <form th:action="@{/login}" method="post" >
+        <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/Untitled-1.png" class="mainlogo">
         <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
         <label for="inputEmail" class="sr-only">Email</label>
         <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>

@@ -7,9 +7,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+<style>
+    body{
+        background-image: url("https://s3-ap-southeast-1.amazonaws.com/ft05/1511.jpg");
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .container{
+        margin-top: 120px;
+    }
+
+</style>
 </head>
 <body>
-<div class="container">
+<div align="center" class="container">
     <form class="form-horizontal" role="form" method="POST" th:action="@{/signup}" th:object="${user}">
         <div class="row">
             <div class="col-md-3"></div>
@@ -20,13 +32,14 @@
         </div>
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <h2>Register New User</h2>
+            <div class="col-md-12">
+                <h1>Register New User</h1>
                 <hr>
+                <br/>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 field-label-responsive">
+            <div class="col-md-6 field-label-responsive">
                 <label for="name">First Name</label>
             </div>
             <div class="col-md-6">
@@ -40,7 +53,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 field-label-responsive">
+            <div class="col-md-6 field-label-responsive">
                 <label for="name">Last Name</label>
             </div>
             <div class="col-md-6">
@@ -54,7 +67,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 field-label-responsive">
+            <div class="col-md-6 field-label-responsive">
                 <label for="email">Email</label>
             </div>
             <div class="col-md-6">
@@ -66,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-control-feedback">
                          <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
                          </span>
@@ -74,7 +87,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 field-label-responsive">
+            <div class="col-md-6 field-label-responsive">
                 <label for="password">Password</label>
             </div>
             <div class="col-md-6">
@@ -93,6 +106,7 @@
                 </div>
             </div>
         </div>
+        <br/>
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
