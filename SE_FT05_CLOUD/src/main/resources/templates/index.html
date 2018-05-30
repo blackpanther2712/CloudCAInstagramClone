@@ -20,22 +20,48 @@
         {
             background-color: #2a6496;
             border-color: #2a6496;
-            color: black ;
+            color: black;
+            height:60px;
+            width: 100%;
+            box-shadow: 0px 1px 10px #5E5E5E;
+            position: fixed;
+            overflow: hidden;
+            z-index: 5;
+
         }
+        ::-webkit-input-placeholder {
+            text-align: center;
+        }
+
         a.navbar-brand{
             color: #dee2e6;
+            font-family:"../webapp.resources.fonts/RobotoCondensed-Bold.ttf" ;
+            font-size: 7mm;
+
         }
         a.navbar-brand:hover{
             color: white;
+            font-family: "../webapp.resources.fonts/RobotoCondensed-Bold.ttf";
         }
 
 
         .card-img-top
         {
-            height: 200px;
-            width:200px;
+
+            max-width:300px;
+            max-height: 200px;
+
 
         }
+        #logo {
+            float: left;
+            max-height: 2cm;
+            max-width: 2cm;
+        }
+        input
+
+
+
 
     </style>
 </head>
@@ -48,8 +74,10 @@
     <!-- ============================================================================ -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Instagram</a>
+                <img src="../images/icon.png"  id="logo"/>
+                <a class="navbar-brand" href="#">Facegram</a>
             </div>
         </div>
     </div>
@@ -60,9 +88,11 @@
 <br>
 <br>
 <th:block layout:fragment="content">
+    <br>
+    <br>
 
     <div align="center" class="container">
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Post</button>
+    <input id="status" align="center" type="text" class="form-control" th:placeholder="'Whats up for today,'+${userName}"data-toggle="modal" data-target="#myModal">
 
 
 
@@ -79,8 +109,8 @@
             <p class="card-text" th:text="${posts.getCaption()}"></p>
             <span>
 
-                <button th:id="${posts.getId()}" class="btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'">
-                <span th:id="${posts.getId()}" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
+                <button th:id='${posts.getId()+posts.getLikeIndicator()}' class="btn btn-success"th:onclick="'like(\''+ ${posts.getId()+posts.getLikeIndicator()} +'\')'">
+                <span th:id='${posts.getId()+posts.getLikeIndicator()}' class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
                 </button>
 
             </span>
@@ -103,7 +133,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 align="center" class="modal-title">Post picture </h4>
+                <h4 align="center" class="modal-title">Post</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
             </div>
@@ -143,9 +173,34 @@
 
 
 <script>
+
+    $(document).ready(function () {
+        if($("[id$='L']")) {
+            var eselect = $("[id$='L']");
+            var select = (eselect);
+            alert(eselect)
+            $(select).removeClass('btn-success');
+            $(select).addClass('btn-danger');
+
+            var value = $(eselect).find("span");
+            $(value).removeClass('glyphicon glyphicon-thumbs-up');
+            $(value).addClass('glyphicon glyphicon-thumbs-down');
+            var obj = $(value);
+            obj.data('liked', true);
+            obj.html('unlike');
+
+        }
+
+
+
+
+    });
+
+
         var like = function (id)
         {
 
+            var u = id.slice(0,-1);
             var select = ("#"+id+".btn");
             $(select).removeClass('btn-danger');
             $(select).addClass('btn-success');
@@ -153,13 +208,13 @@
             var value = $("#"+id).find("span");
             $(value).removeClass('glyphicon glyphicon-thumbs-down');
             $(value).addClass('glyphicon glyphicon-thumbs-up');
+            $(value).css("background-color", "#218838");
             var obj = $(value);
             if( obj.data('liked') ){
                 obj.data('liked', false);
                 obj.html('Like');
-                alert(id);
                 var url = '/likes/';
-                url=url+id;
+                url=url+u;
 
                 $("#resultsBlock").load(url);
             }
@@ -168,11 +223,11 @@
                 $(select).addClass('btn-danger');
                 $(value).removeClass('glyphicon glyphicon-thumbs-up');
                 $(value).addClass('glyphicon glyphicon-thumbs-down');
+                $(value).css("background-color", "#dc3545");
                 obj.data('liked', true);
                 obj.html('Unlike');
                 var url = '/likes/';
-                url=url+id+'d';
-                alert(id)
+                url=url+u+'d';
                 $("#resultsBlock").load(url);
             }
         }
