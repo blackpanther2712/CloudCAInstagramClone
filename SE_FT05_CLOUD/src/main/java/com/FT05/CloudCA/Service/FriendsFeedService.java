@@ -39,10 +39,12 @@ public class FriendsFeedService {
         for (Post post: postList) {
             if(userList.contains(post.getUser())) {
                 Like like = likeRepository.findByPostId(post.getId());
-                if(like.getUser().getId() == user.getId()) {
+                if(like != null && like.getUser().getId() == user.getId()) {
+                    System.out.println("like" );
                     post.setLikeIndicator(true);
                 }
                 else {
+                    System.out.println("unlike" );
                     post.setLikeIndicator(false);
                 }
                 friendsPost.add(post);

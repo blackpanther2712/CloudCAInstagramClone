@@ -13,4 +13,8 @@ public interface UserService {
 
     public User getSelectedUser(Long uid);
 
+    public List<Post> getSelectedUserPosts(Long uid);
+
+    public void updateCurrentUserDetails(Long uid, Long id);
+
 }

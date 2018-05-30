@@ -25,14 +25,16 @@ public class ProfileController {
 
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public ModelAndView showProfile(@PathVariable("id") String id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+
         ModelAndView model = new ModelAndView();
         Long uid = Long.parseLong(id);
-
+        userService.updateCurrentUserDetails(uid, user.getId());
         User selectedUser = userService.getSelectedUser(uid);
-        model.addObject("userPosts",postRepository.findByUserId(uid));
+        model.addObject("userPosts",userService.getSelectedUserPosts(uid));
         model.addObject("userDetails", selectedUser);
         model.setViewName("profile");
-
         return model;
     }
 
