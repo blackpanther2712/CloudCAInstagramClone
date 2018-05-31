@@ -22,23 +22,90 @@
         {
             background-color: #2a6496;
             border-color: #2a6496;
-            color: black ;
+            height:60px;
+            width: 100%;
+            color: white;
+            position: fixed;
+            z-index: 5;
+        }
+        .navbar-inverse .navbar-brand{
+            color: white;
         }
         a.navbar-brand{
-            color: #dee2e6;
+            color: white;
+            font-size: 7mm;
+            font-family: "https://s3-ap-southeast-1.amazonaws.com/ft05/RobotoCondensed-Bold.ttf";
+            margin-left: 5px;
         }
         a.navbar-brand:hover{
             color: white;
+            font-family: "https://s3-ap-southeast-1.amazonaws.com/ft05/RobotoCondensed-Bold.ttf";
         }
-
-
+        body{
+            background-color: whitesmoke;
+        }
         .card-img-top
         {
             height: 200px;
-            width:200px;
-
+            max-width:100%;
         }
-
+        .navbar-header-one{
+            margin-right: 650px;
+            margin-left : -50px;
+        }
+        .well {
+            min-height: 20px;
+            /* padding: 19px; */
+            margin-bottom: 20px;
+            background-color: white;
+            min-width: 100%;
+            box-shadow: 0px 1px 2px #5E5E5E;
+        }
+        .navbar-header-two{
+            font-size: 9mm;
+            margin-left: 135px;
+            margin-right: 0px;
+        }
+        #logo{
+            float: left;
+            max-width: 50px;
+            max-height: 60px;
+            margin-right: 20px;
+        }
+        .btn{
+            padding: 0px 0px;
+            margin-bottom: 6px;
+            border-radius: 28px;
+            border: 4px solid transparent;
+        }
+        .glyphicon{
+            top: 3px;
+            left: 9px;
+        }
+        .col-md-4{
+            position: relative;
+            max-height: 200px;
+            max-width: 200px;
+            overflow: hidden;
+            margin-left: 30px;
+        }
+        .col-md-8{
+            margin-left: 30px;
+        }
+        .img-responsive{
+            max-width: 100%;
+        }
+        .img-circle{
+            border-radius: 50%;
+        }
+        .glyphicon glyphicon-cog{
+            size: 20px;
+        }
+        .card-body{
+            background-color: white;
+            margin-bottom: 20px;
+        }
+        .glyphicon {  margin-bottom: 10px;margin-right: 20px;}
     </style>
 </head>
 <body>
@@ -50,8 +117,21 @@
     <!-- ============================================================================ -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <a  class="navbar-brand"th:href="@{/logout}">Sign out</a>
+            <div class="navbar-header-one">
+                <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
+                <a class="navbar-brand" th:href="@{/home}">Facegram</a>
+            </div>
+            <div class="navbar-header-two">
+                <div class="btn-group">
+                    <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Update Profile</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <!--<a  class="navbar-brand"th:href="@{/logout}">Sign out</a>-->
             </div>
         </div>
     </div>
@@ -62,26 +142,27 @@
 <br>
 <br>
 <th:block layout:fragment="content">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="well well-sm">
+            <div class="col-md-12" style="margin-bottom: 20px;margin-top: 20px ">
+                <div  class="well well-sm">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                            <img src="https://s3.ap-southeast-1.amazonaws.com/images.deccanchronicle.com/dc-Cover-ne2sovtg5n3gs7bbed4j1b42u7-20171122115447.Medi.jpeg" alt="" class="img-circle img-responsive" />
+                        <div class="col-md-4">
+                            <img src="https://s3.ap-southeast-1.amazonaws.com/images.deccanchronicle.com/dc-Cover-ne2sovtg5n3gs7bbed4j1b42u7-20171122115447.Medi.jpeg" alt="" class="img-circle img-responsive" style=" display:inline;margin: 0 auto;height: 100%; width: auto;" />
                         </div>
-                        <div class="col-sm-6 col-md-8">
-                            <h4 th:text="${userDetails.getFirstname()}"></h4>
-                            <small><cite th:title="${userDetails.getCurrentCity()}" th:value="${userDetails.getCurrentCity()}"><i class="glyphicon glyphicon-map-marker">
-                            </i></cite></small>
+                        <div class="col-md-8" >
+                            <b><h2 th:text="${userDetails.getFirstname()}"></h2></b>
                             <p>
-                                <i th:text="${userDetails.getEmail()}" class="glyphicon glyphicon-envelope"></i>
+
+                                <i class="glyphicon glyphicon-map-marker"  th:text="' '+${userDetails.getCurrentCity()}"></i>
                                 <br />
-                                <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com" th:text="${userDetails.getBio()}"></a>
+                                <i class="glyphicon glyphicon-envelope"  th:text="' '+${userDetails.getEmail()}" ></i>
                                 <br />
-                                <i class="glyphicon glyphicon-gift" th:text="${userDetails.getHighSchool()}"></i>
+                                <i class="glyphicon glyphicon-user"  th:text="' '+${userDetails.getBio()}" ></i>
                                 <br />
-                                <i class="glyphicon glyphicon-gift" th:text="${userDetails.getUniversity()}"></i></p>
+                                <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getHighSchool()}" ></i>
+                                <br />
+                                <i class="glyphicon glyphicon-globe"  th:text="' '+${userDetails.getImage()}"></i></p>
 
                             <!-- Split button -->
 
@@ -92,17 +173,16 @@
 
         </div>
     </div>
+    <hr>
+    <br/>
+    <div class="container">
+        <div class="col-md-8" style="width: 350px;" th:each="posts : ${userPosts}">
 
-    <div align="center" class="container">
-    <div class="card mb-3" style="width: 400px;" th:each="posts : ${userPosts}">
-        <br>
-        <h2 class="card-title" th:text="${posts.user.getFirstname()}"></h2>
-        <br>
 
-        <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap" width="200" height="200">
-        <div class="card-body">
-            <p class="card-text" th:text="${posts.getCaption()}"></p>
-            <span>
+            <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap"  >
+            <div class="card-body">
+                <p class="card-text" th:text="${posts.getCaption()}"></p>
+                <span>
 
                 <button th:id="${posts.getId()}" class="btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'">
                 <span th:id="${posts.getId()}" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
@@ -110,9 +190,9 @@
 
             </span>
 
-            <p class="card-text" th:text="${#dates.format(posts.getCreatedDatetime(),'dd-MM-yyyy HH:mm')}"><small class="text-muted"></small></p>
+                <p class="card-text" th:text="${#dates.format(posts.getCreatedDatetime(),'dd-MM-yyyy HH:mm')}"><small class="text-muted"></small></p>
+            </div>
         </div>
-    </div>
     </div>
     <div id="resultsBlock">
 
@@ -124,11 +204,9 @@
 <script>
     var like = function (id)
     {
-
         var select = ("#"+id+".btn");
         $(select).removeClass('btn-danger');
         $(select).addClass('btn-success');
-
         var value = $("#"+id).find("span");
         $(value).removeClass('glyphicon glyphicon-thumbs-down');
         $(value).addClass('glyphicon glyphicon-thumbs-up');
@@ -139,7 +217,6 @@
             alert(id);
             var url = '/likes/';
             url=url+id;
-
             $("#resultsBlock").load(url);
         }
         else{
@@ -155,8 +232,6 @@
             $("#resultsBlock").load(url);
         }
     }
-
 </script>
 
 </html>
-
