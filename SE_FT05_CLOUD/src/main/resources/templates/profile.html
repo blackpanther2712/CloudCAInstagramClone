@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:vertical-align="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -153,7 +153,7 @@
                 <div  class="well well-sm">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="https://s3.ap-southeast-1.amazonaws.com/images.deccanchronicle.com/dc-Cover-ne2sovtg5n3gs7bbed4j1b42u7-20171122115447.Medi.jpeg" alt="" class="img-circle img-responsive" style=" display:inline;margin: 0 auto;height: 100%; width: auto;" />
+                            <img th:src="@{${userDetails.getImage()}}" width="200" height="200"  alt="" class="img-circle img-responsive" style=" display:inline;margin: 0;" />
                         </div>
                         <div class="col-md-8" >
                             <b><h2 th:text="${userDetails.getFirstname()}"></h2></b>
@@ -167,7 +167,12 @@
                                 <br />
                                 <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getHighSchool()}" ></i>
                                 <br />
-                                <i class="glyphicon glyphicon-globe"  th:text="' '+${userDetails.getImage()}"></i></p>
+                                <i class="glyphicon glyphicon-globe"  th:text="' '+${userDetails.getImage()}"></i>
+                                <i>
+                                    <button class="btn btn-info">
+                                        <span class="glyphicon glyphicon-plus-sign" style="vertical-align: middle;"></span>Follow
+                                    </button></i>
+                            </p>
 
                             <!-- Split button -->
 
