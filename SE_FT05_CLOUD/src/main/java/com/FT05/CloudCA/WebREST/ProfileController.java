@@ -1,5 +1,6 @@
 package com.FT05.CloudCA.WebREST;
 
+import com.FT05.CloudCA.AWS.AmazonClient;
 import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Entity.User;
 import com.FT05.CloudCA.Repositories.PostRepository;
@@ -8,12 +9,14 @@ import com.FT05.CloudCA.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class ProfileController {
     @Autowired
     private PostRepository postRepository;
@@ -22,6 +25,12 @@ public class ProfileController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private AmazonClient amazonClient;
 
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public ModelAndView showProfile(@PathVariable("id") String id) {
@@ -37,5 +46,22 @@ public class ProfileController {
         model.setViewName("profile");
         return model;
     }
+
+
+    @PostMapping("/myprofile")
+    public String updateMyProfile(@ModelAttribute User updUser) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        /*User user = userService.findUserByEmail(auth.getName());
+        updUser.setId(user.getId());
+        updUser.setEmail(user.getEmail());
+        System.out.println("pass "+user.getPassword());
+        updUser.setPassword(bCryptPasswordEncoder.encode(user.getBio()));
+        System.out.println("pass1 "+updUser.getPassword());
+        updUser.setImage(user.getImage());
+        updUser.setActive(user.getActive());
+        userService.updateMyProfile(updUser);*/
+        return "redirect:/home";
+    }
+
 
 }

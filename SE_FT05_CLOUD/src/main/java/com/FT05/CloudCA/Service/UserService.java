@@ -1,6 +1,7 @@
 package com.FT05.CloudCA.Service;
 import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Entity.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface UserService {
     public List<Post> getSelectedUserPosts(Long uid);
 
     public void updateCurrentUserDetails(Long uid, Long id);
+
+    public void updateMyProfile(User user);
 
 }

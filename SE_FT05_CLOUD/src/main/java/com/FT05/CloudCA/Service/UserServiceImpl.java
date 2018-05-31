@@ -10,6 +10,8 @@ import com.FT05.CloudCA.Entity.Role;
 import com.FT05.CloudCA.Entity.User;
 import com.FT05.CloudCA.Repositories.RoleRespository;
 import com.FT05.CloudCA.Repositories.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
+        user.setBio(user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
@@ -60,12 +63,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Transactional
+    @Override
+    public void updateMyProfile(User user) {
+        userRepository.updateByUserId(user.getBio(), user.getCurrentCity(), user.getFirstname(), user.getLastname(), user.getHighSchool(), user.getUniversity(), user.getId());
+        userRepository.save(user);
 
-   /* public boolean checkCurrentLoginUser(Long id) {
-        if(id == ){
+    }
 
-        }
 
-        return true;
-    }*/
 }
