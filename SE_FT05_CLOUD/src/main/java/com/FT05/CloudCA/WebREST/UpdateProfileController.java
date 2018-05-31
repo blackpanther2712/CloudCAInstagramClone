@@ -27,9 +27,5 @@ public class UpdateProfileController {
     private AmazonClient amazonClient;
 
 
-    @PostMapping("/myprofile")
-    public String updateMyProfile(@ModelAttribute User updUser) {
-        userService.updateMyProfile(updUser);
-        return "redirect:/home";
-    }
+
 }

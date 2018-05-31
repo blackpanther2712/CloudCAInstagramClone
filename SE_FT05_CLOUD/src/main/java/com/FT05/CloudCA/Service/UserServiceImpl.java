@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
+        user.setBio(user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
@@ -65,7 +66,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void updateMyProfile(User user) {
-        userRepository.updateUser(user.getBio(), user.getCurrentCity(), user.getFirstname(), user.getLastname(), user.getHighSchool(), user.getUniversity(), user.getImage(), user.getId());
+        userRepository.updateByUserId(user.getBio(), user.getCurrentCity(), user.getFirstname(), user.getLastname(), user.getHighSchool(), user.getUniversity(), user.getId());
+        userRepository.save(user);
+
     }
 
 

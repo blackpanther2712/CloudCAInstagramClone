@@ -44,11 +44,14 @@
         body{
             background-color: whitesmoke;
         }
+
         .card-img-top
         {
             height: 200px;
             max-width:100%;
+
         }
+
         .navbar-header-one{
             margin-right: 650px;
             margin-left : -50px;
@@ -105,7 +108,9 @@
             background-color: white;
             margin-bottom: 20px;
         }
+
         .glyphicon {  margin-bottom: 10px;margin-right: 20px;}
+
     </style>
 </head>
 <body>
@@ -209,9 +214,11 @@
 <script>
     var like = function (id)
     {
+
         var select = ("#"+id+".btn");
         $(select).removeClass('btn-danger');
         $(select).addClass('btn-success');
+
         var value = $("#"+id).find("span");
         $(value).removeClass('glyphicon glyphicon-thumbs-down');
         $(value).addClass('glyphicon glyphicon-thumbs-up');
@@ -222,6 +229,7 @@
             alert(id);
             var url = '/likes/';
             url=url+id;
+
             $("#resultsBlock").load(url);
         }
         else{
@@ -237,6 +245,8 @@
             $("#resultsBlock").load(url);
         }
     }
+
 </script>
 
 </html>
+
