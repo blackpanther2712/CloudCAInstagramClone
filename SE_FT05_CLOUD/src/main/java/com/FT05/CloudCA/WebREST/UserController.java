@@ -55,7 +55,7 @@ public class UserController {
         if(userExists != null) {
             bindingResult.rejectValue("email", "error.user", "This email already exists!");
         }
-
+            user.setImage("https://s3-ap-southeast-1.amazonaws.com/ft05/blank-profile-picture-973460_960_720.png");
             userService.saveUser(user);
             model.addObject("msg", "User has been registered successfully!");
             model.addObject("user", new User());
