@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+
 @Controller
 public class ProfileController {
     @Autowired
@@ -49,17 +51,25 @@ public class ProfileController {
 
 
     @PostMapping("/myprofile")
-    public String updateMyProfile(@ModelAttribute User updUser) {
+    public String updateMyProfile(@ModelAttribute User updUser) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         updUser.setId(user.getId());
-        /*updUser.setEmail(user.getEmail());
-        System.out.println("pass "+user.getPassword());
-        updUser.setPassword(bCryptPasswordEncoder.encode(user.getBio()));
-        System.out.println("pass1 "+updUser.getPassword());
+        updUser.setEmail(user.getEmail());
         updUser.setImage(user.getImage());
-        updUser.setActive(user.getActive());*/
         userService.updateMyProfile(updUser);
+        return "redirect:/home";
+    }
+
+    @PostMapping("/updateprofilepic")
+    public String updateMyProfilePicture(@ModelAttribute User updUser, @RequestParam("profilepic") MultipartFile file) throws IOException {
+        String imageUrl = this.amazonClient.uploadFile(file);
+        updUser.setImage(imageUrl);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        updUser.setId(user.getId());
+        updUser.setEmail(user.getEmail());
+        userService.updateMyProfilePicture(updUser);
         return "redirect:/home";
     }
 
