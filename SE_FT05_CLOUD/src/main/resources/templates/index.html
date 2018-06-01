@@ -149,7 +149,9 @@
                 <a class="navbar-brand" href="#">Facegram</a>
             </div>
             <div class="navbar-header-two">
+                <div  data-toggle="modal" data-target="#profilePicModal" >
                 <img class="img-circle" height="45" width="45" th:src="@{${user.getImage()}}">&nbsp;
+                </div>
                 <div class="btn-group">
                     <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                     <ul class="dropdown-menu dropdown-menu-left">
@@ -246,7 +248,7 @@
 
                         <div align="center" class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <button class="btn btn-success" type="submit" >Post</button>
+                                <button class="btn btn-success" type="submit" >Update</button>
                             </div>
                         </div>
 

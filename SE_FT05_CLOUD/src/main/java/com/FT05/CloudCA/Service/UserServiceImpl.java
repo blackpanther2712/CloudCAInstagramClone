@@ -78,6 +78,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Transactional
     @Override
     public void updateMyProfilePicture(User user) throws IOException {
         amazonClient.elasticUpdate(user);
