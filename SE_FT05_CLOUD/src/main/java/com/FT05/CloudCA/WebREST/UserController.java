@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.FT05.CloudCA.Entity.User;
 import com.FT05.CloudCA.Service.UserService;
 
+import java.io.IOException;
+
 @Controller
 public class UserController {
 
@@ -48,7 +50,7 @@ public class UserController {
     }
 
     @RequestMapping(value= {"/signup"}, method=RequestMethod.POST)
-    public ModelAndView createUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createUser(@Valid User user, BindingResult bindingResult) throws IOException {
         ModelAndView model = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
 

@@ -48,7 +48,7 @@ public class ProfileController {
     }
 
 
-    @PostMapping("/myprofile")
+    @PostMapping("/myprofile") 
     public String updateMyProfile(@ModelAttribute User updUser) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         /*User user = userService.findUserByEmail(auth.getName());

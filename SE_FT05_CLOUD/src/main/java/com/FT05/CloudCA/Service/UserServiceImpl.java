@@ -1,5 +1,6 @@
 package com.FT05.CloudCA.Service;
 
+import com.FT05.CloudCA.AWS.AmazonClient;
 import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.FT05.CloudCA.Repositories.RoleRespository;
 import com.FT05.CloudCA.Repositories.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +33,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private AmazonClient amazonClient;
+
+
     @Override
     public User findUserByEmail(String email) {
         System.out.println("aaaaaa" + userRepository.findByEmail(email));
@@ -38,13 +44,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
+    public void saveUser(User user) throws IOException {
         user.setBio(user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
+        amazonClient.elasticAdd(user);
     }
 
     @Override

@@ -172,6 +172,13 @@
     <br>
     <br>
     <br/>
+    <div align="center">
+    <form id="searchForm" action="#" th:action="@{/search}"  method="post">
+    <input  type="text" name="searchuser"  class="form-control" placeholder="search">
+        <button type="submit" class="btn btn-success">Search</button>
+    </form>
+    </div>
+
     <div align="center" class="container">
         <input id="status" align="center" type="text" class="form-control" th:placeholder="'Whats up for today,'+${user.getFirstname()}"data-toggle="modal" data-target="#myModal">
 
