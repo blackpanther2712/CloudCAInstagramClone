@@ -47,25 +47,27 @@ def request_handler(event, context):
         url = """https://s3.amazonaws.com/{}/{}""".format(filtered_image_bucket_name, photo_name)
 
         try:
-            print('connecting to db')
+            print('Connecting To DB')
             host='cloudft05.cgvzp1ri0xhm.ap-southeast-1.rds.amazonaws.com'
             user='FT05DB'
             passwd='instagramclone'
             db='cloudft05'
             conn = pymysql.connect(host=host, port=3306, user=user, passwd=passwd, db=db)
             cur = conn.cursor()
-            print('connection made')
+            print('Connected')
             cur.execute("select max(id) from posts;")
             max_post_number = int(cur.fetchall()[0][0]) + 1
             cur.execute("""insert into posts(id,caption,like_count,created_date,posted_image,user_id) values(%s,%s,%s,%s,%s,%s)""",(max_post_number, caption, 0, datetime.now(), url, user_id))
-            print('query executed')
+            print('Query Execution Completed')
+
         except Exception, e:
             print('error')
             print(str(e))
+
         finally:
-            print('closing resources')
             cur.close()
             conn.close()
+            print('Closed Resources')
 
         return {
             'result': 'yes',
