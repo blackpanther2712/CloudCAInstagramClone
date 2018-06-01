@@ -19,6 +19,7 @@ public interface UserService {
 
     public void updateCurrentUserDetails(Long uid, Long id);
 
-    public void updateMyProfile(User user);
+    public void updateMyProfile(User user) throws IOException;
 
+    public void updateMyProfilePicture(User updUser) throws IOException;
 }

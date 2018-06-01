@@ -29,5 +29,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "UPDATE users SET bio = ?1, firstname = ?2, lastname = ?3, current_city = ?4, high_school = ?5, university = ?6 WHERE id = ?7", nativeQuery = true)
     void updateByUserId(String bio, String fName, String lName, String city, String hschool, String univ, Long id);
 
-
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE users SET image_url = ?1 WHERE id = ?2", nativeQuery = true)
+    void updatePicByUserId(String image, Long id);
 }
