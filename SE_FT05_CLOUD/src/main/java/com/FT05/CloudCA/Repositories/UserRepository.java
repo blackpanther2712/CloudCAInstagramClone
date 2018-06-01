@@ -23,10 +23,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM users WHERE ID = ?1", nativeQuery = true)
     User findByUserId(Long userId);
 
-    @Transactional
-    @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE users SET bio = ?1, current_city = ?2, firstname = ?3, high_school = ?4, university = ?5 WHERE id = ?6", nativeQuery = true)
-    void updateByUserId(String bio, String city, String fName, String lName, String school, String university, Long id);
-    
 
+
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE users SET bio = ?1, firstname = ?2, lastname = ?3, current_city = ?4, high_school = ?5, university = ?6 WHERE id = ?7", nativeQuery = true)
+    void updateByUserId(String bio, String fName, String lName, String city, String hschool, String univ, Long id);
+
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE users SET image_url = ?1 WHERE id = ?2", nativeQuery = true)
+    void updatePicByUserId(String image, Long id);
 }

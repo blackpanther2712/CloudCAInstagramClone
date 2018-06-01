@@ -55,6 +55,14 @@ public class AmazonClient {
     private String userBucket;
 
 
+
+    private String host = "search-usersearch-2ul6qtvv46zwdqc4o44jtx4e4m.ap-southeast-1.es.amazonaws.com"; // For example, my-test-domain.us-east-1.es.amazonaws.com
+    private String index = "users";
+    private String type = "user";
+
+
+
+
     @PostConstruct
     private void initializeAmazon() {
         AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
@@ -184,24 +192,18 @@ public class AmazonClient {
 
    public void elasticAdd(User user) throws IOException {
 
-       String host = "search-usersearch-2ul6qtvv46zwdqc4o44jtx4e4m.ap-southeast-1.es.amazonaws.com"; // For example, my-test-domain.us-east-1.es.amazonaws.com
-       String index = "users";
-       String type = "user";
        String id = user.getId().toString();
 
-       /*String json = "{" + "\"name\":," + "\"director\":\"alter test\"," + "\"year\":\"2010\""
-               + "}";*/
 
        User userSearch = new User();
        userSearch.setFirstname(user.getFirstname());
        userSearch.setLastname(user.getLastname());
        userSearch.setEmail(user.getEmail());
        userSearch.setImage(user.getImage());
+       userSearch.setId(user.getId());
 
        ObjectMapper objectMapper = new ObjectMapper();
        String json = objectMapper.writeValueAsString(userSearch);
-
-       System.out.println("userSearch " +json);
 
        RestClient client = RestClient.builder(new HttpHost(host, 443, "https")).build();
 
@@ -210,9 +212,33 @@ public class AmazonClient {
        Response response = client.performRequest("POST", "/" + index + "/" + type + "/" + id,
                Collections.<String, String>emptyMap(), entity);
 
-       System.out.println(response.toString());
-
 
    }
+
+
+
+    public void elasticUpdate(User user) throws IOException {
+
+        String id = user.getId().toString();
+
+        User userSearch = new User();
+        userSearch.setFirstname(user.getFirstname());
+        userSearch.setLastname(user.getLastname());
+        userSearch.setEmail(user.getEmail());
+        userSearch.setImage(user.getImage());
+        userSearch.setId(user.getId());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(userSearch);
+
+        RestClient client = RestClient.builder(new HttpHost(host, 443, "https")).build();
+
+        HttpEntity entity = new NStringEntity(json, ContentType.APPLICATION_JSON);
+
+        Response response = client.performRequest("PUT", "/" + index + "/" + type + "/" + id,
+                Collections.<String, String>emptyMap(), entity);
+
+
+    }
 
 }

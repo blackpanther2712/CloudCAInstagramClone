@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) {
-        System.out.println("aaaaaa" + userRepository.findByEmail(email));
         return userRepository.findByEmail(email);
     }
 
@@ -70,13 +69,19 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
     @Transactional
     @Override
-    public void updateMyProfile(User user) {
-        userRepository.updateByUserId(user.getBio(), user.getCurrentCity(), user.getFirstname(), user.getLastname(), user.getHighSchool(), user.getUniversity(), user.getId());
-        userRepository.save(user);
+    public void updateMyProfile(User user) throws IOException {
+        amazonClient.elasticUpdate(user);
+        userRepository.updateByUserId(user.getBio(), user.getFirstname(), user.getLastname(), user.getCurrentCity(), user.getHighSchool(), user.getUniversity(), user.getId());
 
     }
 
+    @Override
+    public void updateMyProfilePicture(User user) throws IOException {
+        amazonClient.elasticUpdate(user);
+        userRepository.updatePicByUserId(user.getImage(), user.getId());
+    }
 
 }
