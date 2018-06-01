@@ -37,12 +37,17 @@ public class ProfileController {
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public ModelAndView showProfile(@PathVariable("id") String id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
+        User currentUser = userService.findUserByEmail(auth.getName());
 
         ModelAndView model = new ModelAndView();
         Long uid = Long.parseLong(id);
-        userService.updateCurrentUserDetails(uid, user.getId());
+
+
+
+        userService.updateCurrentUserDetails(uid, currentUser.getId());
         User selectedUser = userService.getSelectedUser(uid);
+
+        userService.getFollowersList(currentUser, selectedUser);
         model.addObject("userPosts",userService.getSelectedUserPosts(uid));
         model.addObject("userDetails", selectedUser);
         model.setViewName("profile");

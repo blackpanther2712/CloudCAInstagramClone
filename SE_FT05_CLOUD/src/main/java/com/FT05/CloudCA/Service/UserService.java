@@ -22,4 +22,6 @@ public interface UserService {
     public void updateMyProfile(User user) throws IOException;
 
     public void updateMyProfilePicture(User updUser) throws IOException;
+
+    public void getFollowersList(User userId, User selectedUser);
 }
