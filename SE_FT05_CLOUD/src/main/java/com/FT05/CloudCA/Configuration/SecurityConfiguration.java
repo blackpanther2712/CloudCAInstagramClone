@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .defaultSuccessUrl("/home")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .and().logout()
+                .and().logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .and().rememberMe()
