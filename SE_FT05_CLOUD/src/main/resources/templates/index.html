@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Home</title>
+    <title>Hello Spring Boot!</title>
 
 
     <meta charset="utf-8">
@@ -29,11 +29,9 @@
         .navbar-inverse .navbar-brand{
             color: white;
         }
-
         ::-webkit-input-placeholder {
             text-align: center;
         }
-
         a.navbar-brand{
             color: white;
             font-size: 7mm;
@@ -52,11 +50,8 @@
         }
         .card-img-top
         {
-
             max-width:300px;
             max-height: 200px;
-
-
         }
         #logo {
             float: left;
@@ -74,31 +69,24 @@
             width: 50%;
             margin-top: 20px;
         }
-
-               input[type="file"] {
-                    display: none;
-                }
-
-                .custom-file-upload {
-                    display: inline-block;
-                    padding: 6px 12px;
-                    cursor: pointer;
-                }
+        input[type="file"] {
+            display: none;
+        }
+        .custom-file-upload {
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
         .btn {
             display: inline-block;
             font-weight: 400;
             text-align: center;
-<<<<<<< Updated upstream
-
             max-width: fit-content;
-
             border: 1px solid transparent;
             padding: 0.75rem 3.75rem;
             font-size: 1.4rem;
-
             border-radius: .25rem;
         }
-
         .glyphicon glyphicon-cog{
             size: 15px;
             color: white;
@@ -124,45 +112,6 @@
             font-size: 6mm;
             margin-left: 135px;
             margin-right: 0px;
-
-=======
-
-            max-width: fit-content;
-
-            border: 1px solid transparent;
-            padding: 0.75rem 3.75rem;
-            font-size: 1.4rem;
-
-            border-radius: .25rem;
-        }
-
-        .glyphicon glyphicon-cog{
-            size: 15px;
-            color: white;
-        }
-        .glyphicon-cog:hover{
-            cursor: pointer;
-        }
-        .mb-3, .my-3 {
-            margin-bottom: 3rem!important;
-        }
-        .col-md-9
-        {
-            flex: 0 0 10%;
-            margin-left: -33px;
-        }
-        #logo{
-            float: left;
-            max-width: 50px;
-            max-height: 60px;
-            margin-right: 20px;
-        }
-        .navbar-header-two{
-            font-size: 6mm;
-            margin-left: 135px;
-            margin-right: 0px;
-
->>>>>>> Stashed changes
             float: right;
         }
         .card-img-top{
@@ -170,7 +119,6 @@
             height: 250px;
             margin-top: -20px;
         }
-
     </style>
 </head>
 <body>
@@ -184,15 +132,12 @@
         <div class="container">
 
             <div class="navbar-header-one">
-
-
-                <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/if_Instagram_1288103.png" id="logo"></a>
-
+                <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
                 <a class="navbar-brand" href="#">Facegram</a>
             </div>
             <div class="navbar-header-two">
                 <div  data-toggle="modal" data-target="#profilePicModal" >
-                <img class="img-circle" height="45" width="45" th:src="@{${user.getImage()}}">&nbsp;
+                    <img class="img-circle" height="45" width="45" th:src="@{${user.getImage()}}">&nbsp;
                 </div>
                 <div class="btn-group">
                     <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -217,10 +162,10 @@
     <br>
     <br/>
     <div align="center">
-    <form id="searchForm" action="#" th:action="@{/search}"  method="post">
-    <input  type="text" name="searchuser"  class="form-control" placeholder="search">
-        <button type="submit" class="btn btn-success">Search</button>
-    </form>
+        <form id="searchForm" action="#" th:action="@{/search}"  method="post">
+            <input  type="text" name="searchuser"  class="form-control" placeholder="search">
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
     </div>
 
     <div align="center" class="container">
@@ -234,7 +179,7 @@
             <div class="container">
                 <div class="row" style="margin-bottom: -10px; margin-top: -10px;">
                     <div class="col-md-3">
-            <img th:src="@{${posts.user.getImage()}}" class="img-circle" height="45" width="45">
+                        <img th:src="@{${posts.user.getImage()}}" class="img-circle" height="45" width="45">
                     </div>
                     <div class="col-md-9">
                         <h3 class="card-title" style="margin-top: 10px;" th:text="${posts.user.getFirstname()}"></h3>
@@ -417,37 +362,26 @@
 
 
 <script>
-
     $(document).ready(function () {
         if($("[id$='L']")) {
             var eselect = $("[id$='L']");
             var select = (eselect);
             $(select).removeClass('btn-success');
             $(select).addClass('btn-danger');
-
             var value = $(eselect).find("span");
             $(value).removeClass('glyphicon glyphicon-thumbs-up');
             $(value).addClass('glyphicon glyphicon-thumbs-down');
             var obj = $(value);
             obj.data('liked', true);
             obj.html('unlike');
-
         }
-
-
-
-
     });
-
-
     var like = function (id)
     {
-
         var u = id.slice(0,-1);
         var select = ("#"+id+".btn");
         $(select).removeClass('btn-danger');
         $(select).addClass('btn-success');
-
         var value = $("#"+id).find("span");
         $(value).removeClass('glyphicon glyphicon-thumbs-down');
         $(value).addClass('glyphicon glyphicon-thumbs-up');
@@ -458,7 +392,6 @@
             obj.html('Like');
             var url = '/likes/';
             url=url+u;
-
             $("#resultsBlock").load(url);
         }
         else{
@@ -474,20 +407,18 @@
             $("#resultsBlock").load(url);
         }
     }
-            function readURL(input) {
-                    if (input.files && input.files[0]) {
-                            var reader = new FileReader();
-                            reader.onload = function (e) {
-                                        $('#eventImageId').attr('src', e.target.result);
-                                   }
-                                reader.readAsDataURL(input.files[0]);
-                        }
-                }
-            $("#imgEvent").change(function () {
-                    readURL(this);
-                });
-
-
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#eventImageId').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imgEvent").change(function () {
+        readURL(this);
+    });
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -500,8 +431,6 @@
     $("#imgEvent1").change(function () {
         readURL(this);
     });
-
 </script>
 
 </html>
-

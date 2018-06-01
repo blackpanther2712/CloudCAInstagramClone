@@ -73,12 +73,14 @@ public class ProfileController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         updUser.setId(user.getId());
-        updUser.setEmail(user.getEmail());
         updUser.setFirstname(user.getFirstname());
         updUser.setLastname(user.getLastname());
+        updUser.setEmail(user.getEmail());
         userService.updateMyProfilePicture(updUser);
         return "redirect:/home";
     }
 
+
+    
 
 }
