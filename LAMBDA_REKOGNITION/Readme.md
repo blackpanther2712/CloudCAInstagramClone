@@ -10,8 +10,4 @@ Procedures:
    II. If No - Resize Image
 5. Upload To S3
 
-
-**Overview:** 
-
-
 ![alt text](https://github.com/blackpanther2712/CloudCAInstagramClone/blob/master/LAMBDA_REKOGNITION/Overview.png)
