@@ -32,7 +32,6 @@ public class LikeController {
     public String showGuestList(@PathVariable("postId") String postId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        System.out.println("user : "+ user);
         likeService.likeChecker(postId, user);
         return "index";
     }

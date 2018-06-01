@@ -85,4 +85,27 @@ public class UserServiceImpl implements UserService {
         userRepository.updatePicByUserId(user.getImage(), user.getId());
     }
 
+
+
+    @Override
+    public void getFollowersList(User currentUser, User selectedUser) {
+        List<User> userList = currentUser.getFollowing();
+
+        for (User user : userList) {
+            if(user.getId() == selectedUser.getId()) {
+                selectedUser.setFollowIndicator("F");
+                break;
+            }
+        }
+
+        if(selectedUser.getFollowIndicator() != null) {
+            //Friends
+        }
+        else{
+            selectedUser.setFollowIndicator("N");
+        }
+
+        System.out.println("follow1 "+ selectedUser.getFollowIndicator());
+    }
+
 }
