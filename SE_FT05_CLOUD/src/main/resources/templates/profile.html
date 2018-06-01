@@ -18,6 +18,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <style>
+
         .navbar-inverse
         {
             background-color: #2a6496;
@@ -169,7 +170,7 @@
                                 <br />
                                 <i class="glyphicon glyphicon-globe"  th:text="' '+${userDetails.getImage()}"></i>
                                 <i>
-                                    <button th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
+                                    <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
                                         <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true">Follow</span>
                                     </button>
                                     </i>
