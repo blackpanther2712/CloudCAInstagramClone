@@ -1,5 +1,6 @@
 package com.FT05.CloudCA.Service;
 
+import com.FT05.CloudCA.AWS.AmazonClient;
 import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.FT05.CloudCA.Repositories.RoleRespository;
 import com.FT05.CloudCA.Repositories.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -31,20 +33,24 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private AmazonClient amazonClient;
+
+
     @Override
     public User findUserByEmail(String email) {
-        System.out.println("aaaaaa" + userRepository.findByEmail(email));
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public void saveUser(User user) {
+    public void saveUser(User user) throws IOException {
         user.setBio(user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
+        amazonClient.elasticAdd(user);
     }
 
     @Override
@@ -63,13 +69,43 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
     @Transactional
     @Override
-    public void updateMyProfile(User user) {
-        userRepository.updateByUserId(user.getBio(), user.getCurrentCity(), user.getFirstname(), user.getLastname(), user.getHighSchool(), user.getUniversity(), user.getId());
-        userRepository.save(user);
+    public void updateMyProfile(User user) throws IOException {
+        amazonClient.elasticUpdate(user);
+        userRepository.updateByUserId(user.getBio(), user.getFirstname(), user.getLastname(), user.getCurrentCity(), user.getHighSchool(), user.getUniversity(), user.getId());
 
     }
 
+    @Transactional
+    @Override
+    public void updateMyProfilePicture(User user) throws IOException {
+        amazonClient.elasticUpdate(user);
+        userRepository.updatePicByUserId(user.getImage(), user.getId());
+    }
+
+
+
+    @Override
+    public void getFollowersList(User currentUser, User selectedUser) {
+        List<User> userList = currentUser.getFollowing();
+
+        for (User user : userList) {
+            if(user.getId() == selectedUser.getId()) {
+                selectedUser.setFollowIndicator("F");
+                break;
+            }
+        }
+
+        if(selectedUser.getFollowIndicator() != null) {
+            //Friends
+        }
+        else{
+            selectedUser.setFollowIndicator("N");
+        }
+
+        System.out.println("follow1 "+ selectedUser.getFollowIndicator());
+    }
 
 }

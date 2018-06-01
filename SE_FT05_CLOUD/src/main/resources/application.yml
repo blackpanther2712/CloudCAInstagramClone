@@ -3,6 +3,8 @@ amazonProperties:
   accessKey: AKIAIK6ICE3XZJH3QJXQ
   secretKey: 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
   bucketName: ft05
+  userBucketName: ft05user
+  region: ap-southeast-1
 
 
 

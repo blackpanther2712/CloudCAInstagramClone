@@ -38,7 +38,6 @@ public class LikeService {
             postRepository.save(post);
             Like like = new Like();
             like.setPost(post);
-            //like.setUser(auth.getPrincipal()/getDetails());
             like.setUser(user);
             likeRepository.save(like);
 

@@ -147,32 +147,22 @@
 <br>
 <br>
 <th:block layout:fragment="content">
-    <div class="container-fluid">
+    <div class="container-fluid"  th:each="text :${searchResult}" >
         <div class="row">
             <div class="col-md-12" style="margin-bottom: 20px;margin-top: 20px ">
                 <div  class="well well-sm">
                     <div class="row">
                         <div class="col-md-4">
-                            <img th:src="@{${userDetails.getImage()}}" width="200" height="200"  alt="" class="img-circle img-responsive" style=" display:inline;margin: 0;" />
+                            <img th:src="@{${text.getImage()}}" width="100" height="100"  alt="" class="img img-responsive" style=" display:inline;margin: 0;" />
                         </div>
                         <div class="col-md-8" >
-                            <b><h2 th:text="${userDetails.getFirstname()}"></h2></b>
+                            <b><h2><a th:href="@{'profile/'+${text.getId()}}" th:text="${text.getFirstname()+text.getLastname()}"></a></h2></b>
                             <p>
-
-                                <i class="glyphicon glyphicon-map-marker"  th:text="' '+${userDetails.getCurrentCity()}"></i>
+                                <i class="glyphicon glyphicon-envelope"  th:text="' '+${text.getEmail()}" ></i>
                                 <br />
-                                <i class="glyphicon glyphicon-envelope"  th:text="' '+${userDetails.getEmail()}" ></i>
-                                <br />
-                                <i class="glyphicon glyphicon-user"  th:text="' '+${userDetails.getBio()}" ></i>
-                                <br />
-                                <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getHighSchool()}" ></i>
-                                <br />
-                                <i class="glyphicon glyphicon-globe"  th:text="' '+${userDetails.getImage()}"></i>
-                                <i>
-                                    <button th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
-                                        <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true">Follow</span>
-                                    </button>
-                                    </i>
+                                    <button class="btn btn-info">
+                                        <span class="glyphicon glyphicon-plus-sign" style="vertical-align: middle;padding: 2px 10px;">Follow</span>
+                                    </button></i>
                             </p>
 
                             <!-- Split button -->
@@ -186,120 +176,10 @@
     </div>
     <hr>
     <br/>
-    <div class="container">
-        <div class="col-md-8" style="width: 350px;" th:each="posts : ${userPosts}">
-
-
-            <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap"  >
-            <div class="card-body">
-                <p class="card-text" th:text="${posts.getCaption()}"></p>
-                <span>
-
-                <button th:id="${posts.getId()}" class="btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'">
-                <span th:id="${posts.getId()}" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
-                </button>
-
-            </span>
-
-                <p class="card-text" th:text="${#dates.format(posts.getCreatedDatetime(),'dd-MM-yyyy HH:mm')}"><small class="text-muted"></small></p>
-            </div>
-        </div>
-    </div>
-    <div id="resultsBlock">
-
-    </div>
 </th:block>
 </body>
 
 
-<script>
-
-    $(document).ready(function () {
-        if($("[id$='F']")) {
-            var eselect = $("[id$='F']");
-            var select = (eselect);
-            $(select).removeClass('btn-info');
-            $(select).addClass('btn-danger');
-
-            var value = $(eselect).find("span");
-            $(value).removeClass('glyphicon glyphicon-plus-sign');
-            $(value).addClass('glyphicon glyphicon-minus-sign');
-            var obj = $(value);
-            obj.data('liked', true);
-            obj.html('Unfollow');
-        }
-    });
-
-
-    var follow = function (id)
-    {
-
-        var u = id.slice(0,-1);
-        var select = ("#"+id+".btn");
-        $(select).removeClass('btn-danger');
-        $(select).addClass('btn-info');
-
-        var value = $("#"+id).find("span");
-        $(value).removeClass('glyphicon glyphicon-minus-sign');
-        $(value).addClass('glyphicon glyphicon-plus-sign');
-        $(value).css("background-color", "#46b8da");
-        var obj = $(value);
-        if( obj.data('liked') ){
-            obj.data('liked', false);
-            obj.html('Follow');
-        }
-
-        else{
-            $(select).removeClass('btn-info');
-            $(select).addClass('btn-danger');
-            $(value).removeClass('glyphicon glyphicon-plus-sign');
-            $(value).addClass('glyphicon glyphicon-minus-sign');
-            $(value).css("background-color", "#dc3545");
-            obj.data('liked', true);
-            obj.html('Unfollow');
-
-        }
-    }
-
-
-
-
-
-    var like = function (id)
-    {
-
-        var select = ("#"+id+".btn");
-        $(select).removeClass('btn-danger');
-        $(select).addClass('btn-success');
-
-        var value = $("#"+id).find("span");
-        $(value).removeClass('glyphicon glyphicon-thumbs-down');
-        $(value).addClass('glyphicon glyphicon-thumbs-up');
-        var obj = $(value);
-        if( obj.data('liked') ){
-            obj.data('liked', false);
-            obj.html('Like');
-            // alert(id);
-            var url = '/likes/';
-            url=url+id;
-
-            $("#resultsBlock").load(url);
-        }
-        else{
-            $(select).removeClass('btn-success');
-            $(select).addClass('btn-danger');
-            $(value).removeClass('glyphicon glyphicon-thumbs-up');
-            $(value).addClass('glyphicon glyphicon-thumbs-down');
-            obj.data('liked', true);
-            obj.html('Unlike');
-            var url = '/likes/';
-            url=url+id+'d';
-            // alert(id)
-            $("#resultsBlock").load(url);
-        }
-    }
-
-</script>
 
 </html>
 

@@ -58,6 +58,9 @@ public class User {
     @Column(name = "tokenId")
     private String tokenId;
 
+    @Transient
+    private String followIndicator;
+
     @OneToMany
     private Set<Post> posts = new HashSet<>();
 
@@ -176,5 +179,21 @@ public class User {
 
     public void setTokenId(String tokenId) {
         this.tokenId = tokenId;
+    }
+
+    public String getFollowIndicator() {
+        return followIndicator;
+    }
+
+    public void setFollowIndicator(String followIndicator) {
+        this.followIndicator = followIndicator;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 }

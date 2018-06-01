@@ -4,7 +4,6 @@ import com.FT05.CloudCA.AWS.AmazonClient;
 import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Entity.User;
 import com.FT05.CloudCA.Repositories.PostRepository;
-import com.FT05.CloudCA.Repositories.UserRepository;
 import com.FT05.CloudCA.Service.FriendsFeedService;
 import com.FT05.CloudCA.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,6 @@ public class PostController {
     @GetMapping("/home")
     public String showPage(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //User user = userService.findUserByEmail(auth.getName());
         System.out.println(userService.findUserByEmail(auth.getName()).getEmail());
         model.addAttribute("user", userService.findUserByEmail(auth.getName()));
         if(friendsFeedService.getFreiendsFeed(userService.findUserByEmail(auth.getName())) != null){
@@ -69,5 +67,9 @@ public class PostController {
         postRepository.save(post);
         return "redirect:/home";
     }
+
+
+
+
 
 }

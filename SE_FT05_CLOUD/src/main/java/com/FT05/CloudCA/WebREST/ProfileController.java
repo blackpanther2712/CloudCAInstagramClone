@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+
 @Controller
 public class ProfileController {
     @Autowired
@@ -35,12 +37,17 @@ public class ProfileController {
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public ModelAndView showProfile(@PathVariable("id") String id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
+        User currentUser = userService.findUserByEmail(auth.getName());
 
         ModelAndView model = new ModelAndView();
         Long uid = Long.parseLong(id);
-        userService.updateCurrentUserDetails(uid, user.getId());
+
+
+
+        userService.updateCurrentUserDetails(uid, currentUser.getId());
         User selectedUser = userService.getSelectedUser(uid);
+
+        userService.getFollowersList(currentUser, selectedUser);
         model.addObject("userPosts",userService.getSelectedUserPosts(uid));
         model.addObject("userDetails", selectedUser);
         model.setViewName("profile");
@@ -49,19 +56,31 @@ public class ProfileController {
 
 
     @PostMapping("/myprofile")
-    public String updateMyProfile(@ModelAttribute User updUser) {
+    public String updateMyProfile(@ModelAttribute User updUser) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        /*User user = userService.findUserByEmail(auth.getName());
+        User user = userService.findUserByEmail(auth.getName());
         updUser.setId(user.getId());
         updUser.setEmail(user.getEmail());
-        System.out.println("pass "+user.getPassword());
-        updUser.setPassword(bCryptPasswordEncoder.encode(user.getBio()));
-        System.out.println("pass1 "+updUser.getPassword());
         updUser.setImage(user.getImage());
-        updUser.setActive(user.getActive());
-        userService.updateMyProfile(updUser);*/
+        userService.updateMyProfile(updUser);
         return "redirect:/home";
     }
 
+    @PostMapping("/updateprofilepic")
+    public String updateMyProfilePicture(@ModelAttribute User updUser, @RequestParam("profilepic") MultipartFile file) throws IOException {
+        String imageUrl = this.amazonClient.uploadFile(file);
+        updUser.setImage(imageUrl);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        updUser.setId(user.getId());
+        updUser.setFirstname(user.getFirstname());
+        updUser.setLastname(user.getLastname());
+        updUser.setEmail(user.getEmail());
+        userService.updateMyProfilePicture(updUser);
+        return "redirect:/home";
+    }
+
+
+    
 
 }
