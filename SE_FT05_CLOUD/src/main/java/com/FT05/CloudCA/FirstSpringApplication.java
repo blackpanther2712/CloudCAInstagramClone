@@ -4,13 +4,22 @@ import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Entity.User;
 import com.FT05.CloudCA.Repositories.PostRepository;
 import com.FT05.CloudCA.Repositories.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.nio.entity.NStringEntity;
+import org.elasticsearch.client.Response;
+import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Collections;
 import java.util.Date;
 
 @SpringBootApplication
@@ -20,10 +29,10 @@ public class FirstSpringApplication implements CommandLineRunner {
     UserRepository userRepository;
     @Autowired
     PostRepository postRepository;
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		SpringApplication.run(FirstSpringApplication.class, args);
-	}
+       	}
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -47,6 +56,8 @@ public class FirstSpringApplication implements CommandLineRunner {
 		post1.setCaption("gowtham");
 		postRepository.save(post);
         postRepository.save(post1);*/
+
+
 
 	}
 }

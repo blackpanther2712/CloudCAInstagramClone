@@ -3,6 +3,7 @@ import com.FT05.CloudCA.Entity.Post;
 import com.FT05.CloudCA.Entity.User;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -10,7 +11,7 @@ public interface UserService {
 
     public User findUserByEmail(String email);
 
-    public void saveUser(User user);
+    public void saveUser(User user) throws IOException;
 
     public User getSelectedUser(Long uid);
 
