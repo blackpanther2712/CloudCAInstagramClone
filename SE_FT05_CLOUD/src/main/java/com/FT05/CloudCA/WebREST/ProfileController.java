@@ -48,18 +48,18 @@ public class ProfileController {
     }
 
 
-    @PostMapping("/myprofile") 
+    @PostMapping("/myprofile")
     public String updateMyProfile(@ModelAttribute User updUser) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        /*User user = userService.findUserByEmail(auth.getName());
+        User user = userService.findUserByEmail(auth.getName());
         updUser.setId(user.getId());
-        updUser.setEmail(user.getEmail());
+        /*updUser.setEmail(user.getEmail());
         System.out.println("pass "+user.getPassword());
         updUser.setPassword(bCryptPasswordEncoder.encode(user.getBio()));
         System.out.println("pass1 "+updUser.getPassword());
         updUser.setImage(user.getImage());
-        updUser.setActive(user.getActive());
-        userService.updateMyProfile(updUser);*/
+        updUser.setActive(user.getActive());*/
+        userService.updateMyProfile(updUser);
         return "redirect:/home";
     }
 

@@ -70,13 +70,12 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
     @Transactional
     @Override
     public void updateMyProfile(User user) {
-        userRepository.updateByUserId(user.getBio(), user.getCurrentCity(), user.getFirstname(), user.getLastname(), user.getHighSchool(), user.getUniversity(), user.getId());
-        userRepository.save(user);
-
+        userRepository.updateByUserId(user.getBio(), user.getFirstname(), user.getLastname(), user.getCurrentCity(), user.getHighSchool(), user.getUniversity(), user.getId());
+        
     }
-
 
 }
