@@ -208,6 +208,9 @@
     <div id="resultsBlock">
 
     </div>
+    <div id="resultsBlock1">
+
+    </div>
 </th:block>
 </body>
 
@@ -247,6 +250,9 @@
         if( obj.data('liked') ){
             obj.data('liked', false);
             obj.html('Follow');
+            var url = '/follow/';
+            url=url+u;
+            $("#resultsBlock1").load(url);
         }
 
         else{
@@ -257,6 +263,9 @@
             $(value).css("background-color", "#dc3545");
             obj.data('liked', true);
             obj.html('Unfollow');
+            var url = '/follow/';
+            url=url+u+'d';
+            $("#resultsBlock1").load(url);
 
         }
     }
