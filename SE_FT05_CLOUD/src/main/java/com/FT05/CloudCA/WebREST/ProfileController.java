@@ -74,6 +74,8 @@ public class ProfileController {
         User user = userService.findUserByEmail(auth.getName());
         updUser.setId(user.getId());
         updUser.setEmail(user.getEmail());
+        updUser.setFirstname(user.getFirstname());
+        updUser.setLastname(user.getLastname());
         userService.updateMyProfilePicture(updUser);
         return "redirect:/home";
     }
