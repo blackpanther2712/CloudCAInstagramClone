@@ -32,7 +32,6 @@ public class FollowController {
     public String updateFollowerList(@PathVariable("id") String followerId) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        System.out.println("testing1 "+ followerId);
         userService.updateFollowerList(user, followerId);
         String result = "/profile/"+followerId;
         return result;
