@@ -50,6 +50,7 @@ public class ProfileController {
         userService.getFollowersList(currentUser, selectedUser);
         model.addObject("userPosts",userService.getSelectedUserPosts(uid));
         model.addObject("userDetails", selectedUser);
+        model.addObject("currentUser", currentUser);
         model.setViewName("profile");
         return model;
     }
@@ -81,6 +82,6 @@ public class ProfileController {
     }
 
 
-    
+
 
 }

@@ -35,6 +35,7 @@ public class FriendsFeedService {
     public List<Post> getFreiendsFeed(User user){
         List<Post> friendsPost = new ArrayList<>();
         List<User> userList = getFriendsList(user);
+        System.out.println("friendList"+ userList);
         List<Post> postList = postRepository.findAllOrderByDateDesc();
         for (Post post: postList) {
             if(userList.contains(post.getUser())) {
@@ -48,7 +49,6 @@ public class FriendsFeedService {
                     post.setLikeIndicator("U");
                 }
                 friendsPost.add(post);
-
             }
         }
 
