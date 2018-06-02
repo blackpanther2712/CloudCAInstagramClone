@@ -117,12 +117,16 @@ public class UserServiceImpl implements UserService {
             Long followerIds =  Long.parseLong(followerId.substring(0, followerId.length()-1));
             User follwer = userRepository.findByUserId(followerIds);
             currentUserFollowerList.add(follwer);
+            user.setFollowing(currentUserFollowerList);
+            userRepository.save(user);
         }
 
         else {
-            Long followerIds =  Long.parseLong(followerId.substring(0, followerId.length()-1));
+            Long followerIds =  Long.parseLong(followerId);
             User follwer = userRepository.findByUserId(followerIds);
             currentUserFollowerList.remove(follwer);
+            user.setFollowing(currentUserFollowerList);
+            userRepository.save(user);
 
         }
     }
