@@ -21,7 +21,7 @@ import java.util.List;
 public class SearchController {
 
 
-    public static final String REST_SERVICE_URI = "https://search-usersearch-2ul6qtvv46zwdqc4o44jtx4e4m.ap-southeast-1.es.amazonaws.com/users/_search?q=";
+    public static final String REST_SERVICE_URI = "https://search-user-search-wiyvojt6kxc6wrq63pzso72bwq.ap-southeast-1.es.amazonaws.com/users/_search?q=";
 
 
 

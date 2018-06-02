@@ -28,7 +28,7 @@ public class Post {
     @Column(name = "like_Count")
     private int count;
 
-    @Column(name = "like_Indicator")
+    @Transient
     private String likeIndicator;
 
 
