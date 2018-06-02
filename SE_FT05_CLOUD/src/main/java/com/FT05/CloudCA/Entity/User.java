@@ -2,6 +2,7 @@ package com.FT05.CloudCA.Entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -55,8 +56,14 @@ public class User {
     @Column(name = "image_Url")
     private String image;
 
-    @Column(name = "tokenId")
-    private String tokenId;
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "registered_date")
+    private Date registeredDate;
+
+    @Column(name = "country")
+    private String country;
 
     @Transient
     private String followIndicator;
@@ -173,14 +180,6 @@ public class User {
         this.following = following;
     }
 
-    public String getTokenId() {
-        return tokenId;
-    }
-
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
-    }
-
     public String getFollowIndicator() {
         return followIndicator;
     }
@@ -195,5 +194,29 @@ public class User {
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getRegisteredDate() {
+        return registeredDate;
+    }
+
+    public void setRegisteredDate(Date registeredDate) {
+        this.registeredDate = registeredDate;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
