@@ -58,6 +58,9 @@ public class User {
     @Column(name = "tokenId")
     private String tokenId;
 
+//    @Column(name = "Gender")
+//    private String gender;
+
     @Transient
     private String followIndicator;
 
@@ -152,6 +155,13 @@ public class User {
         this.image = image;
     }
 
+//    public String getGender() {
+//        return gender;
+//    }
+//
+//    public void setGender(String gender){
+//        this.gender = gender;
+//    }
     @Override
     public String toString() {
         return "User{" +
@@ -162,6 +172,7 @@ public class User {
                 ", university='" + university + '\'' +
                 ", bio='" + bio + '\'' +
                 ", image='" + image + '\'' +
+//                ", gender='" + gender + '\'' +
                 '}';
     }
 
