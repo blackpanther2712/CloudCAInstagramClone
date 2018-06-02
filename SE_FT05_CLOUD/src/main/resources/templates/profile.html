@@ -229,7 +229,7 @@
             $(value).removeClass('glyphicon glyphicon-plus-sign');
             $(value).addClass('glyphicon glyphicon-minus-sign');
             var obj = $(value);
-            obj.data('liked', true);
+            obj.data('followed', true);
             obj.html('Unfollow');
         }
     });
@@ -237,9 +237,9 @@
 
     var follow = function (id)
     {
-        alert(id)
+
         var u = id.slice(0,-1);
-        alert(u)
+
         var select = ("#"+id+".btn");
         $(select).removeClass('btn-danger');
         $(select).addClass('btn-info');
@@ -255,7 +255,6 @@
             obj.html('Follow');
             var url = '/follow/';
             url=url+u;
-            alert(url)
             $("#resultsBlock1").load(url);
         }
 
@@ -269,7 +268,6 @@
             obj.html('Unfollow');
             var url = '/follow/';
             url=url+u+'d';
-            alert(url)
             $("#resultsBlock1").load(url);
 
         }
@@ -293,10 +291,8 @@
         if( obj.data('liked') ){
             obj.data('liked', false);
             obj.html('Like');
-            // alert(id);
             var url = '/likes/';
             url=url+id;
-            alert(url)
             $("#resultsBlock").load(url);
         }
         else{
@@ -308,7 +304,6 @@
             obj.html('Unlike');
             var url = '/likes/';
             url=url+id+'d';
-            alert(url)
             $("#resultsBlock").load(url);
         }
     }
