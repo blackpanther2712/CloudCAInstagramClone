@@ -6,14 +6,14 @@ from Resize import resize_image
 
 
 def request_handler(event, context):
-    user_id = int(event['user_id'])
+    user_id = int(event['user']['id'])
     caption = str(event['caption'])
-    s3_image_url = event['posted_image']
+    s3_image_url = event['imageUrl']
     data_items = s3_image_url.split('/')
     photo_name = data_items[-1]
     bucket_name = data_items[-2]
     can_be_shown = True
-    filtered_image_bucket_name = 'rekognition-filtered-images'
+    filtered_image_bucket_name = 'rekognition-filtered-photos'
 
     client = boto3.client('rekognition', 'us-east-1')
     response = client.detect_moderation_labels(Image={'S3Object': {'Bucket': bucket_name, 'Name': photo_name}})
@@ -48,16 +48,16 @@ def request_handler(event, context):
 
         try:
             print('Connecting To DB')
-            host='cloudft05.cgvzp1ri0xhm.ap-southeast-1.rds.amazonaws.com'
+            host='cloudft05.cgjzt35iknje.ap-southeast-1.rds.amazonaws.com'
             user='FT05DB'
             passwd='instagramclone'
             db='cloudft05'
             conn = pymysql.connect(host=host, port=3306, user=user, passwd=passwd, db=db)
             cur = conn.cursor()
             print('Connected')
-            cur.execute("select max(id) from posts;")
-            max_post_number = int(cur.fetchall()[0][0]) + 1
-            cur.execute("""insert into posts(id,caption,like_count,created_date,posted_image,user_id) values(%s,%s,%s,%s,%s,%s)""",(max_post_number, caption, 0, datetime.now(), url, user_id))
+            # cur.execute("select max(id) from posts;")
+            # max_post_number = int(cur.fetchall()[0][0]) + 1
+            cur.execute("""insert into posts(caption,like_count,created_date,posted_image,user_id) values(%s,%s,%s,%s,%s)""",(caption, 0, datetime.now(), url, user_id))
             print('Query Execution Completed')
 
         except Exception, e:
