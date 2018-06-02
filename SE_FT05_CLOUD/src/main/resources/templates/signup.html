@@ -7,6 +7,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <style>
     body{
         background-image: url("https://s3-ap-southeast-1.amazonaws.com/ft05/1511.jpg");
@@ -14,8 +15,21 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+    label{
+        margin-right: -230px;
+    }
     .container{
         margin-top: 120px;
+    }
+
+    .msg {
+        display: none;
+    }
+    .error {
+        color: red;
+    }
+    .success {
+        color: green;
     }
 
 </style>
@@ -66,6 +80,23 @@
                 </div>
             </div>
         </div>
+        <!--<div class="row">-->
+            <!--<div class="col-md-6 field-label-responsive">-->
+                <!--<label for="Gender">Gender</label>-->
+            <!--</div>-->
+            <!--<div class="col-md-6">-->
+                <!--<div class="form-group">-->
+                    <!--<div class="input-group mb-2 mr-sm-2 mb-sm-0">-->
+                        <!--<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>-->
+                        <!--<form class="form-control" id="gender">-->
+                            <!--<input type="radio" th:field="*{gender}" name="gender"value="male"> Male<br>-->
+                            <!--<input type="radio" th:field="*{gender}"name="gender"value="female"> Female<br>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
         <div class="row">
             <div class="col-md-6 field-label-responsive">
                 <label for="email">Email</label>
@@ -73,16 +104,10 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-                        <input type="text" th:field="*{email}" class="form-control" id="email"
-                               placeholder="username@jackrutorial.com" required autofocus>
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                        <input type="text" th:field="*{email}" class="form-control" id="email" pattern="[^ @]*@[^ @]*"
+                               placeholder="username@domain.com" required >
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-control-feedback">
-                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
-                         </span>
                 </div>
             </div>
         </div>
@@ -106,13 +131,51 @@
                 </div>
             </div>
         </div>
-        <br/>
+
         <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-md-6 field-label-responsive">
+                <label for="password">Confirm Password</label>
+            </div>
             <div class="col-md-6">
-                <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                        <input type="password"  class="form-control" id="confirm_password"
+                               placeholder="Password" required>
+                        <script>
+                            $('#password, #confirm_password').on('keyup', function () {
+                            if ($('#password').val() == $('#confirm_password').val()) {
+                                $('#message').html('').css('color', 'green');
+                            } else
+                                $('#message').html('Password does not match').css('color', 'red');
+                        });
+                        </script>
+                    </div>
+                    <span id='message'></span>
+                    <div class="col-md-6">
+                        <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                         </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                         </span>
+                </div>
             </div>
         </div>
+        <br/>
+        <div class="row" style="margin-left: 20px">
+
+            <div class="col-md-12">
+
+                <a th:href="@{/login}">&lt;&lt;Back to sign</a>
+                <button type="submit" class="btn btn-success" style="margin-left: 50px;"><i class="fa fa-user-plus"></i> Register</button>
+            </div>
+            </div>
     </form>
 </div>
 </body>
