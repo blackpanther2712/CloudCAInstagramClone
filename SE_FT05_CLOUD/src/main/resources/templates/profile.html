@@ -237,22 +237,25 @@
 
     var follow = function (id)
     {
-
+        alert(id)
         var u = id.slice(0,-1);
+        alert(u)
         var select = ("#"+id+".btn");
         $(select).removeClass('btn-danger');
         $(select).addClass('btn-info');
 
         var value = $("#"+id).find("span");
+
         $(value).removeClass('glyphicon glyphicon-minus-sign');
         $(value).addClass('glyphicon glyphicon-plus-sign');
         $(value).css("background-color", "#46b8da");
         var obj = $(value);
-        if( obj.data('liked') ){
-            obj.data('liked', false);
+        if( obj.data('followed') ){
+            obj.data('followed', false);
             obj.html('Follow');
             var url = '/follow/';
             url=url+u;
+            alert(url)
             $("#resultsBlock1").load(url);
         }
 
@@ -262,7 +265,7 @@
             $(value).removeClass('glyphicon glyphicon-plus-sign');
             $(value).addClass('glyphicon glyphicon-minus-sign');
             $(value).css("background-color", "#dc3545");
-            obj.data('liked', true);
+            obj.data('followed', true);
             obj.html('Unfollow');
             var url = '/follow/';
             url=url+u+'d';
