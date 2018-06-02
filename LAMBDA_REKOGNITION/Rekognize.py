@@ -8,7 +8,7 @@ from Resize import resize_image
 def request_handler(event, context):
     user_id = int(event['user_id'])
     caption = str(event['caption'])
-    s3_image_url = event['s3_image_url']
+    s3_image_url = event['posted_image']
     data_items = s3_image_url.split('/')
     photo_name = data_items[-1]
     bucket_name = data_items[-2]
