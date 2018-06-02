@@ -18,6 +18,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <style>
+
         .navbar-inverse
         {
             background-color: #2a6496;
@@ -169,9 +170,10 @@
                                 <br />
                                 <i class="glyphicon glyphicon-globe"  th:text="' '+${userDetails.getImage()}"></i>
                                 <i>
-                                    <button class="btn btn-info">
-                                        <span class="glyphicon glyphicon-plus-sign" style="vertical-align: middle;padding: 2px 10px;">Follow</span>
-                                    </button></i>
+                                    <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
+                                        <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true">Follow</span>
+                                    </button>
+                                    </i>
                             </p>
 
                             <!-- Split button -->
@@ -207,11 +209,72 @@
     <div id="resultsBlock">
 
     </div>
+    <div id="resultsBlock1">
+
+    </div>
 </th:block>
 </body>
 
 
 <script>
+
+    $(document).ready(function () {
+        if($("[id$='F']")) {
+            var eselect = $("[id$='F']");
+            var select = (eselect);
+            $(select).removeClass('btn-info');
+            $(select).addClass('btn-danger');
+
+            var value = $(eselect).find("span");
+            $(value).removeClass('glyphicon glyphicon-plus-sign');
+            $(value).addClass('glyphicon glyphicon-minus-sign');
+            var obj = $(value);
+            obj.data('liked', true);
+            obj.html('Unfollow');
+        }
+    });
+
+
+    var follow = function (id)
+    {
+
+        var u = id.slice(0,-1);
+        var select = ("#"+id+".btn");
+        $(select).removeClass('btn-danger');
+        $(select).addClass('btn-info');
+
+        var value = $("#"+id).find("span");
+        $(value).removeClass('glyphicon glyphicon-minus-sign');
+        $(value).addClass('glyphicon glyphicon-plus-sign');
+        $(value).css("background-color", "#46b8da");
+        var obj = $(value);
+        if( obj.data('liked') ){
+            obj.data('liked', false);
+            obj.html('Follow');
+            var url = '/follow/';
+            url=url+u;
+            $("#resultsBlock1").load(url);
+        }
+
+        else{
+            $(select).removeClass('btn-info');
+            $(select).addClass('btn-danger');
+            $(value).removeClass('glyphicon glyphicon-plus-sign');
+            $(value).addClass('glyphicon glyphicon-minus-sign');
+            $(value).css("background-color", "#dc3545");
+            obj.data('liked', true);
+            obj.html('Unfollow');
+            var url = '/follow/';
+            url=url+u+'d';
+            $("#resultsBlock1").load(url);
+
+        }
+    }
+
+
+
+
+
     var like = function (id)
     {
 

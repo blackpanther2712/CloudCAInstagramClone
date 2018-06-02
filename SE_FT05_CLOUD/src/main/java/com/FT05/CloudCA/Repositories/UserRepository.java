@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
@@ -32,4 +34,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE users SET image_url = ?1 WHERE id = ?2", nativeQuery = true)
     void updatePicByUserId(String image, Long id);
+
+    @Query(value = "SELECT * FROM users WHERE id = ?1", nativeQuery = true)
+    List<User> findFollowersByUser(Long currentUser);
 }
