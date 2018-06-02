@@ -17,13 +17,13 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header-one">
-                    <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/if_Instagram_1288103.png" id="logo"></a>
+                    <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
                     <a class="navbar-brand" href="#">Facegram</a>
                 </div>
                 <div class="navbar-header-two">
                     <div  data-toggle="modal" data-target="#profilePicModal" >
-                    <img class="img-circle" height="45" width="45" th:src="@{${user.getImage()}}">&nbsp;
-                    </div>
+                    <img class="img-circle"  height="45" width="45" th:src="@{${user.getImage()}}">&nbsp;
+
                     <div class="btn-group">
                         <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                         <ul class="dropdown-menu dropdown-menu-left">
@@ -32,6 +32,7 @@
                             <div class="dropdown-divider"></div>
                             <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                         </ul>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -43,11 +44,10 @@
     <br>
     <th:block layout:fragment="content">
         <br>
-        <br>
-        <br/>
         <div align="center">
         <form id="searchForm" action="#" th:action="@{/search}"  method="post">
         <input  type="text" name="searchuser"  class="form-control" placeholder="search">
+            <br/>
             <button type="submit" class="btn btn-success">Search</button>
         </form>
         </div>
@@ -76,7 +76,7 @@
                     <span>
 
                     <button th:id='${posts.getId()+posts.getLikeIndicator()}' style="padding: 10px 20px;margin-bottom: 6px;border-radius: 28px;" class="btn btn-success"th:onclick="'like(\''+ ${posts.getId()+posts.getLikeIndicator()} +'\')'">
-                    <span th:id='${posts.getId()+posts.getLikeIndicator()}' style="font-size: 18px;margin-left: -10px;margin-right: -10px;    margin-top: -5px;" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
+                    <span th:id='${posts.getId()+posts.getLikeIndicator()}' style="font-size: 14px;margin-left: -10px;margin-right: -10px;    margin-top: -5px;" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
                     </button>
 
                 </span>
