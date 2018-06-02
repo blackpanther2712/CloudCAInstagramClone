@@ -24,4 +24,6 @@ public interface UserService {
     public void updateMyProfilePicture(User updUser) throws IOException;
 
     public void getFollowersList(User userId, User selectedUser);
+
+    void updateFollowerList(User user, String followerId);
 }
