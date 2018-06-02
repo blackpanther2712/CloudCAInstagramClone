@@ -1,8 +1,8 @@
 amazonProperties:
-  endpointUrl: https://s3-ap-southeast-1.amazonaws.com
-  accessKey: AKIAIK6ICE3XZJH3QJXQ
-  secretKey: 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
-  bucketName: ft05
+  endpointUrl: s3-ap-southeast-1.amazonaws.com
+  accessKey: AKIAJORUMIYAQMXEBVBA
+  secretKey: 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
+  bucketName: ft05-user-posts
   userBucketName: ft05user
   region: ap-southeast-1
 

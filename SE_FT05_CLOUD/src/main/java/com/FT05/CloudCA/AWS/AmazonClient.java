@@ -56,7 +56,7 @@ public class AmazonClient {
 
 
 
-    private String host = "search-usersearch-2ul6qtvv46zwdqc4o44jtx4e4m.ap-southeast-1.es.amazonaws.com"; // For example, my-test-domain.us-east-1.es.amazonaws.com
+    private String host = "search-user-search-wiyvojt6kxc6wrq63pzso72bwq.ap-southeast-1.es.amazonaws.com";
     private String index = "users";
     private String type = "user";
 
