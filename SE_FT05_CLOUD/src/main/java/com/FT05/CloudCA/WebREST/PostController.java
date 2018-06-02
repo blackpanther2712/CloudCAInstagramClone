@@ -64,6 +64,8 @@ public class PostController {
         post.setUser(user);
         post.setCreatedDatetime(new Date());
         post.setImageUrl(imageUrl);
+
+
         postRepository.save(post);
         return "redirect:/home";
     }
