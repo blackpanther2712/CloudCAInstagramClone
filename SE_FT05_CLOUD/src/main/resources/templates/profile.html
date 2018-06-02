@@ -269,6 +269,7 @@
             obj.html('Unfollow');
             var url = '/follow/';
             url=url+u+'d';
+            alert(url)
             $("#resultsBlock1").load(url);
 
         }
@@ -295,7 +296,7 @@
             // alert(id);
             var url = '/likes/';
             url=url+id;
-
+            alert(url)
             $("#resultsBlock").load(url);
         }
         else{
@@ -307,7 +308,7 @@
             obj.html('Unlike');
             var url = '/likes/';
             url=url+id+'d';
-            // alert(id)
+            alert(url)
             $("#resultsBlock").load(url);
         }
     }
