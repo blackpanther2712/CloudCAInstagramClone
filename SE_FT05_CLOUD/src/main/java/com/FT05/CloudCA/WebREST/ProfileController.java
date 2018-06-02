@@ -55,6 +55,17 @@ public class ProfileController {
         return model;
     }
 
+    @RequestMapping(value = "/follow/{id}", method = RequestMethod.GET)
+    public String updateFollowerList(@PathVariable("postId") String followerId) throws IOException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        System.out.println("testing1 "+ followerId);
+        userService.updateFollowerList(user, followerId);
+        String result = "/profile/"+followerId;
+        return result;
+    }
+
+
 
     @PostMapping("/myprofile")
     public String updateMyProfile(@ModelAttribute User updUser) throws IOException {

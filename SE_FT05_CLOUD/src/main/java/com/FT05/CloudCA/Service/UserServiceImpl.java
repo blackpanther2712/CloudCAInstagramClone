@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) throws IOException {
-        user.setBio(user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
@@ -106,6 +105,23 @@ public class UserServiceImpl implements UserService {
         }
 
         System.out.println("follow1 "+ selectedUser.getFollowIndicator());
+    }
+
+    @Override
+    public void updateFollowerList(User user, String followerId) {
+        List<User> currentUserFollowerList = user.getFollowing();
+        if(followerId.toLowerCase().endsWith("d")) {
+            Long followerIds =  Long.parseLong(followerId.substring(0, followerId.length()-1));
+            User follwer = userRepository.findByUserId(followerIds);
+            currentUserFollowerList.add(follwer);
+        }
+
+        else {
+            Long followerIds =  Long.parseLong(followerId.substring(0, followerId.length()-1));
+            User follwer = userRepository.findByUserId(followerIds);
+            currentUserFollowerList.remove(follwer);
+
+        }
     }
 
 }
