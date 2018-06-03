@@ -65,15 +65,18 @@
                             <b><h2 th:text="${userDetails.getFirstname()}"></h2></b>
                             <p>
 
-                                <i class="glyphicon glyphicon-map-marker"  th:text="' '+${userDetails.getCurrentCity()}"></i>
+                                <i class="glyphicon glyphicon-map-marker"  th:text="' '+${userDetails.getCountry()}"></i>
                                 <br />
                                 <i class="glyphicon glyphicon-envelope"  th:text="' '+${userDetails.getEmail()}" ></i>
                                 <br />
-                                <i class="glyphicon glyphicon-user"  th:text="' '+${userDetails.getBio()}" ></i>
+                                <i class="glyphicon glyphicon-user"  th:text="' '+${userDetails.getGender()}" ></i>
                                 <br />
                                 <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getHighSchool()}" ></i>
                                 <br />
-                                <i class="glyphicon glyphicon-globe"  th:text="' '+${userDetails.getImage()}"></i>
+                                <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getUniversity()}" ></i>
+                                <br />
+                                <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getBio()}" ></i>
+                                <br />
                                 <i>
                                     <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
                                         <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true">Follow</span>
