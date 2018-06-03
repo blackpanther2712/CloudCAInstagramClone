@@ -1,11 +1,15 @@
 package com.FT05.CloudCA.WebREST;
 
 import com.FT05.CloudCA.Entity.User;
+import com.FT05.CloudCA.Service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +25,10 @@ import java.util.List;
 public class SearchController {
 
 
+    @Autowired
+    UserService userService;
+
+
     public static final String REST_SERVICE_URI = "https://search-user-search-wiyvojt6kxc6wrq63pzso72bwq.ap-southeast-1.es.amazonaws.com/users/_search?q=";
 
 
@@ -28,13 +36,19 @@ public class SearchController {
     @PostMapping("/search")
     public String showPage(Model model, @RequestParam("searchuser") String search) throws JSONException, ParseException, IOException {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.findUserByEmail(auth.getName());
+
+        List<User> followerList = currentUser.getFollowing();
+        List<Long> followerId = new ArrayList<>();
+
         RestTemplate restTemplate = new RestTemplate();
         String json = restTemplate.getForObject(REST_SERVICE_URI+search, String.class);
         JSONObject jsonObject = new JSONObject(json);
 
         JSONArray hits = jsonObject.getJSONObject("hits").getJSONArray("hits");
         ObjectMapper objectMapper = new ObjectMapper();
-        List<User> userList = new ArrayList<>();
+        List<User> searchList = new ArrayList<>();
 
         if (hits != null) {
 
@@ -43,12 +57,29 @@ public class SearchController {
                 if (objAtIndex != null) {
                     JSONObject userJson = objAtIndex.getJSONObject("_source");
                     User user = objectMapper.readValue(userJson.toString(), User.class);
-                    userList.add(user);
+                    searchList.add(user);
                 }
             }
 
         }
-        model.addAttribute("searchResult",userList);
+
+        for (User user : followerList) {
+            followerId.add(user.getId());
+        }
+
+        for (User user : searchList) {
+            if(followerId.contains(user.getId())) {
+                user.setFollowIndicator("F");
+                System.out.println("Follow1");
+            }
+            else {
+                user.setFollowIndicator("N");
+                System.out.println("Unfollow1");
+            }
+        }
+
+
+        model.addAttribute("searchResult",searchList);
 
         return "search";
 
