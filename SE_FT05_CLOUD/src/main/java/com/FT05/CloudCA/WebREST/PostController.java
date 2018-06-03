@@ -91,6 +91,8 @@ public class PostController {
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.postForObject(host, json, String.class);
 
+        System.out.println("response"+ response);
+
         JSONObject jsonObject = new JSONObject(response);
         if(jsonObject.get("image_url") != null){
             model.addAttribute("Success", "Successfully Uploaded!");
@@ -100,7 +102,7 @@ public class PostController {
             model.addAttribute("Failure", "Image violates Facegram policy, Please try different image");
             System.out.println("Failed, Bad Image!");
         }
-        postRepository.save(post);
+        //postRepository.save(post);
         return "redirect:/home";
     }
 }

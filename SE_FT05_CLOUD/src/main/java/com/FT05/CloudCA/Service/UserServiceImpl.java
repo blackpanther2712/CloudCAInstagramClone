@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) throws IOException {
-        user.setBio(user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         user.setRegisteredDate(new Date());
