@@ -80,6 +80,7 @@ public class SearchController {
 
 
         model.addAttribute("searchResult",searchList);
+        model.addAttribute("currentUser", userService.findUserByEmail(auth.getName()));
 
         return "search";
 
