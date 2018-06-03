@@ -48,7 +48,7 @@ public class ProfileController {
         User selectedUser = userService.getSelectedUser(uid);
 
         userService.getFollowersList(currentUser, selectedUser);
-        model.addObject("userPosts",userService.getSelectedUserPosts(uid));
+        model.addObject("userPosts",userService.getSelectedUserPosts(uid, currentUser));
         model.addObject("userDetails", selectedUser);
         model.addObject("currentUser", currentUser);
         model.setViewName("profile");

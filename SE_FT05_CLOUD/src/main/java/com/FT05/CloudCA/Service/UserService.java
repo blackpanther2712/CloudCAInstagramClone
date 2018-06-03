@@ -15,7 +15,7 @@ public interface UserService {
 
     public User getSelectedUser(Long uid);
 
-    public List<Post> getSelectedUserPosts(Long uid);
+    public List<Post> getSelectedUserPosts(Long uid, User currentUser);
 
     public void updateCurrentUserDetails(Long uid, Long id);
 

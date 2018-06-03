@@ -53,11 +53,12 @@ public class PostController {
 
 
 
+    /* This controller retrieves all the latest photos uploaded by followers of the currently logged in user
+      from RDS Database */
+
     @GetMapping("/home")
     public String showPage(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(userService.findUserByEmail(auth.getName()).getEmail());
-
         model.addAttribute("user", userService.findUserByEmail(auth.getName()));
         if(friendsFeedService.getFreiendsFeed(userService.findUserByEmail(auth.getName())) != null){
             model.addAttribute("post",new Post());
@@ -70,6 +71,12 @@ public class PostController {
 
         return "index";
     }
+
+
+    /* This controller receives the photos uploaded by currently logged in user and store it in AWS s3 bucket and then hits
+    the API gateway which triggers the Lambda function which is responsible for comparing uploaded photo with Facegram's policy
+    and  if the photo violates the policy restricts user from successful upload in application otherwise user can be able to make
+    successful upload to the application */
 
     @PostMapping("/home")
     public String uploadFile(Model model, @ModelAttribute Post post, @RequestParam("file") MultipartFile file) throws IOException, JSONException {
@@ -91,6 +98,8 @@ public class PostController {
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.postForObject(host, json, String.class);
 
+        System.out.println("response"+ response);
+
         JSONObject jsonObject = new JSONObject(response);
         if(jsonObject.get("image_url") != null){
             model.addAttribute("Success", "Successfully Uploaded!");
@@ -100,7 +109,7 @@ public class PostController {
             model.addAttribute("Failure", "Image violates Facegram policy, Please try different image");
             System.out.println("Failed, Bad Image!");
         }
-        postRepository.save(post);
+        //postRepository.save(post);
         return "redirect:/home";
     }
 }

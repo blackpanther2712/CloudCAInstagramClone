@@ -1,7 +1,9 @@
 package com.FT05.CloudCA.Service;
 
 import com.FT05.CloudCA.AWS.AmazonClient;
+import com.FT05.CloudCA.Entity.Like;
 import com.FT05.CloudCA.Entity.Post;
+import com.FT05.CloudCA.Repositories.LikeRepository;
 import com.FT05.CloudCA.Repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,10 +16,7 @@ import com.FT05.CloudCA.Repositories.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -37,6 +36,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AmazonClient amazonClient;
 
+    @Autowired
+    LikeRepository likeRepository;
+
 
     @Override
     public User findUserByEmail(String email) {
@@ -45,12 +47,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) throws IOException {
-        user.setBio(user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         user.setRegisteredDate(new Date());
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setBio("");
+        user.setHighSchool("");
+        user.setUniversity("");
+        user.setCurrentCity("");
+        user.setCountry("");
         userRepository.save(user);
         amazonClient.elasticAdd(user);
     }
@@ -61,8 +67,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Post> getSelectedUserPosts(Long uid) {
-        return postRepository.findByUserId(uid);
+    public List<Post> getSelectedUserPosts(Long uid, User currentUser) {
+        List<Post> postList = postRepository.findByUserId(uid);
+        for (Post post : postList) {
+            Like like = likeRepository.findByPostId(post.getId(), currentUser.getId());
+            if(like != null) {
+                System.out.println("like profile" );
+                post.setLikeIndicator("L");
+            }
+            else {
+                System.out.println("unlike profile" );
+                post.setLikeIndicator("U");
+            }
+
+        }
+        return postList;
     }
 
     @Override
@@ -99,6 +118,7 @@ public class UserServiceImpl implements UserService {
                 break;
             }
         }
+
 
         if(selectedUser.getFollowIndicator() != null) {
             //Friends

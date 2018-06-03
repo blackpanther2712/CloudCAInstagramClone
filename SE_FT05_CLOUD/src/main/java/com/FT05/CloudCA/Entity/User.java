@@ -65,8 +65,6 @@ public class User {
     @Column(name = "country")
     private String country;
 
-//    @Column(name = "Gender")
-//    private String gender;
 
     @Transient
     private String followIndicator;
@@ -162,13 +160,13 @@ public class User {
         this.image = image;
     }
 
-//    public String getGender() {
-//        return gender;
-//    }
-//
-//    public void setGender(String gender){
-//        this.gender = gender;
-//    }
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender){
+        this.gender = gender;
+    }
     @Override
     public String toString() {
         return "User{" +
@@ -207,13 +205,6 @@ public class User {
         this.posts = posts;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     public Date getRegisteredDate() {
         return registeredDate;

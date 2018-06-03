@@ -1,10 +1,10 @@
 amazonProperties:
-  endpointUrl: s3-ap-southeast-1.amazonaws.com
+  endpointUrl: https://s3.amazonaws.com
   accessKey: AKIAJORUMIYAQMXEBVBA
   secretKey: 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
   bucketName: ft05-user-post
   userBucketName: ft05user
-  region: ap-southeast-1
+  region: us-east-1
 
 
 
