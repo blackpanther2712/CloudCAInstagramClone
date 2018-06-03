@@ -202,6 +202,11 @@ public class AmazonClient {
        userSearch.setImage(user.getImage());
        userSearch.setId(user.getId());
 
+       userSearch.setHighSchool(user.getHighSchool());
+       userSearch.setUniversity(user.getUniversity());
+       userSearch.setCurrentCity(user.getCurrentCity());
+       userSearch.setCountry(user.getCountry());
+
        ObjectMapper objectMapper = new ObjectMapper();
        String json = objectMapper.writeValueAsString(userSearch);
 
@@ -227,6 +232,12 @@ public class AmazonClient {
         userSearch.setEmail(user.getEmail());
         userSearch.setImage(user.getImage());
         userSearch.setId(user.getId());
+
+
+        userSearch.setHighSchool(user.getHighSchool());
+        userSearch.setUniversity(user.getUniversity());
+        userSearch.setCurrentCity(user.getCurrentCity());
+        userSearch.setCountry(user.getCountry());
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(userSearch);
