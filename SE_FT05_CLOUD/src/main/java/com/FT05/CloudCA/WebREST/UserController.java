@@ -31,6 +31,10 @@ public class UserController {
     @Autowired
     private PostRepository postRepository;
 
+
+   /* This controller authenticate and authorize user based on the info he/she giving in the login page and validates
+    those info with database */
+
     @RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView model = new ModelAndView();
@@ -39,6 +43,7 @@ public class UserController {
         return model;
     }
 
+   /* This controller allows user to create new account with Facegram application */
     @RequestMapping(value= {"/signup"}, method=RequestMethod.GET)
     public ModelAndView signup() {
         ModelAndView model = new ModelAndView();
@@ -48,6 +53,9 @@ public class UserController {
 
         return model;
     }
+
+    /* This controller stores all the info given by user during the registeration and saves all info in database and while saving password alone
+   is encrypted and applied salt using */
 
     @RequestMapping(value= {"/signup"}, method=RequestMethod.POST)
     public ModelAndView createUser(@Valid User user, BindingResult bindingResult) throws IOException {

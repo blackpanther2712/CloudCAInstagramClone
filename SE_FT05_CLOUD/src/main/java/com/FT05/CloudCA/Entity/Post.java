@@ -31,6 +31,9 @@ public class Post {
     @Transient
     private String likeIndicator;
 
+    @Transient
+    private String ago;
+
 
     public Long getId() {
         return id;
@@ -87,5 +90,13 @@ public class Post {
 
     public void setLikeIndicator(String likeIndicator) {
         this.likeIndicator = likeIndicator;
+    }
+
+    public String getAgo() {
+        return ago;
+    }
+
+    public void setAgo(String ago) {
+        this.ago = ago;
     }
 }

@@ -14,6 +14,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.nio.entity.NStringEntity;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
+import org.joda.time.Interval;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,8 @@ public class PostController {
     public String showPage(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.findUserByEmail(auth.getName()));
+
+
         if(friendsFeedService.getFreiendsFeed(userService.findUserByEmail(auth.getName())) != null){
             model.addAttribute("post",new Post());
             model.addAttribute("getpost",friendsFeedService.getFreiendsFeed(userService.findUserByEmail(auth.getName())));
@@ -71,6 +74,14 @@ public class PostController {
 
         return "index";
     }
+
+    @GetMapping("/explicit")
+    public String invalidUpload(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("user", userService.findUserByEmail(auth.getName()));
+        return "explicitContent";
+    }
+
 
 
     /* This controller receives the photos uploaded by currently logged in user and store it in AWS s3 bucket and then hits
@@ -101,7 +112,8 @@ public class PostController {
         System.out.println("response"+ response);
 
         JSONObject jsonObject = new JSONObject(response);
-        if(jsonObject.get("image_url") != null){
+        System.out.println("testing "+jsonObject.get("image_url"));
+        if(jsonObject.get("image_url").toString().length() > 1){
             model.addAttribute("Success", "Successfully Uploaded!");
             System.out.println("Sucess, Image Uploaded!");
             return "redirect:/home";
@@ -109,8 +121,9 @@ public class PostController {
         else {
             model.addAttribute("Failure", "Image violates Facegram policy, Please try different image");
             System.out.println("Failed, Bad Image!");
-            return "redirect:/explicitContent";
+            return "redirect:/explicit";
         }
+
     }
 }
 

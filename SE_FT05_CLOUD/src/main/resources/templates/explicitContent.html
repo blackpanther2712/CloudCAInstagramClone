@@ -10,9 +10,9 @@
 </head>
 <body>
 <div align="center" class="container">
-
-    <h1>Upload Failed !!</h1>
-    <h2>Your Image contains a sensitive or uncensored content that violates FaceGram policy,Please review your picture before upload</h2>
+    <h2 th:text="'Hello '+${user.getFirstname()}"></h2>
+    <h3>Your Image contains a sensitive or uncensored content that violates FaceGram policy,Please review your picture before upload</h3>
 </div>
+<a th:href="@{/home}"> &lt;&lt;Back to home</a>
 </body>
 </html>
