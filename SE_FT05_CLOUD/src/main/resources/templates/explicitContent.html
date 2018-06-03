@@ -8,11 +8,19 @@
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
 </head>
-<body>
+<body style="background-color: black;color: #af1e1e;">
+<img src="https://s3.amazonaws.com/ft05-user-post/800px_COLOURBOX12004556.jpg" style="margin-left: 38.5%;" height="170px" id="topimg">
+<br/>
+<br/>
 <div align="center" class="container">
     <h2 th:text="'Hello '+${user.getFirstname()}"></h2>
     <h3>Your Image contains a sensitive or uncensored content that violates FaceGram policy,Please review your picture before upload</h3>
 </div>
-<a th:href="@{/home}"> &lt;&lt;Back to home</a>
+<br/>
+<br/>
+<img src="https://s3.amazonaws.com/ft05-user-post/parental_advisory_explicit_content_lge_logo.gif" style="margin-left: 38.5%;" height="170px" id="conten">
+<br/>
+<br/>
+<a th:href="@{/home}" style="margin-left: 42.5%;"> &lt;&lt;Back to home</a>
 </body>
 </html>

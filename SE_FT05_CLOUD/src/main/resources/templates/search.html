@@ -23,7 +23,7 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header-one">
-                    <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
+                    <a th:href="@{/home}"> <img src="https://s3.amazonaws.com/ft05-user-post/if__Instagram_1156627(1).png" id="logo"></a>
                     <a th:href="@{/home}"> <img src="https://s3.amazonaws.com/ft05-user-post/Untitled-2.png" class="navbar-brand" style="margin-left: -20px;" id="facegramlogo"></a>
                 </div>
                 <div class="navbar-header-two">
@@ -41,7 +41,8 @@
 
     <!--When no results are found-->
         <div align="center" th:if="${#lists.isEmpty(searchResult)}">
-            <h2> No Results found</h2>
+            <h2> We couldn't find anything</h2>
+           <h4> Looking for people? Try entering a name, location or different words.</h4>
         </div>
 
     <!--Search Results-->
@@ -51,10 +52,10 @@
                     <div  class="well well-sm">
                         <div class="row">
                             <div class="col-md-4">
-                                <img th:src="@{${text.getImage()}}" width="100" height="100"  alt="" class="img img-responsive" style=" display:inline;margin: 0;" />
+                                <img th:src="@{${text.getImage()}}" width="150" height="130"  alt="" class="img img-responsive" style=" display:inline;margin: 0;" />
                             </div>
                             <div class="col-md-8" >
-                                <b><h2><a th:href="@{'profile/'+${text.getId()}}" th:text="${text.getFirstname()}+' '+${text.getLastname()}"></a></h2></b>
+                                <b><h2 style="font-family: Cambria"><a th:href="@{'profile/'+${text.getId()}}" th:text="${text.getFirstname()}+' '+${text.getLastname()}"></a></h2></b>
                                 <p>
                                     <i class="glyphicon glyphicon-envelope"  th:text="' '+${text.getEmail()}" ></i>
                                     <br />
