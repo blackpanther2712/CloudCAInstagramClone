@@ -1,241 +1,116 @@
-    <html xmlns:th="http://www.thymeleaf.org"
-          xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:vertical-align="http://www.w3.org/1999/xhtml">
+        <html xmlns:th="http://www.thymeleaf.org"
+              xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+              xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:vertical-align="http://www.w3.org/1999/xhtml">
+        <head>
+            <title>Profile</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+            <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+            <link th:href="@{/css/profile.css}" rel="stylesheet" />
+            <script type="text/javascript" th:src="@{/js/profile.js}"></script>
+        </head>
+        <body>
 
-    <head>
-
-        <title>Profile</title>
-
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link th:href="@{/css/profile.css}" rel="stylesheet" />
-
-    </head>
-    <body>
-    <!-- Header -->
-    <div>
-        <!-- ============================================================================ -->
-        <!-- This content is only used for static prototyping purposes (natural templates)-->
-        <!-- and is therefore entirely optional.                                           -->
-        <!-- ============================================================================ -->
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header-one">
-                    <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
-                    <a th:href="@{/home}"> <img src="https://s3.amazonaws.com/ft05-user-post/Untitled-2.png" class="navbar-brand" style="margin-left: -20px;" id="facegramlogo"></a>
-                </div>
-                <div class="navbar-header-two">
-                    <div class="btn-group">
-                        <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                        <ul class="dropdown-menu dropdown-menu-left">
-
-                            <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
-                        </ul>
+        <!--NavBar of profile page-->
+        <div>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header-one">
+                        <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
+                        <a th:href="@{/home}"> <img src="https://s3.amazonaws.com/ft05-user-post/Untitled-2.png" class="navbar-brand" style="margin-left: -20px;" id="facegramlogo"></a>
                     </div>
-                    <!--<a  class="navbar-brand"th:href="@{/logout}">Sign out</a>-->
+                    <div class="navbar-header-two">
+                        <div class="btn-group">
+                            <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Insert content into the layouts/layout.html -->
-    <br>
-    <br>
-    <br>
-    <br>
-        <th:block layout:fragment="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12" style="margin-bottom: 20px;margin-top: 20px ">
-                        <div  class="well well-sm">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img th:src="@{${userDetails.getImage()}}" width="200" height="200"  alt="" class="img-circle img-responsive" style=" display:inline;margin: 0;" />
-                                </div>
-                                <div class="col-md-8" >
-                                    <b><h2 th:text="${userDetails.getFirstname()}"></h2></b>
-                                    <p>
-                                    <div class="row2">
-                                         <div class="col-md-6">
-                                        <i class="glyphicon glyphicon-map-marker"  th:text="' '+${userDetails.getCountry()}"></i>
-                                        <br />
-                                        <i class="glyphicon glyphicon-envelope"  th:text="' '+${userDetails.getEmail()}" ></i>
-                                        <br />
-                                        <i class="glyphicon glyphicon-user"  th:text="' '+${userDetails.getGender()}" ></i>
-                                        <br />
-                                         </div>
-                                        <div class="col-md-6">
-                                                    <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getHighSchool()}" ></i>
-                                                    <br />
-                                                    <i class="glyphicon glyphicon-briefcase" th:text="' '+${userDetails.getUniversity()}" ></i>
-                                                    <br />
-                                                    <i class="glyphicon glyphicon-pencil" th:text="' '+${userDetails.getBio()}" ></i>
-                                        </div>
+        <br><br><br><br>
+
+        <!--Profile details of a user-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom: 20px;margin-top: 20px ">
+                            <div  class="well well-sm">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img th:src="@{${userDetails.getImage()}}" width="150" height="150"  alt="" class="img-circle" style=" display:inline;margin: 0;" />
                                     </div>
-
-                                    <br />
-                                        <i>
-                                            <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block;' +'float: right; margin-right: -125px;'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
-                                                <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true" >Follow</span>
-                                            </button>
-                                            </i>
-                                    </p>
-
-                                    <!-- Split button -->
-
+                                    <div class="col-md-8" >
+                                        <b><h2 th:text="${userDetails.getFirstname()}"></h2></b>
+                                        <p>
+                                        <div class="row2">
+                                             <div class="col-md-6">
+                                            <i class="glyphicon glyphicon-map-marker"  th:text="' '+${userDetails.getCountry()}"></i>
+                                            <br />
+                                            <i class="glyphicon glyphicon-envelope"  th:text="' '+${userDetails.getEmail()}" ></i>
+                                            <br />
+                                            <i class="glyphicon glyphicon-user"  th:text="' '+${userDetails.getGender()}" ></i>
+                                            <br />
+                                             </div>
+                                            <div class="col-md-6">
+                                                        <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getHighSchool()}" ></i>
+                                                        <br />
+                                                        <i class="glyphicon glyphicon-briefcase" th:text="' '+${userDetails.getUniversity()}" ></i>
+                                                        <br />
+                                                        <i class="glyphicon glyphicon-pencil" th:text="' '+${userDetails.getBio()}" ></i>
+                                            </div>
+                                        </div>
+                                        <br />
+                                            <i>
+                                                <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block;' +'float: right; margin-right: -125px;'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
+                                                    <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true" >Follow</span>
+                                                </button>
+                                                </i>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            <hr>
+            <br/>
 
+        <!--User Posts-->
+            <div class="container">
+
+                <!--No posts by a user-->
+                <div align="center" th:if="${#lists.isEmpty(userPosts)}">
+                    <h2> No Posts to show</h2>
+                </div>
+
+                <!--Posts by a user-->
+                <div class="col-md-8" style="width: 350px;" th:each="posts : ${userPosts}">
+                    <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap"  >
+                    <div class="card-body">
+                        <p class="card-text" th:text="${posts.getCaption()}"></p>
+                        <span>
+                        <button th:id='${posts.getId()+posts.getLikeIndicator()}' class="btn btn-success" th:onclick="'like(\''+ ${posts.getId()+posts.getLikeIndicator()} +'\')'">
+                        <span th:id='${posts.getId()+posts.getLikeIndicator()}' class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
+                        </button>
+                    </span>
+                        <p class="card-text" th:text="${#dates.format(posts.getCreatedDatetime(),'dd-MM-yyyy HH:mm')}"><small class="text-muted"></small></p>
+                    </div>
                 </div>
             </div>
-        <hr>
-        <br/>
-        <div class="container">
-            <div align="center" th:if="${#lists.isEmpty(userPosts)}">
-                <h2> No Posts to show</h2>
+
+        <!--Testing UI-->
+            <div id="resultsBlock">
             </div>
-            <div class="col-md-8" style="width: 350px;" th:each="posts : ${userPosts}">
-
-
-                <img class="card-img-top" th:src="@{${posts.getImageUrl()}}" alt="Card image cap"  >
-                <div class="card-body">
-                    <p class="card-text" th:text="${posts.getCaption()}"></p>
-                    <span>
-
-                    <button th:id='${posts.getId()+posts.getLikeIndicator()}' class="btn btn-success" th:onclick="'like(\''+ ${posts.getId()+posts.getLikeIndicator()} +'\')'">
-                    <span th:id='${posts.getId()+posts.getLikeIndicator()}' class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
-                    </button>
-
-                </span>
-
-                    <p class="card-text" th:text="${#dates.format(posts.getCreatedDatetime(),'dd-MM-yyyy HH:mm')}"><small class="text-muted"></small></p>
-                </div>
+            <div id="resultsBlock1">
             </div>
-        </div>
-        <div id="resultsBlock">
-
-        </div>
-        <div id="resultsBlock1">
-
-        </div>
-    </th:block>
-    </body>
-
-
-    <script>
-
-        $(document).ready(function () {
-            if($("[id$='F']")) {
-                var eselect = $("[id$='F']");
-                var select = (eselect);
-                $(select).removeClass('btn-info');
-                $(select).addClass('btn-danger');
-
-                var value = $(eselect).find("span");
-                $(value).removeClass('glyphicon glyphicon-plus-sign');
-                $(value).addClass('glyphicon glyphicon-minus-sign');
-                var obj = $(value);
-                obj.data('followed', true);
-                obj.html('Unfollow');
-            }
-        });
-
-        $(document).ready(function () {
-            if($("[id$='L']")) {
-                var eselect = $("[id$='L']");
-                var select = (eselect);
-                $(select).removeClass('btn-success');
-                $(select).addClass('btn-danger');
-                var value = $(eselect).find("span");
-                $(value).removeClass('glyphicon glyphicon-thumbs-up');
-                $(value).addClass('glyphicon glyphicon-thumbs-down');
-                var obj = $(value);
-                obj.data('liked', true);
-                obj.html('unlike');
-            }
-        });
-
-
-        var follow = function (id)
-        {
-
-            var u = id.slice(0,-1);
-
-            var select = ("#"+id+".btn");
-            $(select).removeClass('btn-danger');
-            $(select).addClass('btn-info');
-
-            var value = $("#"+id).find("span");
-
-            $(value).removeClass('glyphicon glyphicon-minus-sign');
-            $(value).addClass('glyphicon glyphicon-plus-sign');
-            $(value).css("background-color", "#46b8da");
-            var obj = $(value);
-            if( obj.data('followed') ){
-                obj.data('followed', false);
-                obj.html('Follow');
-                var url = '/follow/';
-                url=url+u;
-                $("#resultsBlock1").load(url);
-            }
-
-            else{
-                $(select).removeClass('btn-info');
-                $(select).addClass('btn-danger');
-                $(value).removeClass('glyphicon glyphicon-plus-sign');
-                $(value).addClass('glyphicon glyphicon-minus-sign');
-                $(value).css("background-color", "#dc3545");
-                obj.data('followed', true);
-                obj.html('Unfollow');
-                var url = '/follow/';
-                url=url+u+'d';
-                $("#resultsBlock1").load(url);
-
-            }
-        }
-
-        var like = function (id)
-        {
-            var u = id.slice(0,-1);
-            var select = ("#"+id+".btn");
-            $(select).removeClass('btn-danger');
-            $(select).addClass('btn-success');
-            var value = $("#"+id).find("span");
-            $(value).removeClass('glyphicon glyphicon-thumbs-down');
-            $(value).addClass('glyphicon glyphicon-thumbs-up');
-            $(value).css("background-color", "#218838");
-            var obj = $(value);
-            if( obj.data('liked') ){
-                obj.data('liked', false);
-                obj.html('Like');
-                var url = '/likes/';
-                url=url+u;
-                $("#resultsBlock").load(url);
-            }
-            else{
-                $(select).removeClass('btn-success');
-                $(select).addClass('btn-danger');
-                $(value).removeClass('glyphicon glyphicon-thumbs-up');
-                $(value).addClass('glyphicon glyphicon-thumbs-down');
-                $(value).css("background-color", "#dc3545");
-                obj.data('liked', true);
-                obj.html('Unlike');
-                var url = '/likes/';
-                url=url+u+'d';
-                $("#resultsBlock").load(url);
-            }
-        }
-
-    </script>
-
-    </html>
+        </body>
+        </html>
 
