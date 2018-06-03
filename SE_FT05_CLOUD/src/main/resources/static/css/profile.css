@@ -67,6 +67,9 @@ body{
     top: 3px;
     left: 9px;
 }
+.glyphicon-cog:hover{
+    cursor: pointer;
+}
 .col-md-4{
     position: relative;
     max-height: 200px;
