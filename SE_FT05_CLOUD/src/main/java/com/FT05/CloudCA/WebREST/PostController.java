@@ -104,13 +104,15 @@ public class PostController {
         if(jsonObject.get("image_url") != null){
             model.addAttribute("Success", "Successfully Uploaded!");
             System.out.println("Sucess, Image Uploaded!");
+            return "redirect:/home";
         }
         else {
             model.addAttribute("Failure", "Image violates Facegram policy, Please try different image");
             System.out.println("Failed, Bad Image!");
+            return "redirect:/explicitContent";
         }
         //postRepository.save(post);
-        return "redirect:/home";
+
     }
 }
 
