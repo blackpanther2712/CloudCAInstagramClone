@@ -101,7 +101,8 @@ public class PostController {
         System.out.println("response"+ response);
 
         JSONObject jsonObject = new JSONObject(response);
-        if(jsonObject.get("image_url") != null){
+        System.out.println("testing "+jsonObject.get("image_url"));
+        if(jsonObject.get("image_url").toString().length() > 1){
             model.addAttribute("Success", "Successfully Uploaded!");
             System.out.println("Sucess, Image Uploaded!");
             return "redirect:/home";
@@ -111,6 +112,7 @@ public class PostController {
             System.out.println("Failed, Bad Image!");
             return "redirect:/explicitContent";
         }
+
     }
 }
 
