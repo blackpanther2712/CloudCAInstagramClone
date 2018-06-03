@@ -50,6 +50,11 @@ public class UserServiceImpl implements UserService {
         user.setRegisteredDate(new Date());
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setBio("");
+        user.setHighSchool("");
+        user.setUniversity("");
+        user.setCurrentCity("");
+        user.setCountry("");
         userRepository.save(user);
         amazonClient.elasticAdd(user);
     }
