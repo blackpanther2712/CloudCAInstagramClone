@@ -72,6 +72,14 @@ public class PostController {
         return "index";
     }
 
+    @GetMapping("/explicit")
+    public String invalidUpload(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("user", userService.findUserByEmail(auth.getName()));
+        return "explicitContent";
+    }
+
+
 
     /* This controller receives the photos uploaded by currently logged in user and store it in AWS s3 bucket and then hits
     the API gateway which triggers the Lambda function which is responsible for comparing uploaded photo with Facegram's policy
@@ -110,7 +118,7 @@ public class PostController {
         else {
             model.addAttribute("Failure", "Image violates Facegram policy, Please try different image");
             System.out.println("Failed, Bad Image!");
-            return "redirect:/explicitContent";
+            return "redirect:/explicit";
         }
 
     }
