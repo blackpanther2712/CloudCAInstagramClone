@@ -30,15 +30,13 @@
         <div class="container">
             <div class="navbar-header-one">
                 <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
-                <a class="navbar-brand" th:href="@{/home}">Facegram</a>
+                <a th:href="@{/home}"> <img src="https://s3.amazonaws.com/ft05-user-post/Untitled-2.png" class="navbar-brand" style="margin-left: -20px;" id="facegramlogo"></a>
             </div>
             <div class="navbar-header-two">
                 <div class="btn-group">
                     <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                     <ul class="dropdown-menu dropdown-menu-left">
-                        <li><a class="dropdown-item" href="#">My Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Update Profile</a></li>
-                        <div class="dropdown-divider"></div>
+
                         <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </div>
@@ -78,8 +76,8 @@
                                 <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getBio()}" ></i>
                                 <br />
                                 <i>
-                                    <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
-                                        <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true">Follow</span>
+                                    <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block;' +'float: right; margin-right: -125px;'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
+                                        <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true" >Follow</span>
                                     </button>
                                     </i>
                             </p>
