@@ -20,7 +20,7 @@ public class LikeController {
     @Autowired
     PostRepository postRepository;
 
-    @Autowired
+    @Autowired 
     LikeRepository likeRepository;
     @Autowired
     LikeService likeService;
