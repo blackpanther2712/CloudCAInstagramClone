@@ -3,6 +3,7 @@ import pymysql
 from datetime import datetime
 from wand.image import Image
 from Resize import resize_image
+from pytz import timezone
 
 
 def request_handler(event, context):
@@ -55,9 +56,10 @@ def request_handler(event, context):
             conn = pymysql.connect(host=host, port=3306, user=user, passwd=passwd, db=db)
             cur = conn.cursor()
             print('Connected')
-            # cur.execute("select max(id) from posts;")
-            # max_post_number = int(cur.fetchall()[0][0]) + 1
-            cur.execute("""insert into posts(caption,like_count,created_date,posted_image,user_id) values(%s,%s,%s,%s,%s)""",(caption, 0, datetime.now(), url, user_id))
+            print('Current DateTime:')
+            now = datetime.now(timezone('Asia/Singapore'))
+            print(now)
+            cur.execute("""insert into posts(caption,like_count,created_date,posted_image,user_id) values(%s,%s,%s,%s,%s)""",(caption, 0, now, url, user_id))
             print('Query Execution Completed')
 
         except Exception, e:
