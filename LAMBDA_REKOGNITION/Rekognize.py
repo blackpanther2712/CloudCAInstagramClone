@@ -1,5 +1,6 @@
 import boto3
 import pymysql
+import config
 from datetime import datetime
 from wand.image import Image
 from Resize import resize_image
@@ -49,16 +50,19 @@ def request_handler(event, context):
 
         try:
             print('Connecting To DB')
-            host='cloudft05.cgjzt35iknje.ap-southeast-1.rds.amazonaws.com'
-            user='FT05DB'
-            passwd='instagramclone'
-            db='cloudft05'
-            conn = pymysql.connect(host=host, port=3306, user=user, passwd=passwd, db=db)
+            host = config.mysql_config['host']
+            user = config.mysql_config['user']
+            password = config.mysql_config['password']
+            db = config.mysql_config['db']
+            port = config.mysql_config['port']
+            conn = pymysql.connect(host=host, port=port, user=user, passwd=password, db=db)
             cur = conn.cursor()
             print('Connected')
+
             print('Current DateTime:')
             now = datetime.now(timezone('Asia/Singapore'))
             print(now)
+
             cur.execute("""insert into posts(caption,like_count,created_date,posted_image,user_id) values(%s,%s,%s,%s,%s)""",(caption, 0, now, url, user_id))
             print('Query Execution Completed')
 
@@ -82,4 +86,3 @@ def request_handler(event, context):
             'response': response,
             'image_url': ''
         }
-
