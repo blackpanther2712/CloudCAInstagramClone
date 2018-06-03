@@ -32,6 +32,8 @@ public class SearchController {
     public static final String REST_SERVICE_URI = "https://search-user-search-wiyvojt6kxc6wrq63pzso72bwq.ap-southeast-1.es.amazonaws.com/users/_search?q=";
 
 
+    /* This controller is invoked whenever user searches for users by giving their name/email id, then it will call the AWS Elasticsearch domian by sending the key given by user in search
+    and as a response ES will retuen all the matching users  */
 
     @PostMapping("/search")
     public String showPage(Model model, @RequestParam("searchuser") String search) throws JSONException, ParseException, IOException {

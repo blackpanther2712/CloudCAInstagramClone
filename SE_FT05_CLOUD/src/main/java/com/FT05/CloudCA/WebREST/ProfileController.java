@@ -34,19 +34,16 @@ public class ProfileController {
     @Autowired
     private AmazonClient amazonClient;
 
+    /* This controller is responsible for retrieving a selected user profile details from database */
+
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public ModelAndView showProfile(@PathVariable("id") String id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.findUserByEmail(auth.getName());
-
         ModelAndView model = new ModelAndView();
         Long uid = Long.parseLong(id);
-
-
-
         userService.updateCurrentUserDetails(uid, currentUser.getId());
         User selectedUser = userService.getSelectedUser(uid);
-
         userService.getFollowersList(currentUser, selectedUser);
         model.addObject("userPosts",userService.getSelectedUserPosts(uid, currentUser));
         model.addObject("userDetails", selectedUser);
@@ -55,16 +52,21 @@ public class ProfileController {
         return model;
     }
 
+
+    /* This controller is invoked whenever user clicks for follow/unfollow button and the respective
+    results will be updated in database */
+
     @RequestMapping(value = "/follow/{id}", method = RequestMethod.GET)
     public String updateFollowerList(@PathVariable("id") String followerId) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        System.out.println("testing1 "+ followerId);
         userService.updateFollowerList(user, followerId);
         String result = "/profile/"+followerId;
         return result;
     }
 
+
+    /* This controller is responsible for retrieving the currently loggin in user's profile detrails from database */
 
     @PostMapping("/myprofile")
     public String updateMyProfile(@ModelAttribute User updUser) throws IOException {
@@ -76,6 +78,11 @@ public class ProfileController {
         userService.updateMyProfile(updUser);
         return "redirect:/home";
     }
+
+
+/*
+    This controller is invoked whenever user clicks on update profile picture and it will store the newly selected picture in s3 and save that location in RDS database
+*/
 
     @PostMapping("/updateprofilepic")
     public String updateMyProfilePicture(@ModelAttribute User updUser, @RequestParam("profilepic") MultipartFile file) throws IOException {
