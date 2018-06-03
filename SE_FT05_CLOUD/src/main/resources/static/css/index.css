@@ -13,6 +13,7 @@
 }
 ::-webkit-input-placeholder {
     text-align: center;
+    font-size: 11px;
 }
 a.navbar-brand{
     color: white;
@@ -105,10 +106,30 @@ input[type="file"] {
     cursor: pointer;
 }
 
+.dropdown-item{
+   font-size: 14px;
+}
+.dropdown-item:hover{
+    cursor: pointer;
+}
 .btn-success:hover{
     background-color: #28a745;
+
+}
+
+a{
+
+    text-decoration:none;
+}
+a:hover{
+
+    text-decoration:none;
 }
 
 .btn-danger:hover{
     background-color: #dc3545;
+}
+
+form > input + .row {
+    display:inline-block
 }

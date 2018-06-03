@@ -62,7 +62,7 @@
                             <img th:src="@{${text.getImage()}}" width="100" height="100"  alt="" class="img img-responsive" style=" display:inline;margin: 0;" />
                         </div>
                         <div class="col-md-8" >
-                            <b><h2><a th:href="@{'profile/'+${text.getId()}}" th:text="${text.getFirstname()+text.getLastname()}"></a></h2></b>
+                            <b><h2><a th:href="@{'profile/'+${text.getId()}}" th:text="${text.getFirstname()}+' '+${text.getLastname()}"></a></h2></b>
                             <p>
                                 <i class="glyphicon glyphicon-envelope"  th:text="' '+${text.getEmail()}" ></i>
                                 <br />
