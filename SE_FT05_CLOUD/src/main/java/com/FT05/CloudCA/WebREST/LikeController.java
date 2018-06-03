@@ -20,14 +20,15 @@ public class LikeController {
     @Autowired
     PostRepository postRepository;
 
-    @Autowired 
+    @Autowired
     LikeRepository likeRepository;
     @Autowired
     LikeService likeService;
     @Autowired
     UserService userService;
 
-
+    /* This controller is invoked when a currently logged in user clicks a like/unlike button for his and their follower photos.
+    It will update the Database whenever user performs this action. */
 
     @RequestMapping(value = "/likes/{postId}", method = RequestMethod.GET)
     public String showGuestList(@PathVariable("postId") String postId) {
