@@ -93,6 +93,9 @@
     <hr>
     <br/>
     <div class="container">
+        <div align="center" th:if="${#lists.isEmpty(userPosts)}">
+            <h2> No Posts to show</h2>
+        </div>
         <div class="col-md-8" style="width: 350px;" th:each="posts : ${userPosts}">
 
 

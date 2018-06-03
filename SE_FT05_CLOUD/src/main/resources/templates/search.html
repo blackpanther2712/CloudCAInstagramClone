@@ -53,7 +53,11 @@
 <br>
 <br>
 <th:block layout:fragment="content">
+    <div align="center" th:if="${#lists.isEmpty(searchResult)}">
+        <h2> No Results found</h2>
+    </div>
     <div class="container-fluid"  th:each="text :${searchResult}" >
+
         <div class="row">
             <div class="col-md-12" style="margin-bottom: 20px;margin-top: 20px ">
                 <div  class="well well-sm">

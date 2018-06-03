@@ -55,11 +55,15 @@
     <th:block layout:fragment="content">
         <br>
 
+
         <div align="center" class="container">
             <input id="status" align="center" style="border-radius: 1.25rem;" type="text" class="form-control" th:placeholder="'What\'s up for today,'+${user.getFirstname()}"data-toggle="modal" data-target="#myModal">
             <br/>
             <br>
             <br>
+            <div align="center" th:if="${#lists.isEmpty(getpost)}">
+                <h2> No news feed, Follow a friend to get feed</h2>
+            </div>
             <div class="card mb-3" style="width: 400px;" th:each="posts : ${getpost}">
                 <br>
                 <div class="container">
