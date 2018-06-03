@@ -16,103 +16,8 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link th:href="@{/css/profile.css}" rel="stylesheet" />
 
-    <style>
-
-        .navbar-inverse
-        {
-            background-color: #2a6496;
-            border-color: #2a6496;
-            height:60px;
-            width: 100%;
-            color: white;
-            position: fixed;
-            z-index: 5;
-        }
-        .navbar-inverse .navbar-brand{
-            color: white;
-        }
-        a.navbar-brand{
-            color: white;
-            font-size: 7mm;
-            font-family: "https://s3-ap-southeast-1.amazonaws.com/ft05/RobotoCondensed-Bold.ttf";
-            margin-left: 5px;
-        }
-        a.navbar-brand:hover{
-            color: white;
-            font-family: "https://s3-ap-southeast-1.amazonaws.com/ft05/RobotoCondensed-Bold.ttf";
-        }
-        body{
-            background-color: whitesmoke;
-        }
-
-        .card-img-top
-        {
-            height: 200px;
-            max-width:100%;
-
-        }
-
-        .navbar-header-one{
-            margin-right: 650px;
-            margin-left : -50px;
-        }
-        .well {
-            min-height: 20px;
-            /* padding: 19px; */
-            margin-bottom: 20px;
-            background-color: white;
-            min-width: 100%;
-            box-shadow: 0px 1px 2px #5E5E5E;
-        }
-        .navbar-header-two{
-            font-size: 6mm;
-            margin-left: 135px;
-            margin-right: 0px;
-            float: right;
-        }
-        #logo{
-            float: left;
-            max-width: 50px;
-            max-height: 60px;
-            margin-right: 20px;
-        }
-        .btn{
-            padding: 0px 0px;
-            margin-bottom: 6px;
-            border-radius: 28px;
-        }
-        .glyphicon{
-            top: 3px;
-            left: 9px;
-        }
-        .col-md-4{
-            position: relative;
-            max-height: 200px;
-            max-width: 200px;
-            overflow: hidden;
-            margin-left: 30px;
-        }
-        .col-md-8{
-            margin-left: 30px;
-        }
-        .img-responsive{
-            max-width: 100%;
-        }
-        .img-circle{
-            border-radius: 50%;
-        }
-        .glyphicon glyphicon-cog{
-            size: 15px;
-        }
-        .card-body{
-            background-color: white;
-            margin-bottom: 20px;
-        }
-
-        .glyphicon {  margin-bottom: 10px;margin-right: 20px;}
-
-    </style>
 </head>
 <body>
 <!-- Header -->
@@ -125,15 +30,13 @@
         <div class="container">
             <div class="navbar-header-one">
                 <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
-                <a class="navbar-brand" th:href="@{/home}">Facegram</a>
+                <a th:href="@{/home}"> <img src="https://s3.amazonaws.com/ft05-user-post/Untitled-2.png" class="navbar-brand" style="margin-left: -20px;" id="facegramlogo"></a>
             </div>
             <div class="navbar-header-two">
                 <div class="btn-group">
                     <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                     <ul class="dropdown-menu dropdown-menu-left">
-                        <li><a class="dropdown-item" href="#">My Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Update Profile</a></li>
-                        <div class="dropdown-divider"></div>
+
                         <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </div>
@@ -160,18 +63,21 @@
                             <b><h2 th:text="${userDetails.getFirstname()}"></h2></b>
                             <p>
 
-                                <i class="glyphicon glyphicon-map-marker"  th:text="' '+${userDetails.getCurrentCity()}"></i>
+                                <i class="glyphicon glyphicon-map-marker"  th:text="' '+${userDetails.getCountry()}"></i>
                                 <br />
                                 <i class="glyphicon glyphicon-envelope"  th:text="' '+${userDetails.getEmail()}" ></i>
                                 <br />
-                                <i class="glyphicon glyphicon-user"  th:text="' '+${userDetails.getBio()}" ></i>
+                                <i class="glyphicon glyphicon-user"  th:text="' '+${userDetails.getGender()}" ></i>
                                 <br />
                                 <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getHighSchool()}" ></i>
                                 <br />
-                                <i class="glyphicon glyphicon-globe"  th:text="' '+${userDetails.getImage()}"></i>
+                                <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getUniversity()}" ></i>
+                                <br />
+                                <i class="glyphicon glyphicon-book" th:text="' '+${userDetails.getBio()}" ></i>
+                                <br />
                                 <i>
-                                    <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
-                                        <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true">Follow</span>
+                                    <button th:style="${userDetails.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block;' +'float: right; margin-right: -125px;'" th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${userDetails.getId().toString()+userDetails.getFollowIndicator()} +'\')'">
+                                        <span th:id='${userDetails.getId().toString()+userDetails.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true" >Follow</span>
                                     </button>
                                     </i>
                             </p>
@@ -188,6 +94,9 @@
     <hr>
     <br/>
     <div class="container">
+        <div align="center" th:if="${#lists.isEmpty(userPosts)}">
+            <h2> No Posts to show</h2>
+        </div>
         <div class="col-md-8" style="width: 350px;" th:each="posts : ${userPosts}">
 
 
@@ -196,8 +105,8 @@
                 <p class="card-text" th:text="${posts.getCaption()}"></p>
                 <span>
 
-                <button th:id="${posts.getId()}" class="btn btn-success" th:onclick="'javascript:like(' + ${posts.getId()} + ')'">
-                <span th:id="${posts.getId()}" class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
+                <button th:id='${posts.getId()+posts.getLikeIndicator()}' class="btn btn-success" th:onclick="'like(\''+ ${posts.getId()+posts.getLikeIndicator()} +'\')'">
+                <span th:id='${posts.getId()+posts.getLikeIndicator()}' class="glyphicon glyphicon-thumbs-up" aria-hidden="true">like</span>
                 </button>
 
             </span>
@@ -229,17 +138,32 @@
             $(value).removeClass('glyphicon glyphicon-plus-sign');
             $(value).addClass('glyphicon glyphicon-minus-sign');
             var obj = $(value);
-            obj.data('liked', true);
+            obj.data('followed', true);
             obj.html('Unfollow');
+        }
+    });
+
+    $(document).ready(function () {
+        if($("[id$='L']")) {
+            var eselect = $("[id$='L']");
+            var select = (eselect);
+            $(select).removeClass('btn-success');
+            $(select).addClass('btn-danger');
+            var value = $(eselect).find("span");
+            $(value).removeClass('glyphicon glyphicon-thumbs-up');
+            $(value).addClass('glyphicon glyphicon-thumbs-down');
+            var obj = $(value);
+            obj.data('liked', true);
+            obj.html('unlike');
         }
     });
 
 
     var follow = function (id)
     {
-        alert(id)
+
         var u = id.slice(0,-1);
-        alert(u)
+
         var select = ("#"+id+".btn");
         $(select).removeClass('btn-danger');
         $(select).addClass('btn-info');
@@ -255,7 +179,6 @@
             obj.html('Follow');
             var url = '/follow/';
             url=url+u;
-            alert(url)
             $("#resultsBlock1").load(url);
         }
 
@@ -274,28 +197,22 @@
         }
     }
 
-
-
-
-
     var like = function (id)
     {
-
+        var u = id.slice(0,-1);
         var select = ("#"+id+".btn");
         $(select).removeClass('btn-danger');
         $(select).addClass('btn-success');
-
         var value = $("#"+id).find("span");
         $(value).removeClass('glyphicon glyphicon-thumbs-down');
         $(value).addClass('glyphicon glyphicon-thumbs-up');
+        $(value).css("background-color", "#218838");
         var obj = $(value);
         if( obj.data('liked') ){
             obj.data('liked', false);
             obj.html('Like');
-            // alert(id);
             var url = '/likes/';
-            url=url+id;
-
+            url=url+u;
             $("#resultsBlock").load(url);
         }
         else{
@@ -303,11 +220,11 @@
             $(select).addClass('btn-danger');
             $(value).removeClass('glyphicon glyphicon-thumbs-up');
             $(value).addClass('glyphicon glyphicon-thumbs-down');
+            $(value).css("background-color", "#dc3545");
             obj.data('liked', true);
             obj.html('Unlike');
             var url = '/likes/';
-            url=url+id+'d';
-            // alert(id)
+            url=url+u+'d';
             $("#resultsBlock").load(url);
         }
     }

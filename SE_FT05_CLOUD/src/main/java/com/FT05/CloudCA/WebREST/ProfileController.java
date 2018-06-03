@@ -48,7 +48,7 @@ public class ProfileController {
         User selectedUser = userService.getSelectedUser(uid);
 
         userService.getFollowersList(currentUser, selectedUser);
-        model.addObject("userPosts",userService.getSelectedUserPosts(uid));
+        model.addObject("userPosts",userService.getSelectedUserPosts(uid, currentUser));
         model.addObject("userDetails", selectedUser);
         model.addObject("currentUser", currentUser);
         model.setViewName("profile");
@@ -56,7 +56,7 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/follow/{id}", method = RequestMethod.GET)
-    public String updateFollowerList(@PathVariable("postId") String followerId) throws IOException {
+    public String updateFollowerList(@PathVariable("id") String followerId) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         System.out.println("testing1 "+ followerId);
@@ -64,7 +64,6 @@ public class ProfileController {
         String result = "/profile/"+followerId;
         return result;
     }
-
 
 
     @PostMapping("/myprofile")
