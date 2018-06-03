@@ -111,8 +111,6 @@ public class PostController {
             System.out.println("Failed, Bad Image!");
             return "redirect:/explicitContent";
         }
-        //postRepository.save(post);
-
     }
 }
 

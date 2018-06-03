@@ -1,151 +1,81 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:vertical-align="http://www.w3.org/1999/xhtml">
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:vertical-align="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Search</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link th:href="@{/css/search.css}" rel="stylesheet" />
+        <script type="text/javascript" th:src="@{/js/search.js}"></script>
 
-<head>
+    </head>
+    <body>
 
-    <title>Profile</title>
-
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link th:href="@{/css/search.css}" rel="stylesheet" />
-
-</head>
-<body>
-<!-- Header -->
-<div>
-    <!-- ============================================================================ -->
-    <!-- This content is only used for static prototyping purposes (natural templates)-->
-    <!-- and is therefore entirely optional.                                           -->
-    <!-- ============================================================================ -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header-one">
-                <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
-                <a th:href="@{/home}"> <img src="https://s3.amazonaws.com/ft05-user-post/Untitled-2.png" class="navbar-brand" style="margin-left: -20px;" id="facegramlogo"></a>
-            </div>
-            <div class="navbar-header-two">
-                <div class="btn-group">
-                    <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                    <ul class="dropdown-menu dropdown-menu-left">
-                       <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
-                    </ul>
+    <!--Top navbar for search page-->
+    <div>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header-one">
+                    <a th:href="@{/home}"> <img src="https://s3-ap-southeast-1.amazonaws.com/ft05/instagram.png" id="logo"></a>
+                    <a th:href="@{/home}"> <img src="https://s3.amazonaws.com/ft05-user-post/Untitled-2.png" class="navbar-brand" style="margin-left: -20px;" id="facegramlogo"></a>
                 </div>
-                <!--<a  class="navbar-brand"th:href="@{/logout}">Sign out</a>-->
+                <div class="navbar-header-two">
+                    <div class="btn-group">
+                        <i class="glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                           <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Insert content into the layouts/layout.html -->
-<br>
-<br>
-<br>
-<br>
-<th:block layout:fragment="content">
-    <div align="center" th:if="${#lists.isEmpty(searchResult)}">
-        <h2> No Results found</h2>
-    </div>
-    <div class="container-fluid"  th:each="text :${searchResult}" >
+    <br><br><br><br>
 
-        <div class="row">
-            <div class="col-md-12" style="margin-bottom: 10px;margin-top: 10px ">
-                <div  class="well well-sm">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img th:src="@{${text.getImage()}}" width="100" height="100"  alt="" class="img img-responsive" style=" display:inline;margin: 0;" />
-                        </div>
-                        <div class="col-md-8" >
-                            <b><h2><a th:href="@{'profile/'+${text.getId()}}" th:text="${text.getFirstname()}+' '+${text.getLastname()}"></a></h2></b>
-                            <p>
-                                <i class="glyphicon glyphicon-envelope"  th:text="' '+${text.getEmail()}" ></i>
-                                <br />
-                                <i class="glyphicon glyphicon-user"  th:text="' '+${text.getGender()}" ></i>
-                                <br />
-                                <button th:style="${text.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block'" th:id='${text.getId().toString()+text.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${text.getId().toString()+text.getFollowIndicator()} +'\')'">
-                                    <span th:id='${text.getId().toString()+text.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true">Follow</span>
-                                </button></i>
-                            </p>
+    <!--When no results are found-->
+        <div align="center" th:if="${#lists.isEmpty(searchResult)}">
+            <h2> No Results found</h2>
+        </div>
 
-                            <!-- Split button -->
-
+    <!--Search Results-->
+        <div class="container-fluid"  th:each="text :${searchResult}" >
+            <div class="row">
+                <div class="col-md-12" style="margin-bottom: 10px;margin-top: 10px ">
+                    <div  class="well well-sm">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img th:src="@{${text.getImage()}}" width="100" height="100"  alt="" class="img img-responsive" style=" display:inline;margin: 0;" />
+                            </div>
+                            <div class="col-md-8" >
+                                <b><h2><a th:href="@{'profile/'+${text.getId()}}" th:text="${text.getFirstname()}+' '+${text.getLastname()}"></a></h2></b>
+                                <p>
+                                    <i class="glyphicon glyphicon-envelope"  th:text="' '+${text.getEmail()}" ></i>
+                                    <br />
+                                    <i class="glyphicon glyphicon-user"  th:text="' '+${text.getGender()}" ></i>
+                                    <br />
+                                    <button th:style="${text.getId()} == ${currentUser.getId()} ? 'display:none' : 'display:block'" th:id='${text.getId().toString()+text.getFollowIndicator()}'class="btn btn-info"th:onclick="'follow(\''+ ${text.getId().toString()+text.getFollowIndicator()} +'\')'">
+                                        <span th:id='${text.getId().toString()+text.getFollowIndicator()}'class="glyphicon glyphicon-plus-sign" aria-hidden="true">Follow</span>
+                                    </button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-    <div id="resultsBlock1">
 
-    </div>
-
-    <hr>
-    <br/>
-</th:block>
-</body>
-<script>
-
-    $(document).ready(function () {
-        if($("[id$='F']")) {
-            var eselect = $("[id$='F']");
-            var select = (eselect);
-            $(select).removeClass('btn-info');
-            $(select).addClass('btn-danger');
-
-            var value = $(eselect).find("span");
-            $(value).removeClass('glyphicon glyphicon-plus-sign');
-            $(value).addClass('glyphicon glyphicon-minus-sign');
-            var obj = $(value);
-            obj.data('followed', true);
-            obj.html('Unfollow');
-        }
-    });
-
-    var follow = function (id)
-    {
-        var u = id.slice(0,-1);
-
-        var select = ("#"+id+".btn");
-        $(select).removeClass('btn-danger');
-        $(select).addClass('btn-info');
-        var value = $("#"+id).find("span");
-        $(value).removeClass('glyphicon glyphicon-minus-sign');
-        $(value).addClass('glyphicon glyphicon-plus-sign');
-        $(value).css("background-color", "#46b8da");
-        var obj = $(value);
-        if( obj.data('followed') ){
-            obj.data('followed', false);
-            obj.html('Follow');
-            var url = '/follow/';
-            url=url+u;
-            $("#resultsBlock1").load(url);
-        }
-
-        else{
-            $(select).removeClass('btn-info');
-            $(select).addClass('btn-danger');
-            $(value).removeClass('glyphicon glyphicon-plus-sign');
-            $(value).addClass('glyphicon glyphicon-minus-sign');
-            $(value).css("background-color", "#dc3545");
-            obj.data('followed', true);
-            obj.html('Unfollow');
-            var url = '/follow/';
-            url=url+u+'d';
-            $("#resultsBlock1").load(url);
-
-        }
-    }
-
-</script>
-
-
-</html>
+    <!--Testing UI-->
+        <div id="resultsBlock1" style="display: none">
+        </div>
+        <hr>
+        <br/>
+    </body>
+    </html>
 
