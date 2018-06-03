@@ -14,6 +14,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.nio.entity.NStringEntity;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
+import org.joda.time.Interval;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,8 @@ public class PostController {
     public String showPage(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.findUserByEmail(auth.getName()));
+
+
         if(friendsFeedService.getFreiendsFeed(userService.findUserByEmail(auth.getName())) != null){
             model.addAttribute("post",new Post());
             model.addAttribute("getpost",friendsFeedService.getFreiendsFeed(userService.findUserByEmail(auth.getName())));
