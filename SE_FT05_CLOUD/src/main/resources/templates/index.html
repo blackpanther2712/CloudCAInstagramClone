@@ -15,7 +15,7 @@
         </head>
         <body>
 
-       <!-- Homepage navbar-->
+              <!-- Homepage navbar-->
         <div>
             <div class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container">
@@ -137,6 +137,9 @@
                                 <div class="form-group">
                                     <input type="text" style="width: 100%;" class="form-control" th:field="*{caption}" placeholder="what's on your mind?" id="caption"/>
                                 </div>
+                                <div align="center" id="ajax-loading"style="display: none">
+                                    <img src="https://s3.amazonaws.com/ft05-user-post/Loader.gif" height="100" width="100">
+                                </div>
                                 <div align="center" class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
                                         <button class="btn btn-success" type="submit" >Post</button>
@@ -151,7 +154,7 @@
                 </div>
             </div>
 
-            <!-- Modal pop up for a Post in NewsFeed -->
+            <!-- Modal pop up for a UpdateProfile in NewsFeed -->
             <div id="updateProfileModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -202,9 +205,14 @@
             <!--testing the UI-->
             <div id="resultsBlock" style="display: none">
             </div>
+
+
         </body>
 
         <script>
+            $('#userForm').bind('submit', function() {
+                $('#ajax-loading').show()
+            });
             /*Image preview script*/
             function readURL(input) {
                 if (input.files && input.files[0]) {
