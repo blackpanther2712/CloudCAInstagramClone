@@ -80,6 +80,10 @@
 
         </div>
     </div>
+    <div id="resultsBlock1">
+
+    </div>
+
     <hr>
     <br/>
 </th:block>
@@ -104,15 +108,12 @@
 
     var follow = function (id)
     {
-
         var u = id.slice(0,-1);
 
         var select = ("#"+id+".btn");
         $(select).removeClass('btn-danger');
         $(select).addClass('btn-info');
-
         var value = $("#"+id).find("span");
-
         $(value).removeClass('glyphicon glyphicon-minus-sign');
         $(value).addClass('glyphicon glyphicon-plus-sign');
         $(value).css("background-color", "#46b8da");

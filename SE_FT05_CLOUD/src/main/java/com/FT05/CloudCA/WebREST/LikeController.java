@@ -28,6 +28,7 @@ public class LikeController {
     UserService userService;
 
 
+
     @RequestMapping(value = "/likes/{postId}", method = RequestMethod.GET)
     public String showGuestList(@PathVariable("postId") String postId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
