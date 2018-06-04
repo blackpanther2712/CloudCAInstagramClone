@@ -53,12 +53,17 @@ public class AmazonClient {
     private String region;
     @Value("${amazonProperties.userBucketName}")
     private String userBucket;
+    @Value("${amazonProperties.elasticDomian}")
+    private String host;
 
-
-
-    private String host = "search-user-search-wiyvojt6kxc6wrq63pzso72bwq.ap-southeast-1.es.amazonaws.com";
     private String index = "users";
     private String type = "user";
+
+
+
+    /*private String host = "search-user-search-wiyvojt6kxc6wrq63pzso72bwq.ap-southeast-1.es.amazonaws.com";
+   */
+
 
 
 
@@ -110,84 +115,6 @@ public class AmazonClient {
                 .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
-    /*public void downloadFile(User user) {
-
-        try {
-            //Utility.jsonfile(user);
-            System.out.println("Downloading an object");
-            S3Object s3object = s3client.getObject(new GetObjectRequest(bucketName, ""));
-            System.out.println("Content-Type: "  + s3object.getObjectMetadata().getContentType());
-
-            Utility.displayText(s3object.getObjectContent());
-            //logger.info("===================== Import File - Done! =====================");
-
-        } catch (AmazonServiceException ase) {
-            *//*logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
-            logger.info("Error Message:    " + ase.getMessage());
-            logger.info("HTTP Status Code: " + ase.getStatusCode());
-            logger.info("AWS Error Code:   " + ase.getErrorCode());
-            logger.info("Error Type:       " + ase.getErrorType());
-            logger.info("Request ID:       " + ase.getRequestId());*//*
-            System.out.println("error");
-        } catch (AmazonClientException ace) {
-           *//* logger.info("Caught an AmazonClientException: ");
-            System.out.println("error");
-            logger.info("Error Message: " + ace.getMessage());*//*
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("error");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
-   /* public void userFile(User user) {
-
-        try {
-
-            JSONObject obj = new JSONObject();
-            obj.put("email", user.getEmail());
-            obj.put("name",user.getFirstname()+" "+user.getLastname());
-            File tempFile = File.createTempFile("newFile", ".JSON");
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-            writer.write(obj.toString());
-            writer.close();
-            uploadFiles(tempFile, user);
-
-        }
-        catch(AmazonServiceException e) {
-            // The call was transmitted successfully, but Amazon S3 couldn't process
-            // it, so it returned an error response.
-            System.out.println("JSON ERROR");
-            e.printStackTrace();
-        }
-        catch(SdkClientException e) {
-            // Amazon S3 couldn't be contacted for a response, or the client
-            // couldn't parse the response from Amazon S3.
-            System.out.println("JSON ERROR");
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-    public String uploadFiles(File file, User user) {
-
-        String fileUrl = "";
-        try {
-            String fileName = user.getEmail();
-            fileUrl = endpointUrl + "/" + bucketName + "/" + fileName;
-            uploadFileTos3bucket(fileName, file);
-            file.delete();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return fileUrl;
-    }*/
 
 
    public void elasticAdd(User user) throws IOException {
@@ -238,6 +165,7 @@ public class AmazonClient {
         userSearch.setUniversity(user.getUniversity());
         userSearch.setCurrentCity(user.getCurrentCity());
         userSearch.setCountry(user.getCountry());
+
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(userSearch);

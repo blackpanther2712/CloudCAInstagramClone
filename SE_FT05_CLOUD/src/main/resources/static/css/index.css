@@ -130,3 +130,6 @@ a:hover{
     background-color: #dc3545;
 }
 
+form > input + .row {
+    display:inline-block
+}

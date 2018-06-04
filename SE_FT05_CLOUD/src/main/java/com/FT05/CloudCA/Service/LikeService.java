@@ -22,7 +22,6 @@ public class LikeService {
 
     @Autowired
     UserRepository userRepository;
-    //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
     @Transactional
     public void likeChecker(String postId, User user){

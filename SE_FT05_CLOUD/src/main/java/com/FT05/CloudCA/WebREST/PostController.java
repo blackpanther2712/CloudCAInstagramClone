@@ -18,6 +18,7 @@ import org.joda.time.Interval;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,9 @@ public class PostController {
 
     @Autowired
     FriendsFeedService friendsFeedService;
+
+    @Value("${amazonProperties.apiGateway}")
+    private String host;
 
     @Autowired
     PostController(AmazonClient amazonClient) {
@@ -101,7 +105,7 @@ public class PostController {
 
         //Calling Lambda
         ObjectMapper mapper = new ObjectMapper();
-        String host = "https://m68ercuxr1.execute-api.us-east-1.amazonaws.com/rekognize/filter";
+        //String host = "https://m68ercuxr1.execute-api.us-east-1.amazonaws.com/rekognize/filter";
         String json = mapper.writeValueAsString(post);
 
         System.out.println("json: " + json);

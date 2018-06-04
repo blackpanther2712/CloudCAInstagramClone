@@ -3,7 +3,8 @@ amazonProperties:
   accessKey: AKIAJORUMIYAQMXEBVBA
   secretKey: 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
   bucketName: ft05-user-post
-  userBucketName: ft05user
+  elasticDomain: search-user-search-wiyvojt6kxc6wrq63pzso72bwq.ap-southeast-1.es.amazonaws.com
+  apiGateway: https://m68ercuxr1.execute-api.us-east-1.amazonaws.com/rekognize/filter
   region: us-east-1
 
 
