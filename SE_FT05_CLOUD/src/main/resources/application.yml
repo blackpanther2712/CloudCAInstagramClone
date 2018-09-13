@@ -1,10 +1,10 @@
 amazonProperties:
   endpointUrl: https://s3.amazonaws.com
-  accessKey: AKIAJORUMIYAQMXEBVBA
-  secretKey: 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
+  accessKey: XXXXXXXXXX
+  secretKey: XXXXXXXXXX
   bucketName: ft05-user-post
-  elasticDomain: search-user-search-wiyvojt6kxc6wrq63pzso72bwq.ap-southeast-1.es.amazonaws.com
-  apiGateway: https://m68ercuxr1.execute-api.us-east-1.amazonaws.com/rekognize/filter
+  elasticDomain: XXXXXXXXX
+  apiGateway: XXXXXXXXX
   region: us-east-1
 
 
